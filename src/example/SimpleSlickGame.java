@@ -12,6 +12,7 @@ public class SimpleSlickGame extends BasicGame
 	public SimpleSlickGame(String gamename)
 	{
 		super(gamename);
+        //This is a comment
 	}
 
 	@Override
