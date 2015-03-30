@@ -12,11 +12,7 @@ public class SimpleSlickGame extends BasicGame
 	public SimpleSlickGame(String gamename)
 	{
 		super(gamename);
-        //This is a comment
-		
-		//help me
-		
-		// Penis master 4000k 
+       
 	}
 
 	@Override
@@ -30,7 +26,7 @@ public class SimpleSlickGame extends BasicGame
 	{
 		g.drawString("Hello World!", 250, 200);
 	}
-// this is a comment 
+
 	
 	public static void main(String[] args)
 	{
