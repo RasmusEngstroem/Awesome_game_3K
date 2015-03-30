@@ -12,7 +12,6 @@ public class SimpleSlickGame extends BasicGame
 	public SimpleSlickGame(String gamename)
 	{
 		super(gamename);
-       
 	}
 
 	@Override
@@ -27,7 +26,6 @@ public class SimpleSlickGame extends BasicGame
 		g.drawString("Hello World!", 250, 200);
 	}
 
-	
 	public static void main(String[] args)
 	{
 		try
