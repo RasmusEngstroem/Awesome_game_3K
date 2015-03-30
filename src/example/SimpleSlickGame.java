@@ -15,6 +15,7 @@ public class SimpleSlickGame extends BasicGame
         //This is a comment
 		
 		//help me
+		//bøsse janik
 		
 		// Penis master 4000k 
 	}
