@@ -10,6 +10,7 @@ public class test1 {
 	{
 	  public static void main(String[] args)
 	  {
+		  //does my thing work again? 
 	    String backupDir = "/Users/al/backups";
 	     //khajdakjskjhsdjkhasjkahsfkjahaæjdhaældkfhaælkhaælkahælkajdælakdjældk
 	    // create a jframe
