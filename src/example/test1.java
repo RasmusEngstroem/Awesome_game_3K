@@ -1,6 +1,7 @@
 package example;
 
 public class test1 {
+	//janik
 
 	import javax.swing.ImageIcon;
 	import javax.swing.JFrame;
