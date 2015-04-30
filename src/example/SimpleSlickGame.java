@@ -35,7 +35,7 @@ public class SimpleSlickGame extends BasicGame
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
 		g.drawString("Hello World!", 250, 200);
-		String input = JOptionPane.showInputDialog("question")
+		String input = JOptionPane.showInputDialog("question");
 	}
 
 	public static void main(String[] args)
