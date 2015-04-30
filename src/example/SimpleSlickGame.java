@@ -1,12 +1,22 @@
 package example;
 import java.util.logging.Level;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 public class SimpleSlickGame extends BasicGame
 {
 	public SimpleSlickGame(String gamename)
@@ -25,6 +35,7 @@ public class SimpleSlickGame extends BasicGame
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
 		g.drawString("Hello World!", 250, 200);
+		String input = JOptionPane.showInputDialog("question")
 	}
 
 	public static void main(String[] args)
