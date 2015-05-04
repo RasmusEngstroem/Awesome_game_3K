@@ -1,6 +1,9 @@
 package mathias_test;
 
-public class blocks {
+public class blocks extends entity{
+
+
+	
 	
 
 }
