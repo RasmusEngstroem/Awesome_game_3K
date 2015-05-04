@@ -194,9 +194,9 @@ public class setupClass extends BasicGame{
 	public void moveBot(int delta)
 	{
 		positionY += 0.2f*delta;
-		botBox.setLocation(positionX-50*size*delta, positionY-50*size*delta); // move bot collision box with bot animation
-		botBoxL.setLocation(positionX-60*size*delta-5, positionY-5+60*size*delta);
-		botBoxR.setLocation(positionX+60*size*delta-5, positionY-5+60*size*delta);
+		botBox.setLocation(positionX-50*size, positionY-50*size); // move bot collision box with bot animation
+		botBoxL.setLocation(positionX-60*size-5, positionY-5+60*size);
+		botBoxR.setLocation(positionX+60*size-5, positionY-5+60*size);
 		
 		if (direction == "Left" && inAir == false)
 		{
