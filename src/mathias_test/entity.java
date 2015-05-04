@@ -9,7 +9,7 @@ public class entity {
 		this.x_pos = x_pos;
 		this.y_pos = y_pos;		
 	}
-/*
+
 	public int getX_pos() {
 		return x_pos;
 	}
@@ -24,6 +24,8 @@ public class entity {
 
 	public void setY_pos(int y_pos) {
 		this.y_pos = y_pos;
-	}*/
+	}
+	
+	
 	
 }
