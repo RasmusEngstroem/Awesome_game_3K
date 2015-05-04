@@ -15,11 +15,23 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-
+import org.lwjgl.LWJGLException;
+import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 
 
 public class setupClass extends BasicGame{
 
+	   long lastFrame;
+	     
+	    /** frames per second */
+	    int fps;
+	    /** last fps time */
+	    long lastFPS;
+	
 	private SpriteSheet botSheetL;
 	private Animation botAnimationL;
 	private SpriteSheet botSheetR;
@@ -106,7 +118,7 @@ public class setupClass extends BasicGame{
 		botAnimationFall.update(delta);
 		
 		
-		moveBot();
+		moveBot(delta);
 		collisionRepeller();
 		collisionTurn();
 			
@@ -179,20 +191,20 @@ public class setupClass extends BasicGame{
 //--------------------------------------------------------------------------
 	
 	
-	public void moveBot()
+	public void moveBot(int delta)
 	{
-		positionY += 0.2f;
-		botBox.setLocation(positionX-50*size, positionY-50*size); // move bot collision box with bot animation
-		botBoxL.setLocation(positionX-60*size-5, positionY-5+60*size);
-		botBoxR.setLocation(positionX+60*size-5, positionY-5+60*size);
+		positionY += 0.2f*delta;
+		botBox.setLocation(positionX-50*size*delta, positionY-50*size*delta); // move bot collision box with bot animation
+		botBoxL.setLocation(positionX-60*size*delta-5, positionY-5+60*size*delta);
+		botBoxR.setLocation(positionX+60*size*delta-5, positionY-5+60*size*delta);
 		
 		if (direction == "Left" && inAir == false)
 		{
-			positionX -= 0.2f * speed*size;
+			positionX -= 0.2f * speed*size*delta;
 		}
 		else if (direction == "Right" && inAir == false)
 		{
-			positionX += 0.2f * speed*size;
+			positionX += 0.2f * speed*size*delta;
 		}
 		
 	}
@@ -286,5 +298,8 @@ public class setupClass extends BasicGame{
 		collisionEnabled = false;
 		
 	}
+	
+	
+  
 
 }
