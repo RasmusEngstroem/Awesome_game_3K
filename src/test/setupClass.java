@@ -52,7 +52,7 @@ public class setupClass extends BasicGame{
 	public float positionY = 100f;
 	private int standOnRectNr = 0;
 	
-	public float speed = 0.8f;
+	public float speed = 0.6f;
 	public float size = 1f;
 	
 	private float mouseLastX = 0f;
@@ -82,13 +82,13 @@ public class setupClass extends BasicGame{
 	public void init(GameContainer container) throws SlickException {
 		
 		botSheetL = new SpriteSheet("pictures/animationBotL.png", 100, 100);
-		botAnimationL = new Animation(botSheetL, 250);
+		botAnimationL = new Animation(botSheetL, 230);
 		
 		botSheetR = new SpriteSheet("pictures/animationBotR.png", 100, 100);
-		botAnimationR = new Animation(botSheetR, 250);
+		botAnimationR = new Animation(botSheetR, 230);
 		
 		botSheetFall = new SpriteSheet("pictures/animationBotFall.png", 100, 100);
-		botAnimationFall = new Animation(botSheetFall, 250);
+		botAnimationFall = new Animation(botSheetFall, 230);
 		
 		botBox = new Rectangle(positionX, positionY, 100*size, 89*size);
 		groundBox0 = new Rectangle(300, 320, 300, 50);
