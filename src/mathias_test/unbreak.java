@@ -1,6 +1,6 @@
 package mathias_test;
 
-public class unbreak extends blocks {
+public abstract class unbreak extends blocks {
 	public String lol;
 	
 	public unbreak(int x_pos, int y_pos,int size, int rep_x, int rep_y) {

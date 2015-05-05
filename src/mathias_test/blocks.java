@@ -1,6 +1,6 @@
 package mathias_test;
 
-public class blocks extends entity{
+public abstract class blocks extends entity{
 
 	public int rep_x;
 	public int rep_y;

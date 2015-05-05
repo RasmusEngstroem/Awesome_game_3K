@@ -2,10 +2,9 @@ package mathias_test;
 
 public class main {
 
-	public void update(){
-		
-		
-		
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
 	}
-	
+
 }

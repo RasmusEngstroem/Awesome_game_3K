@@ -1,6 +1,6 @@
 package mathias_test;
 
-public class Playertypes extends entity{
+public abstract class Playertypes extends entity{
 
 	public Playertypes(int x_pos, int y_pos, int size) {
 		super(x_pos, y_pos, size);
