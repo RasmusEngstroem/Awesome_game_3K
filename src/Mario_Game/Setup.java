@@ -1,5 +1,8 @@
 package Mario_Game;
 
+import mathias_test.test_setup;
+
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -30,6 +33,11 @@ public class Setup extends BasicGame {
 		
 	}
 
+	public static void main(String[] args) throws SlickException{
+		AppGameContainer app = new AppGameContainer(new test_setup("Setup Test"));
+		app.setDisplayMode(800, 600, false);
+		app.start();
+	}
 
 
 }
