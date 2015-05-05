@@ -12,7 +12,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class Enemies extends GameEntities {
 	
-public Rectangle[] boxes;
+	public Rectangle[] boxes;
 	
 	public SpriteSheet botSheetL;
 	public Animation botAnimationL;
@@ -29,8 +29,8 @@ public Rectangle[] boxes;
 	private Rectangle botBoxL;  // left
 	private Rectangle botBoxR;  // right
 	
-//	public float x_pos = 300f;
-//	public float y_pos = 100f;
+	public float x_pos = 300f;
+	public float y_pos = 100f;
 	private int standOnRectNr = 0;
 	
 	public float speed = 0.6f;
@@ -54,10 +54,11 @@ public Rectangle[] boxes;
 	
 	private String direction = "Left"; 
 	
-	public Enemies(String title, int x_pos, int y_pos, Image texture) {
+	public Enemies(String title, int x_pos, int y_pos, Image texture, Rectangle[] boxes) {
 		super(title, x_pos, y_pos, texture);
-//		this. x_pos = x_pos;
-//		this. y_pos = y_pos;
+		this.boxes = boxes;
+		this. x_pos = x_pos;
+		this. y_pos = y_pos;
 	}
 	
 public void init(GameContainer container) throws SlickException {
