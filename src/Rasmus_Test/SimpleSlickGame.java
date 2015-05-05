@@ -32,19 +32,13 @@ public class SimpleSlickGame extends BasicGame
 	public SimpleSlickGame(String gamename)
 	{
 		super(gamename);
-		//lol
-
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException 
 	{
-		
 		block = new Image("Assets/marioblock.png");
 		
-		
-		
-	
 	}
 
 	@Override
@@ -60,8 +54,8 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-	
-		block.draw(200,200,200,200);
+		newentity.render(gc, g);
+		//block.draw(200,200,200,200);
 		
 	
 		//String input = JOptionPane.showInputDialog("question");
