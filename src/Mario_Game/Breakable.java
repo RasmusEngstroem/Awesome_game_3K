@@ -23,6 +23,12 @@ public class Breakable extends Blocks {
 		super(title, x_pos, y_pos, texture, rep_x, rep_y);
 		this.transformTo = transformTo;
 		this.containThis = containThis;
+		whenBreak();
+	}
+	
+	public void whenBreak (){
+		containThis.getClass(); newItem = new containThis.getClass();();
+		
 	}
 
 }
