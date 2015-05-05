@@ -53,7 +53,7 @@ public class Enemies extends GameEntities {
 	
 	
 	private String direction = "Left"; 
-	
+	//aj
 	public Enemies(String title, int x_pos, int y_pos, Image texture, Rectangle[] boxes) {
 		super(title, x_pos, y_pos, texture);
 		this.boxes = boxes;
