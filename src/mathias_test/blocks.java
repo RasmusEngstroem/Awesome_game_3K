@@ -12,4 +12,7 @@ public abstract class blocks extends entity{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public abstract void reproduce ();
+	
+	
 }
