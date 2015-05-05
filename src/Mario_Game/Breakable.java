@@ -27,7 +27,6 @@ public class Breakable extends Blocks {
 	}
 	
 	public void whenBreak (){
-		containThis.getClass(); newItem = new containThis.getClass();();
 		
 	}
 
