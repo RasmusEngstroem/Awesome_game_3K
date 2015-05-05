@@ -25,51 +25,24 @@ import org.lwjgl.opengl.GL11;
 
 public class setupClass extends BasicGame{
 
-	   long lastFrame;
-	     
-	    /** frames per second */
-	    int fps;
-	    /** last fps time */
-	    long lastFPS;
-	
-	private SpriteSheet botSheetL;
-	private Animation botAnimationL;
-	private SpriteSheet botSheetR;
-	private Animation botAnimationR;
-	private SpriteSheet botSheetFall;
-	private Animation botAnimationFall;
-	
+
 	private Rectangle groundBox0;
 	private Rectangle groundBox1;
 	private Rectangle groundBox2;
 	private Rectangle groundBox3;
-	
-	private Rectangle botBox;   // body
-	private Rectangle botBoxL;  // left
-	private Rectangle botBoxR;  // right
-	
-	public float positionX = 300f;
-	public float positionY = 100f;
-	private int standOnRectNr = 0;
-	
-	public float speed = 0.6f;
-	public float size = 1f;
-	
-	private float mouseLastX = 0f;
-	private float mouseLastY = 0f;
+	private Rectangle groundBox4;
+	private Rectangle groundBox5;
 	
 	
-	public boolean collisionB = false;  // body
-	private boolean collisionL = false;  // left
-	private boolean collisionR = false;  // right
-	private boolean inAir = true;
-	private boolean collisionEnabled = true;
 	
+	private static Rectangle[] boxes = new Rectangle[6];
 	
-	private String direction = "Left"; 
+	enemy gomba = new enemy("Gomba", 100, 0);
+//	enemy gomba2 = new enemy("Gomba2");
 	
-	private Rectangle[] boxes = new Rectangle[4];
+	smallEnemy smallE = new smallEnemy("The Small Gomba", 200, 0);
 	
+	suisideEnemy suisideE = new suisideEnemy("The Suisidal", 400, 0);
 	
 //---------------------------------------------------------------------------------------
 	
@@ -81,28 +54,38 @@ public class setupClass extends BasicGame{
 
 	public void init(GameContainer container) throws SlickException {
 		
-		botSheetL = new SpriteSheet("pictures/animationBotL.png", 100, 100);
-		botAnimationL = new Animation(botSheetL, 230);
-		
-		botSheetR = new SpriteSheet("pictures/animationBotR.png", 100, 100);
-		botAnimationR = new Animation(botSheetR, 230);
-		
-		botSheetFall = new SpriteSheet("pictures/animationBotFall.png", 100, 100);
-		botAnimationFall = new Animation(botSheetFall, 230);
-		
-		botBox = new Rectangle(positionX, positionY, 100*size, 89*size);
+
 		groundBox0 = new Rectangle(300, 320, 300, 50);
 		groundBox1 = new Rectangle(100, 500, 1000, 50);
 		groundBox2 = new Rectangle(10, 150, 300, 50);
 		groundBox3 = new Rectangle(605, 300, 300, 50);
-		
-		botBoxL = new Rectangle(0,0,10*size,10*size);
-		botBoxR = new Rectangle(0,0,10*size,10*size);
+		groundBox4 = new Rectangle(10, 400, 300, 50);
+		groundBox5 = new Rectangle(-50, 350, 70, 50);
 		
 		boxes[0] = groundBox0;
 		boxes[1] = groundBox1;
 		boxes[2] = groundBox2;
 		boxes[3] = groundBox3;
+		boxes[4] = groundBox4;
+		boxes[5] = groundBox5;
+		
+		gomba.size = 1f;
+		gomba.init(container);
+		gomba.boxes = boxes;
+		
+		
+//		gomba2.init(container);
+//		gomba2.boxes = boxes;
+//		gomba2.positionX += 100;
+//		
+		
+		smallE.init(container);
+		smallE.boxes = boxes;
+		smallE.positionX += 200;
+		
+		suisideE.init(container);
+		suisideE.boxes = boxes;
+		suisideE.positionX += 200;
 		
 	}
 	
@@ -110,43 +93,16 @@ public class setupClass extends BasicGame{
 
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		botAnimationL.setSpeed(speed);
-		botAnimationL.update(delta);
-		botAnimationR.setSpeed(speed);
-		botAnimationR.update(delta);
-		botAnimationFall.setSpeed(speed);
-		botAnimationFall.update(delta);
-		
-		
-		moveBot(delta);
-		collisionRepeller();
-		collisionTurn();
-			
-		
-		if (Math.sqrt(Math.pow((positionX - container.getInput().getMouseX()), 2)) < 50 && Math.sqrt(Math.pow((positionY - container.getInput().getMouseY()), 2)) < 50 )
-		{
-			if (container.getInput().getMouseY() - mouseLastY > 20)
-			{
-				dead();
-			}
-			else
-			{
-				if (collisionEnabled)
-				{
-					positionX -= mouseLastX - container.getInput().getMouseX();
-					positionY -= mouseLastY - container.getInput().getMouseY();
-				}
-			}
-		}
-		
-		
-		mouseLastX = container.getInput().getMouseX();
-		mouseLastY = container.getInput().getMouseY();
-		
+		gomba.update(container, delta);
+//		gomba2.update(container, delta);
+
+		smallE.update(container, delta);
+		suisideE.update(container, delta);
+	
 	}
 	
-
 	public void render(GameContainer container, Graphics g) throws SlickException {
+	
 		
 		g.setBackground(Color.white);
 
@@ -158,19 +114,13 @@ public class setupClass extends BasicGame{
 			g.fill(boxes[i]);
 		}
 		
-		drawBot();
+		gomba.render(container, g);
+//		gomba.showInfo(container, g);
 		
-//		g.drawString("collides: " + collisionB, 10, 30); // print collision true/false
-		g.drawString("in Air: " + inAir, 10, 45); // print inAir true/false
-		g.drawString("box nr underneath: " + standOnRectNr, 10, 60); // print inAir true/false
-		g.drawString("direction: " + direction, 10, 75); // print inAir true/false
-		g.drawString("size: " + size + " speed: " + speed, 10, 90); // print inAir true/false
-		g.drawString("Alive: " + collisionEnabled, 10, 105); // print inAir true/false
+		smallE.render(container, g);
+		suisideE.render(container, g);
+//		suisideE.showInfo(container, g);
 
-		g.setColor(Color.lightGray);
-//		g.draw(botBoxL);
-//		g.draw(botBoxR);
-//		g.draw(botBox);
 	}
 
 
@@ -183,121 +133,19 @@ public class setupClass extends BasicGame{
 		app.setDisplayMode(800, 600, false);
 		app.setAlwaysRender(true);
 		
+
 		
 		app.start();
 		
 	}
+
+
+
 	
 //--------------------------------------------------------------------------
 	
 	
-	public void moveBot(int delta)
-	{
-		positionY += 0.2f*delta;
-		botBox.setLocation(positionX-50*size, positionY-50*size); // move bot collision box with bot animation
-		botBoxL.setLocation(positionX-60*size-5, positionY-5+60*size);
-		botBoxR.setLocation(positionX+60*size-5, positionY-5+60*size);
-		
-		if (direction == "Left" && inAir == false)
-		{
-			positionX -= 0.2f * speed*size*delta;
-		}
-		else if (direction == "Right" && inAir == false)
-		{
-			positionX += 0.2f * speed*size*delta;
-		}
-		
-	}
-	
-//--------------
-	
-	public void collisionRepeller()
-	{
-		collisionB = false;
-		
-		for (int i = 0; i < boxes.length; i++)
-		{
-			if( botBox.intersects(boxes[i]) && collisionEnabled == true) // check if the bot collides with a groundBox
-				collisionB = true;
-		
-		}
-		
-		inAir = true;
-			
-		while (collisionB && collisionEnabled == true)
-		{
-			positionY -= 0.01f;
-			botBox.setLocation(positionX-50*size, positionY-50*size); // move bot collision box with bot animation
-			
-			collisionB = false;
-			
-			for (int i = 0; i < boxes.length; i++)
-			{
-				if( botBox.intersects(boxes[i])) // re-check if the bot collides with a groundBox
-					{
-						collisionB = true;
-						standOnRectNr = i;		
-					}
-			}
-			
-			inAir = false;
-		}
-	}
-	
-//--------------	
-	
-	public void collisionTurn()
-	{
-		collisionL = false;
-		collisionR = false;
-		
-		for (int i = 0; i < boxes.length; i++)
-		{
-			if( botBoxL.intersects(boxes[i])) // re-check if the bot collides with a groundBox
-				{
-					collisionL = true;
-				}
-			if( botBoxR.intersects(boxes[i])) // re-check if the bot collides with a groundBox
-			{
-				collisionR = true;
-						
-			}
-		}
-	
-		if (!collisionL)
-		{
-			direction = "Right";
-			
-		}
-		else if (!collisionR)
-		{
-			direction = "Left";
-		}
-	}
 
-//--------------
-	
-	public void drawBot()
-	{
-	
-		if (inAir)
-		botAnimationFall.draw(positionX-50*size, positionY-50*size, 100 * size, 100*size);
-		
-		else if (direction == "Left")
-		botAnimationL.draw(positionX-50*size, positionY-50*size, 100 * size, 100*size);
-		
-		else if (direction == "Right")
-		botAnimationR.draw(positionX-50*size, positionY-50*size, 100 * size, 100*size);
-
-	}
-	
-//--------------
-	
-	public void dead()
-	{
-		collisionEnabled = false;
-		
-	}
 	
 	
   
