@@ -17,7 +17,16 @@ public class Unbreakable extends Blocks {
 		
 	}
 
-
+	@Override
+	public void render(GameContainer container, Graphics g) throws SlickException {
+		super.render(container, g);	
+		g.drawImage(texture, x_pos, y_pos);
+		texture.draw();
+	}
+	
+	public void draw(){
+		texture.draw(x_pos,y_pos);
+	}
 	
 
 }
