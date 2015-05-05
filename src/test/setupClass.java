@@ -37,8 +37,9 @@ public class setupClass extends BasicGame{
 	
 	private static Rectangle[] boxes = new Rectangle[6];
 	
-	enemy gomba = new enemy("Gomba", 100, 0);
-//	enemy gomba2 = new enemy("Gomba2");
+	player player = new player("The Player", 100, 100);
+	
+//	enemy gomba = new enemy("Gomba", 100, 0);
 	
 	smallEnemy smallE = new smallEnemy("The Small Gomba", 200, 0);
 	
@@ -69,9 +70,11 @@ public class setupClass extends BasicGame{
 		boxes[4] = groundBox4;
 		boxes[5] = groundBox5;
 		
-		gomba.size = 1f;
-		gomba.init(container);
-		gomba.boxes = boxes;
+		
+		
+//		gomba.size = 1f;
+//		gomba.init(container);
+//		gomba.boxes = boxes;
 		
 		
 //		gomba2.init(container);
@@ -87,13 +90,18 @@ public class setupClass extends BasicGame{
 		suisideE.boxes = boxes;
 		suisideE.positionX += 200;
 		
+		player.init(container);
+		player.boxes = boxes;
+		
 	}
 	
 	
 
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		gomba.update(container, delta);
+		player.update(container, delta);
+		
+//		gomba.update(container, delta);
 //		gomba2.update(container, delta);
 
 		smallE.update(container, delta);
@@ -114,7 +122,9 @@ public class setupClass extends BasicGame{
 			g.fill(boxes[i]);
 		}
 		
-		gomba.render(container, g);
+		player.render(container, g);
+		
+//		gomba.render(container, g);
 //		gomba.showInfo(container, g);
 		
 		smallE.render(container, g);
