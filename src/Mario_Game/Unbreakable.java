@@ -1,6 +1,9 @@
 package Mario_Game;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Unbreakable extends Blocks {
 
@@ -10,7 +13,9 @@ public class Unbreakable extends Blocks {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	public void render(){
+		
+	}
 
 
 	
