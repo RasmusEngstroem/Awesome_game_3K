@@ -1,5 +1,8 @@
 package test;
 
+import java.awt.print.Printable;
+import java.io.Console;
+
 import org.lwjgl.util.vector.Vector;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.BasicGame;
@@ -27,18 +30,35 @@ public class player extends BasicGame{
 	
 	
 	public Rectangle[] boxes;
+//	private Rectangle playerFB; 
 	private Circle playerFB; 
 	
+	private Circle botBoxFB; 
+	private Rectangle botBoxTL;   // body Top
+	private Rectangle botBoxTR;   // body Top
+	private Rectangle botBoxB;   // body Bottom
+	private Rectangle botBoxL;  // left
+	private Rectangle botBoxR;  // right
+	
+	public boolean collisionFB = false;  // body
+//	private boolean collisionT = false;
+	private boolean collisionB = false;
+	private boolean collisionL = false;  // left
+	private boolean collisionR = false;  // right
+//	private boolean inAir = true;
+	private boolean collisionEnabled = true;
+	
+	
 	public float size = 1;
-	public float speed = 0.2f;
+	public float speed = 0.7f;
 	public float jumpHeight = 1;
 //	public float dampingAir = 0.002f;
 	public float dampingCollision = 0.005f;
 	public float gravity = 0.003f;
 	
 	public float positionX = 100;
-	public float positionY = 100;
-	
+	public float positionY = 50;
+		
 	private Vector2f positionV;
 	private Vector2f directionV;
 	private Vector2f speedV;
@@ -48,6 +68,7 @@ public class player extends BasicGame{
 	
 	private boolean inAir = true;
 	private boolean onGround = false;
+	private int standOnRectNr = 0;
 	
 	public player(String title, int positionX, int positionY) {
 		super(title);
@@ -62,10 +83,19 @@ public class player extends BasicGame{
 
 		initPlayer(container);
 		playerFB = new Circle(0,0,43*size);
+//		playerFB = new Rectangle(positionX, positionY, 100, 100);
 		positionV = new Vector2f(positionX, positionY);
 		directionV = new Vector2f(0,0);
 		speedV = new Vector2f(speed,0);
 		jumpHeightV = new Vector2f(0,jumpHeight);
+		
+		
+		botBoxFB = new Circle(0,0,43*size);
+		botBoxTL = new Rectangle(0,0,51*size, 50*size);
+		botBoxTR = new Rectangle(0,0,51*size, 50*size);
+		botBoxB = new Rectangle(0,0,100*size, 35*size);
+		botBoxL = new Rectangle(0,0,10*size, 35*size);
+		botBoxR = new Rectangle(0,0,10*size, 35*size);
 		
 	}
 
@@ -80,9 +110,12 @@ public class player extends BasicGame{
 		botAnimationFall.update(delta);
 		
 
+//		moveBot(delta);
+//		edgeTurn();
+//		collisionTurn();
+//		collisionRepeller();
 		
-		
-		movePlayer();
+		movePlayer(delta);
 		collisionDeflection();
 //		damping();
 		
@@ -91,6 +124,7 @@ public class player extends BasicGame{
 	
 	public void render(GameContainer container, Graphics g) throws SlickException {
 
+//		drawBot();
 		drawPlayer();
 		showInfo(container, g);
 	}
@@ -99,48 +133,99 @@ public class player extends BasicGame{
 	
 //---------------------------------------------------------------------
 
-	
-	private void movePlayer() {
-		directionV.add(new Vector2f(0,1).scale(gravity));
-		
-		
-		
+	public void movePlayer(int delta)
+	{
+		directionV.y += gravity*delta;
+//		positionY += 0.2f*delta;
+
 		positionV.add(directionV);
+//		playerFB.setLocation(positionV.x - 50+5, positionV.y - 50+5);
+		
+		botBoxB.setLocation(positionV.x-50*size, positionV.y-5 + 10*size); // move bot collision box with bot animation
+
+		
+
+		
 	}
 	
-//---------------------------------
+	//------------
 	
-	private void collisionDeflection() {
-	
-		inAir = true;
-		boolean collision = false;
-		
-		Vector2f collisionV;
-		Vector2f deflectV = new Vector2f(0,0);
+	public void collisionDeflection()
+	{
+		collisionB = false;
 		
 		for (int i = 0; i < boxes.length; i++)
 		{
-			if (playerFB.intersects(boxes[i]))
-			{
-				deflectV.normalise();
-				collisionV = new Vector2f(positionX - boxes[i].getCenterX(), positionY - boxes[i].getCenterY());
-				collisionV.normalise();		
-				deflectV = (deflectV.add(collisionV)).scale(0.5f);
-				collision = true;
-				inAir = false;
-			}
+			if( botBoxB.intersects(boxes[i]) && collisionEnabled == true) // check if the bot collides with a groundBox
+				collisionB = true;
+		
 		}
 		
-		while (collision)
+		inAir = true;
+			
+		while (collisionB && collisionEnabled == true)
 		{
-			positionV.add(deflectV);
-			playerFB.setLocation(positionV);
+			positionV.y -= 0.001f;
+			directionV.y = 0.0f;
+			botBoxB.setLocation(positionV.x-50*size, positionV.y-5+10*size); // move bot collision box with bot animation
+			
+			collisionB = false;
+			
+			for (int i = 0; i < boxes.length; i++)
+			{
+				if( botBoxB.intersects(boxes[i])) // re-check if the bot collides with a groundBox
+					{
+						collisionB = true;
+						standOnRectNr = i;		
+					}
+			}
+			inAir = false;
 		}
-		
-		directionV.scale((float) (-1*0.5));
-		playerFB.setLocation(positionV);
-		
 	}
+	
+	
+
+	
+//---------------------------------
+	
+
+		
+		
+		
+//		inAir = true;
+//		boolean collision = false;
+//		
+//		Vector2f collisionV;
+//		Vector2f deflectV = new Vector2f(0,0);
+//		
+//		for (int i = 0; i < boxes.length; i++)
+//		{
+//			if (playerFB.intersects(boxes[i]))
+//			{
+//				deflectV.normalise();
+//				collisionV = new Vector2f(positionV.x - boxes[i].getCenterX(), positionV.y - boxes[i].getCenterY());
+//				collisionV.normalise();		
+//				deflectV = (deflectV.add(collisionV)).scale(0.5f);
+//				collision = true;
+//				inAir = false;
+//			}
+//		}
+//		
+//		while (collision)
+//		{
+//			positionV.add(deflectV);
+//			playerFB.setLocation(positionV);
+//		}
+//		
+//		if (collision)
+//			directionV.scale((float) (-1*0.5));	
+//			
+//		collision = false;
+//		
+//		
+//		playerFB.setLocation(positionV);
+		
+//	}
 	
 //---------------------------------
 	
@@ -166,19 +251,22 @@ public class player extends BasicGame{
 	
 //---------------------------------
 	
+	
+	
 	public void drawPlayer()
 	{
 	
 		if (inAir)
 		botAnimationFall.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
 		
-		else if (directionV.x <= 0)
+		else if (directionV.x < -0.005f)
 		botAnimationL.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
 		
-		else if (directionV.x > 0)
+		else if (directionV.x > 0.005f)
 		botAnimationR.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
-
 		
+		else
+			botAnimationFall.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
 		
 	}
 	
@@ -188,6 +276,13 @@ public class player extends BasicGame{
 		g.drawString("direction " + directionV, 10, 30); // print collision true/false
 		g.drawString("in Air: " + inAir, 10, 45); // print inAir true/false
 
+		g.setColor(Color.lightGray);
+		g.draw(botBoxL);
+		g.draw(botBoxR);
+		g.draw(botBoxB);
+		g.draw(botBoxTL);
+		g.draw(botBoxTR);
+		g.draw(botBoxFB);
 		g.draw(playerFB);
 
 	}

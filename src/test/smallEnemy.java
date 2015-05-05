@@ -24,7 +24,7 @@ public class smallEnemy extends enemy {
 	public void render(GameContainer container, Graphics g) throws SlickException { // overrider the inherited render function
 		
 		this.drawBot();
-		
+//		g.drawString("print print " , 10, 45); // print inAir true/false
 	}
 
 

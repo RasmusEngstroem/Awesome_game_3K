@@ -23,7 +23,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 
-public class enemy extends BasicGame{
+public abstract class enemy extends BasicGame{
 
 	public Rectangle[] boxes;
 	
