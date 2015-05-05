@@ -15,6 +15,9 @@ public class smallEnemy extends enemy {
 		this.size = 0.5f;  // change size at start
 		this.speed = 1.7f;
 		
+		this.pictureL = "pictures/animationBotLO.png";
+		this.pictureR = "pictures/animationBotRO.png";
+		this.pictureFall = "pictures/animationBotFallO.png";
 		
 	}
 	

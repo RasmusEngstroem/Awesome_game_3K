@@ -56,10 +56,10 @@ public class setupClass extends BasicGame{
 		
 
 		groundBox0 = new Rectangle(300, 320, 300, 50);
-		groundBox1 = new Rectangle(100, 500, 1000, 50);
+		groundBox1 = new Rectangle(100, 570, 1000, 50);
 		groundBox2 = new Rectangle(10, 150, 300, 50);
 		groundBox3 = new Rectangle(605, 300, 300, 50);
-		groundBox4 = new Rectangle(10, 400, 300, 50);
+		groundBox4 = new Rectangle(10, 450, 300, 50);
 		groundBox5 = new Rectangle(-50, 350, 70, 50);
 		
 		boxes[0] = groundBox0;

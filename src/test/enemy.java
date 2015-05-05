@@ -27,12 +27,12 @@ public class enemy extends BasicGame{
 
 	public Rectangle[] boxes;
 	
-	private SpriteSheet botSheetL;
-	private Animation botAnimationL;
-	private SpriteSheet botSheetR;
-	private Animation botAnimationR;
-	private SpriteSheet botSheetFall;
-	private Animation botAnimationFall;
+	public SpriteSheet botSheetL;
+	public Animation botAnimationL;
+	public SpriteSheet botSheetR;
+	public Animation botAnimationR;
+	public SpriteSheet botSheetFall;
+	public Animation botAnimationFall;
 	
 
 	private Circle botBoxFB; 
@@ -48,6 +48,9 @@ public class enemy extends BasicGame{
 	
 	public float speed = 0.6f;
 	public float size = 1f;
+	public String pictureL = "pictures/animationBotL.png";
+	public String pictureR = "pictures/animationBotR.png";
+	public String pictureFall = "pictures/animationBotFall.png";
 	
 	private float mouseLastX = 0f;
 	private float mouseLastY = 0f;
@@ -78,14 +81,7 @@ public class enemy extends BasicGame{
 
 	public void init(GameContainer container) throws SlickException {
 		
-		botSheetL = new SpriteSheet("pictures/animationBotL.png", 100, 100);
-		botAnimationL = new Animation(botSheetL, 230);
-		
-		botSheetR = new SpriteSheet("pictures/animationBotR.png", 100, 100);
-		botAnimationR = new Animation(botSheetR, 230);
-		
-		botSheetFall = new SpriteSheet("pictures/animationBotFall.png", 100, 100);
-		botAnimationFall = new Animation(botSheetFall, 230);
+		initBot(container);
 		
 		botBoxFB = new Circle(0,0,43*size);
 		botBoxTL = new Rectangle(0,0,51*size, 50*size);
@@ -94,8 +90,6 @@ public class enemy extends BasicGame{
 		botBoxL = new Rectangle(0,0,10*size, 35*size);
 		botBoxR = new Rectangle(0,0,10*size, 35*size);
 		
-
-
 		
 	}
 	
@@ -158,6 +152,18 @@ public class enemy extends BasicGame{
 	}
 	
 //--------------------------------------------------------------------------
+	
+	public void initBot(GameContainer container) throws SlickException
+	{
+		botSheetL = new SpriteSheet(pictureL, 100, 100);
+		botAnimationL = new Animation(botSheetL, 230);
+		
+		botSheetR = new SpriteSheet(pictureR, 100, 100);
+		botAnimationR = new Animation(botSheetR, 230);
+		
+		botSheetFall = new SpriteSheet(pictureFall, 100, 100);
+		botAnimationFall = new Animation(botSheetFall, 230);
+	}
 	
 	
 	public void moveBot(int delta)
@@ -238,17 +244,15 @@ public class enemy extends BasicGame{
 		}
 	
 		
-		if (!collisionL)
-		{
+		if (!collisionL && collisionR )
 			direction = "Right";
 			
-		}
-		else if (!collisionR)
-		{
+		else if (!collisionR && collisionL)
 			direction = "Left";
-		}
+	
 	}
 
+	
 	public void collisionTurn()
 	{
 		for (int i = 0; i < boxes.length; i++)
