@@ -15,6 +15,7 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -64,6 +65,7 @@ public abstract class enemy extends BasicGame{
 	private boolean inAir = true;
 	private boolean collisionEnabled = true;
 	
+	Vector2f vector2Print = new Vector2f(0,0);
 	
 	private String direction = "Left"; 
 	
@@ -105,7 +107,7 @@ public abstract class enemy extends BasicGame{
 		botAnimationFall.update(delta);
 		
 		
-		
+
 		moveBot(delta);
 		edgeTurn();
 		collisionTurn();
@@ -195,8 +197,10 @@ public abstract class enemy extends BasicGame{
 		
 		for (int i = 0; i < boxes.length; i++)
 		{
+			
 			if( botBoxB.intersects(boxes[i]) && collisionEnabled == true) // check if the bot collides with a groundBox
 				collisionB = true;
+			
 		
 		}
 		
@@ -251,7 +255,7 @@ public abstract class enemy extends BasicGame{
 			direction = "Left";
 	
 	}
-
+	
 	
 	public void collisionTurn()
 	{
@@ -321,6 +325,7 @@ public abstract class enemy extends BasicGame{
 		g.drawString("direction: " + direction, 10, 75); // print inAir true/false
 		g.drawString("size: " + size + " speed: " + speed, 10, 90); // print inAir true/false
 		g.drawString("Alive: " + collisionEnabled, 10, 105); // print inAir true/false
+		g.drawString("vector: " + vector2Print, 10, 130); // print inAir true/false
 
 		g.setColor(Color.lightGray);
 		g.draw(botBoxL);

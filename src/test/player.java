@@ -67,6 +67,7 @@ public class player extends BasicGame{
 	Vector2f collisionV = new Vector2f(0,0);
 	private boolean inAir = true;
 	private boolean onGround = false;
+	private boolean inCollision = false;
 	private int standOnRectNr = 0;
 	
 	Vector2f collisionVPrint = new Vector2f(0,0); 
@@ -160,9 +161,57 @@ public class player extends BasicGame{
 	
 	//------------
 	
-
-	
 	public void collisionDeflection(GameContainer container,int delta)
+	{
+		pushObjectV = new Vector2f(0,0);
+		inCollision = false;
+		
+		
+		for (int i = 0; i < boxes.length; i++)
+		{
+			if( botBoxB.intersects(boxes[i])) // check if the bot collides with a groundBox
+			{
+				
+//				if (botBoxB.getCenterX()+ 0.5 * botBoxB.getWidth() > boxes[i].getCenterX()- 0.5 * boxes[i].getWidth() &&  botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight() < boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
+//					pushObjectV.x = -1;
+//				
+//				if (botBoxB.getCenterX()- 0.5 * botBoxB.getWidth() > boxes[i].getCenterX()+ 0.5 * boxes[i].getWidth())
+//					pushObjectV.x = 1;
+//				
+				if (botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight() > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
+					pushObjectV.y = -1;
+
+				
+//				if (botBoxB.getCenterY()- 0.5 * botBoxB.getHeight() > boxes[i].getCenterY()+ 0.5 * boxes[i].getHeight())
+//					pushObjectV.y = 1;
+
+				System.out.println("print");
+				
+//				positionV.x += pushObjectV.x;
+//				positionV.y += pushObjectV.y;
+//				botBoxB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
+				
+	
+				
+				inCollision = true;
+			}
+			
+			
+			collisionVPrint = pushObjectV;
+
+			while (botBoxB.intersects(boxes[i]))
+			{
+				positionV.x += pushObjectV.x/100;
+				positionV.y += pushObjectV.y/100;
+				botBoxB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
+			}
+				
+		}
+	}
+	
+	
+	
+	public void collisionDeflection2(GameContainer container,int delta)
 	{
 		collisionV = new Vector2f(0,0);
 		Vector2f vectorToCornerV = new Vector2f(0,0);

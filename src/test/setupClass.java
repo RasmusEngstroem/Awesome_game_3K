@@ -134,6 +134,7 @@ public class setupClass extends BasicGame{
 //		gomba.showInfo(container, g);
 		
 		smallE.render(container, g);
+//		smallE.showInfo(container, g);
 		suisideE.render(container, g);
 //		suisideE.showInfo(container, g);
 
