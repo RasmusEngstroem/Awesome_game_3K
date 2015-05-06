@@ -18,7 +18,7 @@ public class Breakable extends Blocks {
 	 * @param transformTo the block which this should transform to when hit by the player
 	 * @param containThis the item that should be inside the block
 	 */
-	public Breakable(String title, int x_pos, int y_pos, Image texture,
+	public Breakable(String title, float x_pos, float y_pos, Image texture,
 			int rep_x, int rep_y, GameObjects transformTo, GameObjects containThis) {
 		super(title, x_pos, y_pos, texture, rep_x, rep_y);
 		this.transformTo = transformTo;
