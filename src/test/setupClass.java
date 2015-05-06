@@ -22,6 +22,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import Mario_Game.Enemies;
+
 
 public class setupClass extends BasicGame{
 
@@ -42,6 +44,7 @@ public class setupClass extends BasicGame{
 //	enemy gomba = new enemy("Gomba", 100, 0);
 	
 	smallEnemy smallE = new smallEnemy("The Small Gomba", 200, 0);
+	Enemies enemy = new Enemies("The Small Gomba", 200, 0, null, boxes);
 	
 	suisideEnemy suisideE = new suisideEnemy("The Suisidal", 400, 0);
 	
@@ -56,11 +59,11 @@ public class setupClass extends BasicGame{
 	public void init(GameContainer container) throws SlickException {
 		
 
-		groundBox0 = new Rectangle(300, 320, 300, 50);
-		groundBox1 = new Rectangle(100, 570, 1000, 50);
-		groundBox2 = new Rectangle(10, 150, 300, 50);
+		groundBox0 = new Rectangle(300, 300, 100, 100);
+		groundBox1 = new Rectangle(400, 300, 100, 100);
+		groundBox2 = new Rectangle(500, 300, 100, 100);
 		groundBox3 = new Rectangle(605, 300, 300, 50);
-		groundBox4 = new Rectangle(10, 450, 300, 50);
+		groundBox4 = new Rectangle(10, 400, 300, 50);
 		groundBox5 = new Rectangle(-50, 350, 70, 50);
 		
 		boxes[0] = groundBox0;
@@ -81,6 +84,7 @@ public class setupClass extends BasicGame{
 //		gomba2.boxes = boxes;
 //		gomba2.positionX += 100;
 //		
+		enemy.init(container);
 		
 		smallE.init(container);
 		smallE.boxes = boxes;
@@ -99,6 +103,7 @@ public class setupClass extends BasicGame{
 
 	public void update(GameContainer container, int delta) throws SlickException {
 		
+		enemy.update(container, delta);
 		player.update(container, delta);
 		
 //		gomba.update(container, delta);
@@ -122,6 +127,7 @@ public class setupClass extends BasicGame{
 			g.fill(boxes[i]);
 		}
 		
+		enemy.render(container, g);
 		player.render(container, g);
 		
 //		gomba.render(container, g);
