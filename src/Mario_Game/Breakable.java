@@ -27,7 +27,9 @@ public class Breakable extends Blocks {
 	}
 	
 	public void whenBreak (){
-		
+//		if( containThis.getClass() ==  ){
+//			Coins coin =new Coins(title, x_pos, y_pos+scaleSize, texture);
+//		}
 	}
 
 }
