@@ -33,7 +33,8 @@ public class SimpleSlickGame extends BasicGame
 	//public blocks thisblock; 
 	public entity myEntity; 
 	public blocks myBlocks; 
-	public Rectangle mousepointer; 
+	public Circle mousepointer; 
+	public Circle boundingbox3; 
 	
 	
 	float mouseX; 
@@ -51,10 +52,10 @@ public class SimpleSlickGame extends BasicGame
 	{
 		block = new Image("Assets/marioblock.png");
 		//mousepointer = new Image("Assets/marioblock2.png");
-		mousepointer = new Rectangle(10,10,30,30);
+		mousepointer = new Circle(1,1,30);
 		myEntity = new entity(10,10) {
 		};
-		myBlocks = new blocks(10,10,50,50,block) {
+		myBlocks = new blocks(0,300,50,50,block,boundingbox3) {
 			
 		};
 		
@@ -78,17 +79,17 @@ public class SimpleSlickGame extends BasicGame
 		Input input = gc.getInput(); 
 		if(input.isKeyDown(Input.KEY_D))
 		{
-			myBlocks.x_pos += delta*0.1f;
+			myBlocks.x_pos += delta*0.2f;
 		}
 		if(input.isKeyDown(Input.KEY_A))
 		{
-			myBlocks.x_pos -= delta*0.1f;
+			myBlocks.x_pos -= delta*0.2f;
 		}
 		
-		if(mousepointer.intersects(blocks.boundingbox))
-		{
-			
-		}
+//		if(mousepointer.intersects(blocks.boundingbox))
+//		{
+//			System.out.println("HIT DETECTION!");
+//		}
 		
 	}
 
