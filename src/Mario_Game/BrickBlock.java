@@ -68,6 +68,7 @@ public class BrickBlock extends Breakable {
 		if(breakHitBox.intersects(marioHead) && placed && alive){
 			alive=false;
 			System.out.println("hit");
+			mario.collisionD = true;
 		}
 	}
 	

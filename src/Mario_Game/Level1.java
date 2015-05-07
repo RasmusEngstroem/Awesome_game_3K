@@ -15,13 +15,14 @@ public class Level1 extends level{
 
 //-----
 
-public int width = 1400;
-public int height = 1000;
+public static int width = 1024;
+public static int height = 768;
 public int moveMargin = 150;
 	
 public Player player;
 private BrickBlock brick; 
 private EmptyItemBlock emptyBlok1;
+private EmptyItemBlock emptyBlok2;
 	
 	
 //------ SETUP --------------------------------------------
@@ -41,7 +42,8 @@ public Level1(String title) {
 		player = new Player(100 + x_posLevel, 100 + y_posLevel, container);
 		player.init(container);
 		brick = new BrickBlock(0,0, 10, 0, player);
-		emptyBlok1 = new EmptyItemBlock(0, 0, 30, 0, player);
+		emptyBlok1 = new EmptyItemBlock(0, 0, 50, 0, player);
+		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player);
 	}
 
 	
@@ -51,6 +53,7 @@ public Level1(String title) {
 		
 		brick.update(200+ x_posLevel, 300 + y_posLevel);
 		emptyBlok1.update(10+ x_posLevel, 600 + y_posLevel);
+		emptyBlok2.update(50+ x_posLevel, 1000 + y_posLevel);
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
 		moveLevel(container, delta);

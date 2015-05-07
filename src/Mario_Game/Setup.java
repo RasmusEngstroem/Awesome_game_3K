@@ -14,8 +14,8 @@ public class Setup extends BasicGame {
 	
 	public int gameLevel = 1;
 	
-	public static int width = 1400;
-	public static int height = 1000;
+	public static int width = 1024;
+	public static int height = 768;
 	
 //------ SETUP --------------------------------------------
 	
