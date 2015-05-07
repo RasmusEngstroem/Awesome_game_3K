@@ -18,9 +18,9 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class player extends BasicGame{
 
-	public String pictureL = "pictures/animationBotL.png";
-	public String pictureR = "pictures/animationBotR.png";
-	public String pictureFall = "pictures/animationBotFall.png";
+	public String pictureL = "pictures/playerL84.png";
+	public String pictureR = "pictures/playerR84.png";
+	public String pictureFall = "pictures/animationPlayerIdle_82.png";
 	
 	public SpriteSheet botSheetL;
 	public Animation botAnimationL;
@@ -118,7 +118,7 @@ public class player extends BasicGame{
 
 	
 		movePlayer(container,delta);
-		collisionDeflection(container,delta);
+		collisionDeflection2(container,delta);
 		damping();
 		
 	}
@@ -253,7 +253,63 @@ public class player extends BasicGame{
 			directionV.x *= -1/2;
 	}
 
+	public void collisionDeflection2(GameContainer container,int delta)
+	{
+		pushObjectV = new Vector2f(0,0);
+		inCollision = false;
 		
+		inAir = true;
+		onGround = false;
+		
+		for (int i = 0; i < boxes.length; i++)
+		{
+			if( botBoxFB.intersects(boxes[i])) // check if the bot collides with a groundBox
+			{
+				
+				if (botBoxFB.getCenterY()+ (0.5f * botBoxFB.getHeight())+0.5f > boxes[i].getCenterY()- 0.5f * boxes[i].getHeight())
+					pushObjectV.y = -1;
+				
+				if (botBoxFB.getCenterY()+ 0.5f * botBoxFB.getHeight()+1f > boxes[i].getCenterY()+ 0.5f * boxes[i].getHeight())
+					pushObjectV.y = 1;
+				
+				if (botBoxFB.getCenterX()+ 0.5f * botBoxFB.getWidth()-0.5f < boxes[i].getCenterX()- 0.5f * boxes[i].getWidth()  && botBoxFB.getCenterY()+ 0.5 * botBoxFB.getHeight()-1f > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
+					pushObjectV.x = -1;
+				
+				if (botBoxFB.getCenterX()- 0.5f * botBoxFB.getWidth() + 0.7f > boxes[i].getCenterX()+ 0.5f * boxes[i].getWidth()  && botBoxFB.getCenterY()+ 0.5 * botBoxFB.getHeight()-1f > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
+					pushObjectV.x = 1;
+				
+				
+				inAir = false;
+				inCollision = true;
+			}
+			
+
+			
+			collisionVPrint = pushObjectV;
+
+			while (botBoxFB.intersects(boxes[i]))
+			{
+				positionV.x += pushObjectV.x/100;
+				positionV.y += pushObjectV.y/100;
+				botBoxFB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
+				
+			}
+			
+
+			if (botBoxGT.intersects(boxes[i]))
+				{
+					standOnRectNr = i;
+					onGround = true;
+				}
+
+		}
+		
+		if (pushObjectV.y != 0 )
+			directionV.y *= -1/2;
+
+		if (pushObjectV.x != 0)
+			directionV.x *= -1/2;
+	}
 
 //---------------------------------
 	
@@ -269,14 +325,14 @@ public class player extends BasicGame{
 	
 	public void initPlayer(GameContainer container) throws SlickException
 	{
-		botSheetL = new SpriteSheet(pictureL, 100, 100);
-		botAnimationL = new Animation(botSheetL, 230);
+		botSheetL = new SpriteSheet(pictureL, 84, 100);
+		botAnimationL = new Animation(botSheetL, 270);
 		
-		botSheetR = new SpriteSheet(pictureR, 100, 100);
-		botAnimationR = new Animation(botSheetR, 230);
+		botSheetR = new SpriteSheet(pictureR, 83, 100);
+		botAnimationR = new Animation(botSheetR, 270);
 		
-		botSheetFall = new SpriteSheet(pictureFall, 100, 100);
-		botAnimationFall = new Animation(botSheetFall, 230);
+		botSheetFall = new SpriteSheet(pictureFall, 82, 100);
+		botAnimationFall = new Animation(botSheetFall, 270);
 	}
 	
 //---------------------------------

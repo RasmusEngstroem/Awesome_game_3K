@@ -100,7 +100,7 @@ public class setupClass extends BasicGame{
 		suisideE.boxes = boxes;
 		suisideE.positionX += 200;
 		
-		
+		player.size = 1f;
 		player.init(container);
 		player.boxes = boxes;
 //		player.hitBoxes = hitBoxes;
@@ -139,7 +139,7 @@ public class setupClass extends BasicGame{
 		boxTest.render(container, g);
 		enemy.render(container, g);
 		player.render(container, g);
-		player.showInfo(container, g);
+//		player.showInfo(container, g);
 		
 //		gomba.render(container, g);
 //		gomba.showInfo(container, g);
