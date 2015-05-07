@@ -23,30 +23,28 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import Mario_Game.Enemies;
+import Mario_Game.boxTest;
 
 
 public class setupClass extends BasicGame{
 
 
-	private Rectangle groundBox0;
-	private Rectangle groundBox1;
-	private Rectangle groundBox2;
-	private Rectangle groundBox3;
-	private Rectangle groundBox4;
-	private Rectangle groundBox5;
+	boxTest box1 = new boxTest("1");
+	boxTest box2 = new boxTest("2");
 	
 	
+	public boxTest[] boxes = new boxTest[100];
 	
-	private static Rectangle[] boxes = new Rectangle[6];
+//	private static Rectangle[] boxes = new Rectangle[6];
 	
 	player player = new player("The Player", 100, 100);
 	
 //	enemy gomba = new enemy("Gomba", 100, 0);
 	
-	smallEnemy smallE = new smallEnemy("The Small Gomba", 200, 0);
-	Enemies enemy = new Enemies("The Small Gomba", 200, 0, null, boxes);
+//	smallEnemy smallE = new smallEnemy("The Small Gomba", 200, 0);
+//	Enemies enemy = new Enemies("The Small Gomba", 200, 0, null, boxes);
 	
-	suisideEnemy suisideE = new suisideEnemy("The Suisidal", 400, 0);
+//	suisideEnemy suisideE = new suisideEnemy("The Suisidal", 400, 0);
 	
 //---------------------------------------------------------------------------------------
 	
@@ -59,19 +57,19 @@ public class setupClass extends BasicGame{
 	public void init(GameContainer container) throws SlickException {
 		
 
-		groundBox0 = new Rectangle(300, 300, 100, 100);
-		groundBox1 = new Rectangle(400, 300, 100, 100);
-		groundBox2 = new Rectangle(500, 300, 100, 100);
-		groundBox3 = new Rectangle(605, 300, 300, 50);
-		groundBox4 = new Rectangle(10, 400, 300, 50);
-		groundBox5 = new Rectangle(-50, 350, 70, 50);
+//		groundBox0 = new Rectangle(300, 300, 100, 100);
+//		groundBox1 = new Rectangle(400, 300, 100, 100);
+//		groundBox2 = new Rectangle(500, 300, 100, 100);
+//		groundBox3 = new Rectangle(605, 300, 300, 50);
+//		groundBox4 = new Rectangle(10, 400, 300, 50);
+//		groundBox5 = new Rectangle(100, 100, 300, 50);
 		
-		boxes[0] = groundBox0;
-		boxes[1] = groundBox1;
-		boxes[2] = groundBox2;
-		boxes[3] = groundBox3;
-		boxes[4] = groundBox4;
-		boxes[5] = groundBox5;
+		boxes[0] = box1;
+		boxes[1] = box2;
+//		boxes[2] = groundBox2;
+//		boxes[3] = groundBox3;
+//		boxes[4] = groundBox4;
+//		boxes[5] = groundBox5;
 		
 		
 		
@@ -84,15 +82,16 @@ public class setupClass extends BasicGame{
 //		gomba2.boxes = boxes;
 //		gomba2.positionX += 100;
 //		
-		enemy.init(container);
-		
-		smallE.init(container);
-		smallE.boxes = boxes;
-		smallE.positionX += 200;
-		
-		suisideE.init(container);
-		suisideE.boxes = boxes;
-		suisideE.positionX += 200;
+//		enemy.init(container);
+//		
+//		smallE.init(container);
+//		smallE.boxes = boxes;
+//		smallE.positionX += 200;
+//		
+//		suisideE.init(container);
+//		suisideE.boxes = boxes;
+//		suisideE.positionX += 200;
+//		
 		
 		player.init(container);
 		player.boxes = boxes;
@@ -103,14 +102,14 @@ public class setupClass extends BasicGame{
 
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		enemy.update(container, delta);
+//		enemy.update(container, delta);
 		player.update(container, delta);
 		
 //		gomba.update(container, delta);
 //		gomba2.update(container, delta);
 
-		smallE.update(container, delta);
-		suisideE.update(container, delta);
+//		smallE.update(container, delta);
+//		suisideE.update(container, delta);
 	
 	}
 	
@@ -121,21 +120,22 @@ public class setupClass extends BasicGame{
 
 		
 		
-		g.setColor(Color.lightGray);
-		for (int i = 0; i < boxes.length; i++)
-		{
-			g.fill(boxes[i]);
-		}
+		box1.render(container, g);
+		box2.render(container, g);
+//		for (int i = 0; i < boxes.length; i++)
+//		{
+//			boxes[i].
+//		}
 		
-		enemy.render(container, g);
+//		enemy.render(container, g);
 		player.render(container, g);
 		
 //		gomba.render(container, g);
 //		gomba.showInfo(container, g);
 		
-		smallE.render(container, g);
+//		smallE.render(container, g);
 //		smallE.showInfo(container, g);
-		suisideE.render(container, g);
+//		suisideE.render(container, g);
 //		suisideE.showInfo(container, g);
 
 	}

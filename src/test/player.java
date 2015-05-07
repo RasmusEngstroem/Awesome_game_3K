@@ -16,6 +16,8 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
+import Mario_Game.boxTest;
+
 public class player extends BasicGame{
 
 	public String pictureL = "pictures/animationBotL.png";
@@ -30,7 +32,7 @@ public class player extends BasicGame{
 	public Animation botAnimationFall;
 	
 	
-	public Rectangle[] boxes;
+	public boxTest[] boxes;
 
 	private Circle botBoxFB; 
 	private Rectangle botBoxTL;   // body Top
@@ -60,8 +62,7 @@ public class player extends BasicGame{
 		
 	private Vector2f positionV;
 	private Vector2f directionV;
-	private Vector2f speedV;
-	private Vector2f jumpHeightV;
+
 
 	Vector2f pushObjectV = new Vector2f(0,0);
 	Vector2f collisionV = new Vector2f(0,0);
@@ -72,6 +73,9 @@ public class player extends BasicGame{
 	
 	Vector2f collisionVPrint = new Vector2f(0,0); 
 	float variable = 0;
+	
+
+	
 	
 	public player(String title, int positionX, int positionY) {
 		super(title);
@@ -89,16 +93,11 @@ public class player extends BasicGame{
 
 		positionV = new Vector2f(positionX, positionY);
 		directionV = new Vector2f(0,0);
-		speedV = new Vector2f(speed,0);
-		jumpHeightV = new Vector2f(0,jumpHeight);
 		
-		
-//		botBoxFB = new Circle(0,0,43*size);
-//		botBoxTL = new Rectangle(0,0,51*size, 50*size);
-//		botBoxTR = new Rectangle(0,0,51*size, 50*size);
+
 		botBoxB = new Rectangle(0,0,100*size, 85*size);
-//		botBoxL = new Rectangle(0,0,10*size, 35*size);
-//		botBoxR = new Rectangle(0,0,10*size, 35*size);
+		botBoxL = new Rectangle(0,0,80*size, 10*size);
+
 		
 	}
 
@@ -124,7 +123,7 @@ public class player extends BasicGame{
 	public void render(GameContainer container, Graphics g) throws SlickException {
 
 		drawPlayer();
-		showInfo(container, g);
+
 	}
 
 
@@ -143,18 +142,15 @@ public class player extends BasicGame{
 		if(input.isKeyDown(Input.KEY_D))
 			directionV.x += speed/500*delta;
 		
-		if(input.isKeyDown(Input.KEY_W) && pushObjectV.x == 0 && pushObjectV.y != 1 && !inAir )
+		if(input.isKeyDown(Input.KEY_W) &&  pushObjectV.x == 0 && pushObjectV.y != 1 && !inAir )
 			directionV.y -= jumpHeight;
 		
 		positionV.add(directionV);
 
 		
 		botBoxB.setLocation(positionV.x-50*size, positionV.y-5 - 40 *size); // move bot collision box with bot animation
-//		botBoxFB.setLocation(positionV.x-43*size, positionV.y+(5-50)*size);
-//		botBoxTL.setLocation(positionV.x-51*size, positionV.y+5-50*size);
-//		botBoxTR.setLocation(positionV.x-0*size, positionV.y+5-50*size);
-//		botBoxL.setLocation(positionV.x-5-60*size, positionV.y-5+50*size);
-//		botBoxR.setLocation(positionV.x-5+60*size, positionV.y-5+50*size);
+		botBoxL.setLocation(positionV.x-40*size, positionV.y + 35*size);
+
 	
 	
 	}
@@ -166,195 +162,68 @@ public class player extends BasicGame{
 		pushObjectV = new Vector2f(0,0);
 		inCollision = false;
 		
+		inAir = true;
+		onGround = false;
 		
 		for (int i = 0; i < boxes.length; i++)
 		{
-			if( botBoxB.intersects(boxes[i])) // check if the bot collides with a groundBox
+			if( botBoxB.intersects(boxes[i].hitBox)) // check if the bot collides with a groundBox
 			{
 				
-//				if (botBoxB.getCenterX()+ 0.5 * botBoxB.getWidth() > boxes[i].getCenterX()- 0.5 * boxes[i].getWidth() &&  botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight() < boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
-//					pushObjectV.x = -1;
-//				
-//				if (botBoxB.getCenterX()- 0.5 * botBoxB.getWidth() > boxes[i].getCenterX()+ 0.5 * boxes[i].getWidth())
-//					pushObjectV.x = 1;
-//				
-				if (botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight() > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
+				if (botBoxB.getCenterY()+ (0.5f * botBoxB.getHeight())+0.5f > boxes[i].hitBox.getCenterY()- 0.5f * boxes[i].hitBox.getHeight())
 					pushObjectV.y = -1;
-
 				
-//				if (botBoxB.getCenterY()- 0.5 * botBoxB.getHeight() > boxes[i].getCenterY()+ 0.5 * boxes[i].getHeight())
-//					pushObjectV.y = 1;
-
-				System.out.println("print");
+				if (botBoxB.getCenterY()+ 0.5f * botBoxB.getHeight()+1f > boxes[i].hitBox.getCenterY()+ 0.5f * boxes[i].hitBox.getHeight())
+					pushObjectV.y = 1;
 				
-//				positionV.x += pushObjectV.x;
-//				positionV.y += pushObjectV.y;
-//				botBoxB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
+				if (botBoxB.getCenterX()+ 0.5f * botBoxB.getWidth()-0.5f < boxes[i].hitBox.getCenterX()- 0.5f * boxes[i].hitBox.getWidth()  && botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight()-1f > boxes[i].hitBox.getCenterY()- 0.5 * boxes[i].hitBox.getHeight())
+					pushObjectV.x = -1;
 				
-	
+				if (botBoxB.getCenterX()- 0.5f * botBoxB.getWidth() + 0.7f > boxes[i].hitBox.getCenterX()+ 0.5f * boxes[i].hitBox.getWidth()  && botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight()-1f > boxes[i].hitBox.getCenterY()- 0.5 * boxes[i].hitBox.getHeight())
+					pushObjectV.x = 1;
 				
+				
+				inAir = false;
 				inCollision = true;
 			}
 			
+
 			
 			collisionVPrint = pushObjectV;
 
-			while (botBoxB.intersects(boxes[i]))
+			while (botBoxB.intersects(boxes[i].hitBox))
 			{
 				positionV.x += pushObjectV.x/100;
 				positionV.y += pushObjectV.y/100;
 				botBoxB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
-			}
 				
-		}
-	}
-	
-	
-	
-	public void collisionDeflection2(GameContainer container,int delta)
-	{
-		collisionV = new Vector2f(0,0);
-		Vector2f vectorToCornerV = new Vector2f(0,0);
-		
-		pushObjectV = new Vector2f(0,0);
-		
-		collisionB = false;
-		
-		for (int i = 0; i < boxes.length; i++)
-		{
+			}
 			
 
-				
-			
-			
-			if( botBoxB.intersects(boxes[i]) && collisionEnabled == true) // check if the bot collides with a groundBox
+			if (botBoxL.intersects(boxes[i].hitBox))
 				{
-				
-				if (botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight() > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight() /*&&  botBoxB.getCenterX()+ 0.5 * botBoxB.getWidth() < boxes[i].getCenterX()+ 0.5 * boxes[i].getWidth()*/)
-				{
-					pushObjectV.y = -1;
-					collisionB = true;
+					standOnRectNr = i;
+					onGround = true;
 				}
-				
-//				else if (botBoxB.getCenterY()- 0.5 * botBoxB.getHeight() < boxes[i].getCenterY()+ 0.5 * boxes[i].getHeight())
-//				{
-//					pushObjectV.y = 1;
-//					collisionB = true;
-//				}
-//				
-//				if (botBoxB.getCenterX()+ 0.5 * botBoxB.getWidth() < boxes[i].getCenterX()- 0.5 * boxes[i].getWidth())
-//				{
-//					pushObjectV.x = -1;
-//					collisionB = true;
-//				}
-//				
-//				else if (botBoxB.getCenterX()- 0.5 * botBoxB.getWidth() > boxes[i].getCenterX()+ 0.5 * boxes[i].getWidth())
-//				{
-//					pushObjectV.x = 1;
-//					collisionB = true;
-//				}
-				
-				}
-			//----------
-//					collisionV.x = botBoxB.getCenterX() - boxes[i].getCenterX();
-//					collisionV.y = botBoxB.getCenterY() - boxes[i].getCenterY();
-//				
-//					
-//					if (collisionV.x <= 0)
-//						vectorToCornerV.x = boxes[i].getCenterX()-boxes[i].getWidth()/2- boxes[i].getCenterX();
-//					
-//					if (collisionV.x > 0)	
-//						vectorToCornerV.x = boxes[i].getCenterX()+boxes[i].getWidth()/2- boxes[i].getCenterX();
-//					
-//					if (collisionV.y <= 0)
-//						vectorToCornerV.y = boxes[i].getCenterY()-boxes[i].getHeight()/2- boxes[i].getCenterY();
-//					
-//					if (collisionV.y > 0)
-//						vectorToCornerV.y = boxes[i].getCenterY()+boxes[i].getHeight()/2- boxes[i].getCenterY();
-//					
-//					
-//					//----
-//					
-//					if(collisionV.getTheta() < vectorToCornerV.getTheta() && collisionV.y <= 0 && collisionV.x <= 0)
-//						pushObjectV.x = -1; 
-//					
-//					else if(collisionV.getTheta() > vectorToCornerV.getTheta() && collisionV.y <= 0 && collisionV.x <= 0)
-//						pushObjectV.y = -1;
-//					
-//					//--
-//					
-//					else if(collisionV.getTheta() < vectorToCornerV.getTheta() && collisionV.y <= 0 && collisionV.x >= 0)
-//						pushObjectV.y = -1;
-//					
-//					else if(collisionV.getTheta() > vectorToCornerV.getTheta() && collisionV.y <= 0 && collisionV.x >= 0)
-//						pushObjectV.x =  1;
-//					
-//					//--
-//					
-//					else if(collisionV.getTheta() < vectorToCornerV.getTheta() && collisionV.y >= 0 && collisionV.x <= 0)
-//						pushObjectV.y = 1;
-//					
-//					else if(collisionV.getTheta() > vectorToCornerV.getTheta() && collisionV.y >= 0 && collisionV.x <= 0)
-//						pushObjectV.x =  -1;
-//					
-//				//--
-//										
-//					else if(collisionV.getTheta() < vectorToCornerV.getTheta() && collisionV.y >= 0 && collisionV.x >= 0)
-//						pushObjectV.x = 1;
-//					
-//					else if(collisionV.getTheta() > vectorToCornerV.getTheta() && collisionV.y >= 0 && collisionV.x >= 0)
-//						pushObjectV.y =  1;
-//					
-//	
-//					
-//					
-//					vectorToCornerV.normalise();
-//					collisionV.normalise();
-//					collisionVPrint = pushObjectV;
-//					variable = (float) collisionV.getTheta();
-//					collisionB = true;
-//					
-					if (pushObjectV.y != 0)
-						directionV.y *= -1/2;
-					
-					if (pushObjectV.x != 0)
-						directionV.x *= -1/2;
-	
-//	
-//				}
-//		
-//			
+
 		}
 		
-		inAir = true;
-			
-		while (collisionB && collisionEnabled == true)
-		{
-			positionV.y += pushObjectV.y/1000;
-			positionV.x += pushObjectV.x/1000;
-			
-			botBoxB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
-			
-			collisionB = false;
-			
-			for (int i = 0; i < boxes.length; i++)
-			{
-				if( botBoxB.intersects(boxes[i])) // re-check if the bot collides with a groundBox
-					{
-						collisionB = true;
-						standOnRectNr = i;		
-					}
-			}
-			inAir = false;
-		}
+		if (pushObjectV.y != 0 )
+			directionV.y *= -1/2;
+
+		if (pushObjectV.x != 0)
+			directionV.x *= -1/2;
 	}
-	
+
+		
 
 //---------------------------------
 	
 	private void damping() {
 		
 		directionV = directionV.scale(1-damping) ;
+//		if (onGround)
+//			directionV.y *= (1-damping);
 		
 	}
 	
@@ -379,7 +248,7 @@ public class player extends BasicGame{
 	public void drawPlayer()
 	{
 	
-		if (inAir)
+		if ( !onGround)
 		botAnimationFall.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
 		
 		else if (directionV.x < -0.005f)
@@ -396,13 +265,15 @@ public class player extends BasicGame{
 	
 	public void showInfo (GameContainer container, Graphics g) throws SlickException  // for debugging
 	{
-		g.drawString("collision " + collisionVPrint, 10, 30); // print collision true/false
-		g.drawString("in Air: " + inAir, 10, 45); // print inAir true/false
+		g.drawString("direction " + directionV.x, 10, 30); // print collision true/false
+		g.drawString("direction " + directionV.y, 10, 45); // print collision true/false
+//		g.drawString("in Air: " + inAir, 10, 45); // print inAir true/false
+		g.drawString("on Ground: " + onGround, 10, 60); // print inAir true/false
 //		g.drawString("variable: " + variable, 10, 60); // print inAir true/false
 		
 		
 		g.setColor(Color.lightGray);
-//		g.draw(botBoxL);
+		g.draw(botBoxL);
 //		g.draw(botBoxR);
 		g.draw(botBoxB);
 //		g.draw(botBoxTL);
