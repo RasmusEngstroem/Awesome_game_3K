@@ -10,8 +10,8 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class BrickBlock extends Breakable {
 	
-	//hej
-
+	public Image textureBlock;
+	
 	public Rectangle boxShape;
 	public Rectangle breakHitBox;
 	public Rectangle marioHead;
@@ -20,11 +20,13 @@ public class BrickBlock extends Breakable {
 	public String  t = "kasse";
 	public int rep_x;
 	public int rep_y;
+	float x_pos;
+	float y_pos;
 	
 	public Player mario;
 	public BrickBlock[] kasse;
 	
-	public BrickBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario) {
+	public BrickBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario) throws SlickException {
 		super(x_pos, y_pos, rep_x, rep_y);
 		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
 		breakHitBox = new Rectangle(x_pos, y_pos, scaleSize-4, 10);
@@ -32,11 +34,17 @@ public class BrickBlock extends Breakable {
 		marioHead = mario.botBoxT;
 		this.rep_x = rep_x;
 		this.rep_y = rep_y;
+		textureBlock = new Image("Assets/blokEmpty.png");
+
 		placeClones();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void update(float x, float y){
+		
+		this.x_pos=x-(scaleSize/2);
+		this.y_pos=y-(scaleSize/2);
+		
 		boxShape.setCenterX(x);
 		boxShape.setCenterY(y);
 		breakHitBox.setCenterX(x);
@@ -55,9 +63,9 @@ public class BrickBlock extends Breakable {
 		// TODO Auto-generated method stub
 		if(alive){
 		g.setColor(Color.white);
-		g.texture(boxShape, new Image("Assets/blokBreakable.png"));
 		g.draw(boxShape);
 		g.draw(breakHitBox);
+		textureBlock.draw(x_pos, y_pos);
 		breakBox();
 		}
 		if( rep_x != 0){
