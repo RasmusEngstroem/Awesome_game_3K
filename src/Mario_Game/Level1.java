@@ -1,5 +1,7 @@
 package Mario_Game;
 
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.util.Display;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -9,10 +11,16 @@ import org.newdawn.slick.geom.Rectangle;
 
 import test.setupClass;
 
-//-----
-
 public class Level1 extends level{
 
+//-----
+
+public int width = 1400;
+public int height = 1000;
+public int moveMargin = 150;
+	
+public Player player;
+private BrickBlock brick; 
 	
 	
 //------ SETUP --------------------------------------------
@@ -29,20 +37,39 @@ public Level1(String title) {
 	public void sendToInit(GameContainer container) throws SlickException{
 		background = new Image("Assets/backgroundWater.jpg");
 		
+		player = new Player(100 + x_posLevel, 100 + y_posLevel, container);
+		player.init(container);
+		brick = new BrickBlock(100+ x_posLevel, 300 + y_posLevel, 10, 0, player);
 	}
 
+	
 	
 //------ UPDATE --------------------------------------------
 	public void sendToUpdate(GameContainer container, int delta) throws SlickException {
 		
-
+		brick.update(100+ x_posLevel, 300 + y_posLevel);
+		player.update(container, delta, x_posLevel, y_posLevel);
+		moveLevel(container, delta);
 		
 	}
+	
+	
+	
 //------ RENDER --------------------------------------------
 	public void sendToRender(GameContainer container, Graphics g) throws SlickException {
 		
-		background.draw(x_posLevel/2, y_posLevel/2 - background.getTextureHeight()/4);
-
+		background.draw(x_posLevel/1.001f, y_posLevel/1.001f - background.getTextureHeight()/4);
+		brick.render(g);
+		player.render(container, g);
 	}
+	
 
+	void moveLevel(GameContainer container, int delta)
+	{
+		if (player.x_pos > width/2 + moveMargin)
+			x_posLevel -= 1;
+		else if (player.x_pos < width/2 - moveMargin)
+			x_posLevel += 1;
+	}
+	
 }

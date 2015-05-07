@@ -14,6 +14,8 @@ public class Setup extends BasicGame {
 	
 	public int gameLevel = 1;
 	
+	public static int width = 1400;
+	public static int height = 1000;
 	
 //------ SETUP --------------------------------------------
 	
@@ -48,7 +50,7 @@ public class Setup extends BasicGame {
 //------ MAIN --------------------------------------------
 	public static void main(String[] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Setup("Main Setup"));
-		app.setDisplayMode(1400, 1000, false);
+		app.setDisplayMode(width, height, false);
 		app.start();
 	}
 

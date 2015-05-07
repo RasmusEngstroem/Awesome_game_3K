@@ -156,19 +156,19 @@ public class Player extends GameEntities{
 			
 		
 		positionV.add(directionV);
-		positionV.x+=screen_pos_x;
-		positionV.y+=screen_pos_y;
+//		positionV.x+=screen_pos_x;
+//		positionV.y+=screen_pos_y;
 		
-		x_pos = positionV.x;
-		y_pos = positionV.y;
+		x_pos = botBoxFB.getCenterX();
+		y_pos = botBoxFB.getCenterY();
 		
-		botBoxFB.setLocation(positionV.x-50*size, positionV.y-5 - 40 *size); // move bot collision box with bot animation
-		botBoxGT.setLocation(positionV.x-40*size, positionV.y + 35*size);
+		botBoxFB.setLocation(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-5 - 40 *size); // move bot collision box with bot animation
+		botBoxGT.setLocation(positionV.x + screen_pos_x-40*size, positionV.y + screen_pos_y + 35*size);
 		
-		botBoxL.setLocation(positionV.x-50*size, positionV.y - 50 *size);
-		botBoxR.setLocation(positionV.x + 45*size, positionV.y - 50 *size);
-		botBoxT.setLocation(positionV.x+ 0-45*size, positionV.y - 60 *size);
-		botBoxB.setLocation(positionV.x+ 0-40*size, positionV.y + 30 *size);
+		botBoxL.setLocation(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y - 50 *size);
+		botBoxR.setLocation(positionV.x + screen_pos_x+ 45*size, positionV.y + screen_pos_y - 50 *size);
+		botBoxT.setLocation(positionV.x + screen_pos_x+ 0-45*size, positionV.y + screen_pos_y - 60 *size);
+		botBoxB.setLocation(positionV.x + screen_pos_x+ 0-40*size, positionV.y + screen_pos_y + 30 *size);
 
 	
 	}
@@ -254,16 +254,16 @@ public class Player extends GameEntities{
 	{
 	
 		if ( !onGround)
-		botAnimationFall.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
+		botAnimationFall.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
 		else if (directionV.x < -0.005f)
-		botAnimationL.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
+		botAnimationL.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
 		else if (directionV.x > 0.005f)
-		botAnimationR.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
+		botAnimationR.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
 		else
-			botAnimationFall.draw(positionV.x-50*size, positionV.y-50*size, 100 * size, 100*size);
+			botAnimationFall.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
 	}
 	

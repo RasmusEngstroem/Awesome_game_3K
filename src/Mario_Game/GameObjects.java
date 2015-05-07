@@ -2,7 +2,7 @@ package Mario_Game;
 
 public abstract class GameObjects {
 
-	public int scaleSize = 20;
+	public int scaleSize = 100;
 	
 
 }
