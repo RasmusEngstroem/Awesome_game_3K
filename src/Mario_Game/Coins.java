@@ -24,7 +24,7 @@ public class Coins extends Items {
 		this.x_pos = x_pos;
 		this.y_pos = y_pos;
 		marioShape = mario.botBoxFB;
-		textureBlock = new Image("Assets/blokBreakable.png");
+		textureBlock = new Image("Assets/coin.png");
 		// TODO Auto-generated constructor stub
 	}
 	
