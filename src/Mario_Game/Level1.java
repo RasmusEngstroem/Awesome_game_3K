@@ -22,7 +22,7 @@ public static int height = 768;
 public int moveMargin = 150;
 	
 public Player player;
-private SolidBlock brick; 
+private ItemBlock brick; 
 private EmptyItemBlock emptyBlok1;
 private EmptyItemBlock emptyBlok2;
 private ItemBlock item1;
@@ -46,7 +46,7 @@ public Level1(String title) {
 		
 		player = new Player(100 + x_posLevel, 100 + y_posLevel, container);
 		player.init(container);
-		brick = new SolidBlock(0,0, 5, 0, player);
+		brick = new ItemBlock(0,0, 5, 0, player);
 		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player);
 		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player);
 		coin = new Coins(0, 0, player);
@@ -73,7 +73,7 @@ public Level1(String title) {
 //------ RENDER --------------------------------------------
 	public void sendToRender(GameContainer container, Graphics g) throws SlickException {
 		
-		background.draw(x_posLevel/1.001f, y_posLevel/1.001f - background.getTextureHeight()/4);
+		background.draw(x_posLevel/1.1f, y_posLevel/1.1f - background.getTextureHeight()/4);
 		brick.render(g);
 		emptyBlok1.render(g);
 		emptyBlok2.render(g);

@@ -40,7 +40,7 @@ public class Player extends GameEntities{
 	public boolean collisionFB = false;  // body
 	private boolean collisionB = false;
 
-//	private boolean inAir = true; fff
+//	private boolean inAir = true; 
 	private boolean collisionEnabled = true;
 	
 	
@@ -48,7 +48,7 @@ public class Player extends GameEntities{
 	public float speed = 2f;
 	public float jumpHeight = 1.2f;
 //	public float dampingAir = 0.002f;
-	public float damping = 0.0001f;
+	public float damping = 1.01f;
 	public float gravity = 0.01f;
 	
 	public float screen_pos_x;
@@ -227,26 +227,26 @@ public class Player extends GameEntities{
 	private void damping( int delta) {
 		
 //		directionV = directionV.scale(1-damping/delta) ;
-//		directionV.x /= (damping/delta);
-//		directionV.y /= (damping/delta);
-		float a = 0.0015f;
-		float b = 0.003f;
-		
-		if (directionV.x > 0.01f)
-			directionV.x -= a*delta;
-		else if (directionV.x < -0.01f)
-			directionV.x += a*delta;
-		else
-			directionV.x = 0;
-		
-		if (directionV.y > 0.01f)
-			directionV.y -= b*delta;
-		else if (directionV.y < -0.01f)
-			directionV.y += b*delta;
-		else
-			directionV.y = 0;
-//		if (onGround)
-//			directionV.y *= (1-damping);
+		directionV.x /= (damping);
+		directionV.y /= (damping);
+//		float a = 0.0015f;
+//		float b = 0.003f;
+//		
+//		if (directionV.x > 0.01f)
+//			directionV.x -= a*delta;
+//		else if (directionV.x < -0.01f)
+//			directionV.x += a*delta;
+//		else
+//			directionV.x = 0;
+//		
+//		if (directionV.y > 0.01f)
+//			directionV.y -= b*delta;
+//		else if (directionV.y < -0.01f)
+//			directionV.y += b*delta;
+//		else
+//			directionV.y = 0;
+		if (onGround)
+			directionV.y /= (damping);
 		
 	}
 	

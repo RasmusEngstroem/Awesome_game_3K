@@ -47,8 +47,6 @@ public class Coins extends Items {
 	public void render(Graphics g){
 		
 		if(alive){
-			g.setColor(Color.white);
-			g.draw(marioShape);
 			textureBlock.draw(x_pos, y_pos);
 		}
 		

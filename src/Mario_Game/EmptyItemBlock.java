@@ -41,10 +41,10 @@ public class EmptyItemBlock extends Unbreakable {
 		boxShape.setCenterX(x);
 		boxShape.setCenterY(y);
 		placed = true;
+		checkCollision();
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){
-				kasse[i].update(x+scaleSize*i, y);
-				kasse[i].checkCollision();
+				kasse[i].update(x+scaleSize*i+scaleSize, y);
 			}
 		}
 	}
@@ -52,12 +52,7 @@ public class EmptyItemBlock extends Unbreakable {
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
 		if(alive){
-			
-			g.setColor(Color.white);
-			
-			g.draw(boxShape);
 			textureBlock.draw(x_pos, y_pos);
-			
 		}
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){

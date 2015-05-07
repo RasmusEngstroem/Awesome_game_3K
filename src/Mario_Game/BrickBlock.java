@@ -48,10 +48,10 @@ public class BrickBlock extends Breakable {
 		breakHitBox.setCenterX(x);
 		breakHitBox.setCenterY(y+(scaleSize/2)-5);
 		placed = true;
+		checkCollision();
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){
-				kasse[i].update(x+scaleSize*i, y);
-				kasse[i].checkCollision();
+				kasse[i].update(x+scaleSize*i+scaleSize, y);
 			}
 		}
 	}
@@ -60,9 +60,6 @@ public class BrickBlock extends Breakable {
 	public void render(Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		if(alive){
-		g.setColor(Color.white);
-		g.draw(boxShape);
-		g.draw(breakHitBox);
 		textureBlock.draw(x_pos, y_pos);
 		breakBox();
 		}
