@@ -11,6 +11,7 @@ public class ItemBlock extends Breakable {
 	public Image textureBlock;
 	
 	public EmptyItemBlock empty;
+	public Coins coin;
 	
 	public Rectangle boxShape;
 	public Rectangle breakHitBox;
@@ -59,6 +60,7 @@ public void update(float x, float y){
 		
 		if(!alive){
 			empty.update(x, y);
+			coin.update(x, y);
 			empty.checkCollision();
 		}
 		
@@ -76,6 +78,7 @@ public void update(float x, float y){
 		}
 		if(!alive){
 			empty.render(g);
+			coin.render(g);
 		}
 
 		if( rep_x != 0){
@@ -91,6 +94,7 @@ public void update(float x, float y){
 			System.out.println("hit");
 			mario.collisionD = true;
 			empty = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario);
+			coin = new Coins(x_pos+(scaleSize/2)-scaleSize, x_pos+(scaleSize/2)-scaleSize, mario);
 		}
 	}
 	
