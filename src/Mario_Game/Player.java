@@ -44,12 +44,12 @@ public class Player extends GameEntities{
 	private boolean collisionEnabled = true;
 	
 	
-	public float size = 1;
-	public float speed = 0.7f;
-	public float jumpHeight = 2.2f;
+	public float size = 0.95f;
+	public float speed = 2f;
+	public float jumpHeight = 6f;
 //	public float dampingAir = 0.002f;
-	public float damping = 1.003f;
-	public float gravity = 0.003f;
+	public float damping = 1.01f;
+	public float gravity = 0.01f;
 	
 	public float screen_pos_x;
 	public float screen_pos_y;
@@ -229,6 +229,16 @@ public class Player extends GameEntities{
 //		directionV = directionV.scale(1-damping/delta) ;
 		directionV.x /= damping;
 		directionV.y /= damping;
+		
+//		if (directionV.x > 0)
+//			directionV.x -= 0.0002f*delta;
+//		else if (directionV.x < 0)
+//			directionV.x += 0.0002f*delta;
+//		
+//		if (directionV.x > 0)
+//			directionV.x -= 0.0002f*delta;
+//		else if (directionV.x < 0)
+//			directionV.x += 0.0002f*delta;
 //		if (onGround)
 //			directionV.y *= (1-damping);
 		
@@ -239,13 +249,13 @@ public class Player extends GameEntities{
 	public void initPlayer(GameContainer container) throws SlickException
 	{
 		botSheetL = new SpriteSheet(pictureL, 100, 100);
-		botAnimationL = new Animation(botSheetL, 230);
+		botAnimationL = new Animation(botSheetL, 700);
 		
 		botSheetR = new SpriteSheet(pictureR, 100, 100);
-		botAnimationR = new Animation(botSheetR, 230);
+		botAnimationR = new Animation(botSheetR, 700);
 		
 		botSheetFall = new SpriteSheet(pictureFall, 100, 100);
-		botAnimationFall = new Animation(botSheetFall, 230);
+		botAnimationFall = new Animation(botSheetFall, 700);
 	}
 	
 //---------------------------------

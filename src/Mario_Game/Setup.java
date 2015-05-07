@@ -50,8 +50,9 @@ public class Setup extends BasicGame {
 //------ MAIN --------------------------------------------
 	public static void main(String[] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Setup("Main Setup"));
+		app.setTargetFrameRate(200);
 		app.setDisplayMode(width, height, false);
-		app.setAlwaysRender(true);
+//		app.setAlwaysRender(true);
 		app.start();
 	}
 
