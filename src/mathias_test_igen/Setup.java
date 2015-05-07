@@ -28,7 +28,9 @@ public class Setup extends BasicGame {
 	public void update(GameContainer container, int arg1) throws SlickException {
 		// TODO Auto-generated method stub
 		kasse.updatePosition(container.getInput().getMouseX(),container.getInput().getMouseY());
+
 		brick.updatePosition(40,40);
+		brick.checkCollision();
 
 	}
 

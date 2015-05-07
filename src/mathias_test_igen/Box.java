@@ -44,6 +44,7 @@ public class Box extends GameObject {
 		if( clone_x != 0){
 			for(int i=0; i< clone_x; i++){
 				kasse[i].updatePosition(x+sizeScale*i, y);
+				kasse[i].checkCollision();
 			}
 		}
 	}
@@ -68,6 +69,24 @@ public class Box extends GameObject {
 			alive=false;
 			System.out.println("hit");
 		}
+	}
+	
+	public void checkCollision(){
+		if(boxShape.intersects(mario.headHitbox) && placed && alive){
+			mario.hit_T = true;
+		}
+
+		if(boxShape.intersects(mario.footHitbox) && placed && alive){
+			mario.hit_B = true;
+		}
+		if(boxShape.intersects(mario.lHitbox) && placed && alive){
+			mario.hit_L = true;
+		}
+		
+		if(boxShape.intersects(mario.rHitbox) && placed && alive){
+			mario.hit_R = true;
+		}
+
 	}
 	
 	public void placeClones(){
