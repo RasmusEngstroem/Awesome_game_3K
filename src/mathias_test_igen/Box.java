@@ -86,6 +86,10 @@ public class Box extends GameObject {
 		if(boxShape.intersects(mario.botBoxR) && placed && alive){
 			mario.collisionR = true;
 		}
+		if(boxShape.intersects(mario.botBoxGT) && placed && alive){
+			mario.collisionGT = true;
+		}
+		
 
 	}
 	

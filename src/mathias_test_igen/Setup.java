@@ -49,6 +49,7 @@ public class Setup extends BasicGame {
 		
 		//kasse.drawMask(arg1);
 		player.render(container, arg1);
+		player.showInfo(container, arg1);
 		brick.drawMask(arg1);
 		
 	}
