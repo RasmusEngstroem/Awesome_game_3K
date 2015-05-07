@@ -58,8 +58,8 @@ public class Player extends GameEntities{
 	public float positionX = 100;
 	public float positionY = 50;
 		
-	private Vector2f positionV;
-	private Vector2f directionV;
+	public Vector2f positionV;
+	public Vector2f directionV;
 
 
 	Vector2f pushObjectV = new Vector2f(0,0);
