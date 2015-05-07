@@ -30,10 +30,10 @@ public abstract class blocks extends entity{
 	
 	
 	// Dette er bare en draw function der drawer en cube. 
-	public static void draw(int pos_x, int pos_y) //public static void draw(int pos_x, int pos_y)
+	public static void draw(int pos_x, int pos_y, int size_x, int size_y) //public static void draw(int pos_x, int pos_y)
 	{
-		myImage.draw(pos_x, pos_y,50,50); 
-		boundingbox = new Circle(pos_x, pos_y,50);
+		myImage.draw(pos_x, pos_y,size_x,size_y); 
+		//boundingbox = new Circle(pos_x, pos_y,50);
 		
 	}
 

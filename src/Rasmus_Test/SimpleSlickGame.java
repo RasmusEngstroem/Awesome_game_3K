@@ -58,7 +58,7 @@ public class SimpleSlickGame extends BasicGame
 		mousepointer = new Circle(1,1,30);
 		myEntity = new entity(10,10) {
 		};
-		myBlocks = new blocks(0,300,50,50,block,boundingbox3) {
+		myBlocks = new blocks(0,700,50,50,block,boundingbox3) {
 		
 		};
 		background = new Image("Assets/background.png");	
@@ -82,19 +82,19 @@ public class SimpleSlickGame extends BasicGame
 		Input input = gc.getInput(); 
 		if(input.isKeyDown(Input.KEY_D))
 		{
-			myBlocks.x_pos += 0.5f*delta;
+			myBlocks.x_pos += 1.5f*delta;
 			backgroundX += 0.03f*delta; 
 		}
 		if(input.isKeyDown(Input.KEY_A))
 		{
-			myBlocks.x_pos -= 0.5f*delta;
+			myBlocks.x_pos -= 1.5f*delta;
 			backgroundX -= 0.03f*delta; 
 		}
 		
-		if(mousepointer.intersects(blocks.boundingbox))
-		{
-			System.out.println("HIT DETECTION!");
-		}
+//		if(mousepointer.intersects(blocks.boundingbox))
+//		{
+//			System.out.println("HIT DETECTION!");
+//		}
 		
 	}
 
@@ -103,6 +103,7 @@ public class SimpleSlickGame extends BasicGame
 	{
 		background.draw(backgroundX,backgroundY,8192/2, 1024/2);//,480,3275);
 		map.buildground();
+		map.buildtriangles(200,200);
 		
 		//blocks.draw(); 
 		//newentity.render(gc, g);
@@ -120,7 +121,7 @@ public class SimpleSlickGame extends BasicGame
 		{
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(new SimpleSlickGame("Simple Slick Game"));
-			appgc.setDisplayMode(640, 480, false);
+			appgc.setDisplayMode(1024, 768, false);
 			appgc.start();
 		}
 		catch (SlickException ex)
