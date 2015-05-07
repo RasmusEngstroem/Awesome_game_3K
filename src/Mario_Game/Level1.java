@@ -22,7 +22,7 @@ public static int height = 768;
 public int moveMargin = 150;
 	
 public Player player;
-private ItemBlock brick; 
+private SolidBlock brick; 
 private EmptyItemBlock emptyBlok1;
 private EmptyItemBlock emptyBlok2;
 private ItemBlock item1;
@@ -44,7 +44,7 @@ public Level1(String title) {
 		
 		player = new Player(100 + x_posLevel, 100 + y_posLevel, container);
 		player.init(container);
-		brick = new ItemBlock(0,0, 5, 0, player);
+		brick = new SolidBlock(0,0, 5, 0, player);
 		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player);
 		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player);
 		
@@ -82,29 +82,29 @@ public Level1(String title) {
 	{
 		
 		if (player.x_pos > width/2 + moveMargin)
-			x_posLevel -= 2;
+			x_posLevel -= 1*delta;
 		
 		else if (player.x_pos > width/2 + moveMargin/3)
-			x_posLevel -= 0.5f;
+			x_posLevel -= 0.2f*delta;
 		
 		else if (player.x_pos < width/2 - moveMargin)
-			x_posLevel += 2;
+			x_posLevel += 1*delta;
 		
 		else if (player.x_pos < width/2- moveMargin/3)
-			x_posLevel += 0.5f;
+			x_posLevel += 0.2f*delta;
 		
 		
 		if (player.y_pos > height/2 + moveMargin)
-			y_posLevel -= 2;
+			y_posLevel -= 1*delta;
 		
 		else if (player.y_pos > height/2+ moveMargin/3)
-			y_posLevel -= 0.5f;
+			y_posLevel -= 0.2f*delta;
 		
 		else if (player.y_pos < height/2 - moveMargin)
-			y_posLevel += 2;
+			y_posLevel += 1*delta;
 		
 		else if (player.y_pos < height/2- moveMargin/3)
-			y_posLevel += 0.5f;
+			y_posLevel += 0.2f*delta;
 
 	}
 	
