@@ -1,4 +1,4 @@
-package test;
+package Mario_Game;
 
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -10,9 +10,10 @@ import org.newdawn.slick.SlickException;
 
 public abstract class level extends BasicGame{
 
-	public float x_posL;
-	public float y_posL;
-	public Image texture;
+	public float x_posLevel;
+	public float y_posLevel;
+	
+	public Image background;
 	
 	//d
 	public level(String title) {

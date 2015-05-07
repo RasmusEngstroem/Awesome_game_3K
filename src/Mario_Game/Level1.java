@@ -3,37 +3,46 @@ package Mario_Game;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
-import test.level;
 import test.setupClass;
 
+//-----
+
 public class Level1 extends level{
+
 	
-	public Level1(String title) {
+	
+//------ SETUP --------------------------------------------
+
+
+	
+public Level1(String title) {
 		super(title);
+	
+	}
+
+
+	//------ INIT --------------------------------------------
+	public void sendToInit(GameContainer container) throws SlickException{
+		background = new Image("Assets/backgroundWater.jpg");
 		
 	}
 
-	private Rectangle rect;
 	
-	public void sendToInit(GameContainer container) throws SlickException{
-		rect = new Rectangle(200+ x_posL, 300 + y_posL, 50, 50);
-	}
-	
+//------ UPDATE --------------------------------------------
 	public void sendToUpdate(GameContainer container, int delta) throws SlickException {
 		
-		rect.setLocation(200 + x_posL, 200 + y_posL);
-		
-		x_posL += 0.2f * delta;
+
 		
 	}
-	
+//------ RENDER --------------------------------------------
 	public void sendToRender(GameContainer container, Graphics g) throws SlickException {
 		
-		g.setColor(Color.lightGray);
-		g.fill(rect);
+		background.draw(x_posLevel/2, y_posLevel/2 - background.getTextureHeight()/4);
+
 	}
 
 }
