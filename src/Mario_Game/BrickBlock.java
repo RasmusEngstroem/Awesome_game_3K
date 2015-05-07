@@ -47,6 +47,7 @@ public class BrickBlock extends Breakable {
 			}
 		}
 	}
+	//aijhdjk
 	
 	public void render(Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
