@@ -40,7 +40,7 @@ public class Player extends GameEntities{
 	public boolean collisionFB = false;  // body
 	private boolean collisionB = false;
 
-//	private boolean inAir = true;
+//	private boolean inAir = true; fff
 	private boolean collisionEnabled = true;
 	
 	
