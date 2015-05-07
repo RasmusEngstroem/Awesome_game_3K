@@ -53,7 +53,7 @@ public void update(float x, float y){
 		placed = true;
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){
-				kasse[i].update(x+scaleSize*i, y);
+				kasse[i].update(x+scaleSize*i+scaleSize, y);
 				kasse[i].checkCollision();
 			}
 		}
