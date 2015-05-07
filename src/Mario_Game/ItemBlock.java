@@ -60,7 +60,7 @@ public void update(float x, float y){
 		
 		if(!alive){
 			empty.update(x, y);
-			coin.update(x+scaleSize/2, y-scaleSize-scaleSize/2);
+			coin.update(x+scaleSize/4, y-scaleSize);
 			empty.checkCollision();
 		}
 		
