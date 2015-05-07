@@ -37,7 +37,7 @@ public class Coins extends Items {
 		
 		coinShape.setCenterX(x);
 		coinShape.setCenterY(y);
-		
+		placed = true;
 		if(alive){
 			checkCollision();
 		}
