@@ -48,7 +48,7 @@ public class Player extends GameEntities{
 	public float speed = 0.7f;
 	public float jumpHeight = 2.2f;
 //	public float dampingAir = 0.002f;
-	public float damping = 0.003f;
+	public float damping = 1.003f;
 	public float gravity = 0.003f;
 	
 	public float screen_pos_x;
@@ -143,10 +143,10 @@ public class Player extends GameEntities{
 		directionV.y += gravity*delta;
 
 		if(input.isKeyDown(Input.KEY_A))
-			directionV.x -= speed/500*delta;
+			directionV.x -= (speed/500)*delta;
 		
 		if(input.isKeyDown(Input.KEY_D))
-			directionV.x += speed/500*delta;
+			directionV.x += (speed/500)*delta;
 		
 		if(input.isKeyDown(Input.KEY_W) && onGround && pushObjectV.x == 0 && pushObjectV.y !=0 )
 			{
@@ -208,8 +208,8 @@ public class Player extends GameEntities{
 		collisionFB = false;
 		collisionGT = false;
 
-		positionV.x += pushObjectV.x/10*delta;
-		positionV.y += pushObjectV.y/10*delta;
+		positionV.x += (pushObjectV.x/10)*delta;
+		positionV.y += (pushObjectV.y/10)*delta;
 				
 
 		
@@ -226,7 +226,9 @@ public class Player extends GameEntities{
 	
 	private void damping( int delta) {
 		
-		directionV = directionV.scale(1-damping*delta) ;
+//		directionV = directionV.scale(1-damping/delta) ;
+		directionV.x /= damping;
+		directionV.y /= damping;
 //		if (onGround)
 //			directionV.y *= (1-damping);
 		
