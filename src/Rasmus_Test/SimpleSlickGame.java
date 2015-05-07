@@ -35,10 +35,13 @@ public class SimpleSlickGame extends BasicGame
 	public blocks myBlocks; 
 	public Circle mousepointer; 
 	public Circle boundingbox3; 
-	
+	public Image background; 
 	
 	float mouseX; 
 	float mouseY; 
+	
+	float backgroundY = -200; 
+	float backgroundX = 0; 
 
 	 
 	
@@ -56,9 +59,9 @@ public class SimpleSlickGame extends BasicGame
 		myEntity = new entity(10,10) {
 		};
 		myBlocks = new blocks(0,300,50,50,block,boundingbox3) {
-			
-		};
 		
+		};
+		background = new Image("Assets/background.png");	
 		//block = new Image("Assets/marioblock.png");
 		//entity newentity = new entity(10, 10, 50, 50, block);
 		// thisblocks = new blocks(10,10,50,50, block);
@@ -80,23 +83,27 @@ public class SimpleSlickGame extends BasicGame
 		if(input.isKeyDown(Input.KEY_D))
 		{
 			myBlocks.x_pos += delta*0.2f;
+			backgroundX += delta*0.01f; 
 		}
 		if(input.isKeyDown(Input.KEY_A))
 		{
 			myBlocks.x_pos -= delta*0.2f;
+			backgroundX -= delta*0.01f; 
 		}
 		
-//		if(mousepointer.intersects(blocks.boundingbox))
-//		{
-//			System.out.println("HIT DETECTION!");
-//		}
+		if(mousepointer.intersects(blocks.boundingbox))
+		{
+			System.out.println("HIT DETECTION!");
+		}
 		
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-		map.buildground(); 
+		background.draw(backgroundX,backgroundY,8192/2, 1024/2);//,480,3275);
+		map.buildground();
+		
 		//blocks.draw(); 
 		//newentity.render(gc, g);
 		//block.draw(200,200,200,200);

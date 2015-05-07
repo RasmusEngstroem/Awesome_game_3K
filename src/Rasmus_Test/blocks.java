@@ -33,16 +33,16 @@ public abstract class blocks extends entity{
 	public static void draw(int pos_x, int pos_y) //public static void draw(int pos_x, int pos_y)
 	{
 		myImage.draw(pos_x, pos_y,50,50); 
-		boundingbox = Circle(pos_x, pos_y,50);
+		boundingbox = new Circle(pos_x, pos_y,50);
 		
 	}
 
 
 
 
-	private static Circle Circle(int pos_x, int pos_y, int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private static Circle Circle(int pos_x, int pos_y, int i) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 }
