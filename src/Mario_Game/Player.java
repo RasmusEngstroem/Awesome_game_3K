@@ -51,6 +51,10 @@ public class Player extends GameEntities{
 	public float damping = 0.003f;
 	public float gravity = 0.003f;
 	
+	public float screen_pos_x;
+	public float screen_pos_y;
+	
+	
 	public float positionX = 100;
 	public float positionY = 50;
 		
@@ -103,7 +107,7 @@ public class Player extends GameEntities{
 	}
 
 
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, int delta,float screen_pos_x, float screen_pos_y) throws SlickException {
 		
 		botAnimationL.setSpeed(speed * (1-directionV.x));
 		botAnimationL.update(delta);
@@ -111,7 +115,8 @@ public class Player extends GameEntities{
 		botAnimationR.update(delta);
 		botAnimationFall.setSpeed(speed);
 		botAnimationFall.update(delta);
-		
+		this.screen_pos_x = screen_pos_x;
+		this.screen_pos_y = screen_pos_y;
 
 	
 		movePlayer(container,delta);
@@ -151,7 +156,7 @@ public class Player extends GameEntities{
 			
 		
 		positionV.add(directionV);
-
+		positionV.x+=screen_pos_x;
 		
 		botBoxFB.setLocation(positionV.x-50*size, positionV.y-5 - 40 *size); // move bot collision box with bot animation
 		botBoxGT.setLocation(positionV.x-40*size, positionV.y + 35*size);
