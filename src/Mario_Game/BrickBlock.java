@@ -4,6 +4,8 @@ import mathias_test_igen.Box;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
 public class BrickBlock extends Breakable {
@@ -46,12 +48,13 @@ public class BrickBlock extends Breakable {
 		}
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		if(alive){
 		g.setColor(Color.white);
 		g.draw(boxShape);
 		g.draw(breakHitBox);
+		g.texture(boxShape, new Image("Assets/blokBreakable.jpg"));
 		breakBox();
 		}
 		if( rep_x != 0){
