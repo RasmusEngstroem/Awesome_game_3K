@@ -11,6 +11,7 @@ public class Setup extends BasicGame {
 
 	public Mario kasse;
 	public Box brick;
+	public Box brick2;
 	public Mario_2 player;
 	public test.player mario;
 	
@@ -28,6 +29,7 @@ public class Setup extends BasicGame {
 		player.init(container);
 		//kasse = new Mario(0,0, container);
 		brick = new Box(0,0, container, player,20);
+		brick2 = new Box(0,0, container, player,1);
 		
 	}
 
@@ -39,6 +41,8 @@ public class Setup extends BasicGame {
 		player.update(container, delta);
 		brick.updatePosition(40,200);
 		brick.checkCollision();
+		brick2.updatePosition(300,20);
+		brick2.checkCollision();
 
 	}
 
@@ -51,6 +55,7 @@ public class Setup extends BasicGame {
 		player.render(container, arg1);
 		player.showInfo(container, arg1);
 		brick.drawMask(arg1);
+		brick2.drawMask(arg1);
 		
 	}
 
