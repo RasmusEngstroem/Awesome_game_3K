@@ -82,29 +82,29 @@ public Level1(String title) {
 	{
 		
 		if (player.x_pos > width/2 + moveMargin)
-			x_posLevel -= 2;
+			x_posLevel -= 1*delta;
 		
 		else if (player.x_pos > width/2 + moveMargin/3)
-			x_posLevel -= 0.5f;
+			x_posLevel -= 0.2f*delta;
 		
 		else if (player.x_pos < width/2 - moveMargin)
-			x_posLevel += 2;
+			x_posLevel += 1*delta;
 		
 		else if (player.x_pos < width/2- moveMargin/3)
-			x_posLevel += 0.5f;
+			x_posLevel += 0.2f*delta;
 		
 		
 		if (player.y_pos > height/2 + moveMargin)
-			y_posLevel -= 2;
+			y_posLevel -= 1*delta;
 		
 		else if (player.y_pos > height/2+ moveMargin/3)
-			y_posLevel -= 0.5f;
+			y_posLevel -= 0.2f*delta;
 		
 		else if (player.y_pos < height/2 - moveMargin)
-			y_posLevel += 2;
+			y_posLevel += 1*delta;
 		
 		else if (player.y_pos < height/2- moveMargin/3)
-			y_posLevel += 0.5f;
+			y_posLevel += 0.2f*delta;
 
 	}
 	
