@@ -52,9 +52,9 @@ public class BrickBlock extends Breakable {
 		// TODO Auto-generated method stub
 		if(alive){
 		g.setColor(Color.white);
+		g.texture(boxShape, new Image("Assets/blokBreakable.jpg"));
 		g.draw(boxShape);
 		g.draw(breakHitBox);
-		g.texture(boxShape, new Image("Assets/blokBreakable.jpg"));
 		breakBox();
 		}
 		if( rep_x != 0){
