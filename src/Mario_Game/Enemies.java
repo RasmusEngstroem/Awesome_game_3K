@@ -67,7 +67,7 @@ public class Enemies extends GameEntities {
 	private Vector2f pushObjectV;
 	
 	private String direction = "Left"; 
-	
+	//asd
 
 	
 public void init(GameContainer container) throws SlickException {
