@@ -48,7 +48,7 @@ public class Player extends GameEntities{
 	public float speed = 2f;
 	public float jumpHeight = 1.4f;
 //	public float dampingAir = 0.002f;
-	public float damping = 1.01f;
+	public float damping = 0.0001f;
 	public float gravity = 0.01f;
 	
 	public float screen_pos_x;
@@ -227,20 +227,20 @@ public class Player extends GameEntities{
 	private void damping( int delta) {
 		
 //		directionV = directionV.scale(1-damping/delta) ;
-		directionV.x /= damping;
-		directionV.y /= damping;
+//		directionV.x /= (damping/delta);
+//		directionV.y /= (damping/delta);
 		
-//		if (directionV.x > 0)
-//			directionV.x -= 0.0002f*delta;
-//		else if (directionV.x < 0)
-//			directionV.x += 0.0002f*delta;
-//		
-//		if (directionV.x > 0)
-//			directionV.x -= 0.0002f*delta;
-//		else if (directionV.x < 0)
-//			directionV.x += 0.0002f*delta;
-//		if (onGround)
-//			directionV.y *= (1-damping);
+		if (directionV.x > 0)
+			directionV.x -= 0.0002f*delta;
+		else if (directionV.x < 0)
+			directionV.x += 0.0002f*delta;
+		
+		if (directionV.x > 0)
+			directionV.x -= 0.0002f*delta;
+		else if (directionV.x < 0)
+			directionV.x += 0.0002f*delta;
+		if (onGround)
+			directionV.y *= (1-damping);
 		
 	}
 	

@@ -26,6 +26,8 @@ private SolidBlock brick;
 private EmptyItemBlock emptyBlok1;
 private EmptyItemBlock emptyBlok2;
 private ItemBlock item1;
+
+private Coins coin;
 	
 	
 //------ SETUP --------------------------------------------
@@ -47,6 +49,7 @@ public Level1(String title) {
 		brick = new SolidBlock(0,0, 5, 0, player);
 		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player);
 		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player);
+		coin = new Coins(0, 0, player);
 		
 	}
 
@@ -58,6 +61,7 @@ public Level1(String title) {
 		brick.update(200+ x_posLevel, 300 + y_posLevel);
 		emptyBlok1.update(0+ x_posLevel, 600 + y_posLevel);
 		emptyBlok2.update(800+ x_posLevel, 500 + y_posLevel);
+		coin.update(300+ x_posLevel, 500 + y_posLevel);
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
 		moveLevel(container, delta);
@@ -73,6 +77,7 @@ public Level1(String title) {
 		brick.render(g);
 		emptyBlok1.render(g);
 		emptyBlok2.render(g);
+		coin.render(g);
 		player.render(container, g);
 		showStads(container, g);
 	}
