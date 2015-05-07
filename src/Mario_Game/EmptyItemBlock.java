@@ -30,7 +30,7 @@ public class EmptyItemBlock extends Unbreakable {
 		marioHead = mario.botBoxT;
 		this.rep_x = rep_x;
 		this.rep_y = rep_y;
-		textureBlock = new Image("Assets/blokEmpty.jpg");
+		textureBlock = new Image("Assets/blokEmpty.png");
 		placeClones();
 		// TODO Auto-generated constructor stub
 	}
