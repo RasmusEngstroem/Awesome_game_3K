@@ -103,8 +103,8 @@ public class SimpleSlickGame extends BasicGame
 	{
 		background.draw(backgroundX,backgroundY,8192/2, 1024/2);//,480,3275);
 		map.buildground();
-		map.buildtriangles(200,200);
-		
+		//map.buildtriangles(200,200);
+		map.printtriangles1(400,400);
 		//blocks.draw(); 
 		//newentity.render(gc, g);
 		//block.draw(200,200,200,200);

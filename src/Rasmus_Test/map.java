@@ -32,7 +32,48 @@ public class map { // this class will be used to call the function that will spa
 		}
 	
 	}
+	
+	public void printTriangle (int count) {
+	    int line = 1;
+	    while(line <= count) {
+	        for(int x = 1; x <= line; x++) {
+	            System.out.print("*");
+	        }
+	        System.out.print("\n");
+	        line++;
+	    }
+	}
+	
+	public static void printtriangles1(int posx, int posy)
+	{
+	
+//
+//	        for(int i=0;i<=150;i+=50){
+//		        for(int j=0;j<=i;j+=50){
+//		            blocks.draw(i, j, 50, 50);
+//		        }
+//		    
+//		    }
+	    }
+	
 		
+		
+//		int line = 1; 
+//		while (line <= levels)
+//		{
+//			// posy+=50;
+//			for ( int i = 1; i <= levels; i++)
+//			{
+//				blocks.draw(posx, posy, 50, 50);
+//				posy-=50;
+//				
+//			}
+//			line++; 
+//			posx-=50;
+//			
+//		}
+	}
+	
 //	public static void printFirstHalf(int m, int n){
 //
 //	    if(m==0){
@@ -46,23 +87,51 @@ public class map { // this class will be used to call the function that will spa
 //	    System.out.println();
 //	    printFirstHalf(m-1,n);
 	
- static int buildtriangles(int length, int height)
-	{
-	 
-	 	if(height == 0)
-	 	{
-	 		return 0; 
-	 	}
-	 	
-	 	for( int i = height; i <= length;i++)
-	 	{
-	 		blocks.draw(length,height,50,50); 
-	 	} 
-	 	
-	 	return buildtriangles(length-1, height);
-		
-	}
-		
+//public static int buildtriangles(int length, int height)
+//	{
+//	 
+//	 	if(height == 0)
+//	 	{
+//	 		return 0; 
+//	 	}
+//	 	
+//	 	for( int i = height; i <= length;i++)
+//	 	{
+//	 		blocks.draw(length,height,50,50); 
+//	 	} 
+//	 	
+//	 	return buildtriangles(length-50, height);
+//		
+//	}
+//
+//public static int buildtraingles2(int length, int height)
+//	{
+//		if(length > height )
+//		{
+//			return 0; 
+//		}
+//		
+//		for( int i = 0 ; i <= length; i+=50)
+//		{
+//			blocks.draw(length, height, 50, 50);
+//		}
+//		
+//		return buildtraingles2(length+50, height);
+//	}
+//
+//public static int buildtraingles3(int posX, int posY, int height, int length)
+//{
+//	if(length < height)
+//	{
+//		return 0; 
+//	}
+//	for( int i = posY; i <= height; i+=50){
+//	blocks.draw(posX, posY-i, 50, 50);
+//	}
+//	return buildtraingles3(posX-50, posY, height, length);
+//}
+	
+	
 		// Below is just a collection of garbage code that didnt work
 		
 //  		for( int i = 0; i < 3550; i+=50) // This loop will spawn the first part of the map. 70 tiles. 
@@ -125,4 +194,4 @@ public class map { // this class will be used to call the function that will spa
 
 	
 
-}
+

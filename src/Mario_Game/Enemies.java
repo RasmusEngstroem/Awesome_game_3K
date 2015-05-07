@@ -9,9 +9,16 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Vector2f;
 
 public class Enemies extends GameEntities {
 	
+	public Enemies(float x_pos, float y_pos) {
+		super(x_pos, y_pos);
+		this. x_pos = x_pos;
+		this. y_pos = y_pos;
+	}
+
 	public Rectangle[] boxes;
 	
 	public SpriteSheet botSheetL;
@@ -28,6 +35,7 @@ public class Enemies extends GameEntities {
 	private Rectangle botBoxB;   // body Bottom
 	private Rectangle botBoxL;  // left
 	private Rectangle botBoxR;  // right
+	private Rectangle botBoxGT; // cheeck ground
 	
 	public float x_pos = 300f;
 	public float y_pos = 100f;
@@ -45,21 +53,22 @@ public class Enemies extends GameEntities {
 	
 	public boolean collisionFB = false;  // body
 //	private boolean collisionT = false;
-	private boolean collisionB = false;
-	private boolean collisionL = false;  // left
-	private boolean collisionR = false;  // right
-	private boolean inAir = true;
-	private boolean collisionEnabled = true;
+	public boolean collisionB = false;
+	public boolean collisionL = false;  // left
+	public boolean collisionR = false;  // right
+	public boolean collisionGT = false;  // Ground Check
+	public boolean collisionTL = false;
+	public boolean collisionTR = false;
 	
+	public boolean inAir = true;
+	public boolean onGround = false;
+	public boolean collisionEnabled = true;
+	
+	private Vector2f pushObjectV;
 	
 	private String direction = "Left"; 
-	//aj
-	public Enemies(String title, int x_pos, int y_pos, Image texture, Rectangle[] boxes) {
-		super(title, x_pos, y_pos, texture);
-		this.boxes = boxes;
-		this. x_pos = x_pos;
-		this. y_pos = y_pos;
-	}
+	
+
 	
 public void init(GameContainer container) throws SlickException {
 		
@@ -71,13 +80,13 @@ public void init(GameContainer container) throws SlickException {
 		botBoxB = new Rectangle(0,0,100*size, 35*size);
 		botBoxL = new Rectangle(0,0,10*size, 35*size);
 		botBoxR = new Rectangle(0,0,10*size, 35*size);
-		
+		botBoxGT = new Rectangle(0,0,80*size, 10*size);
 		
 	}
 	
 	
 
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, int delta, float  screen_pos_x, float  screen_pos_y) throws SlickException {
 		
 		botAnimationL.setSpeed(speed);
 		botAnimationL.update(delta);
@@ -88,10 +97,10 @@ public void init(GameContainer container) throws SlickException {
 		
 		
 		
-		moveBot(delta);
+		moveBot(delta, screen_pos_x, screen_pos_y);
 		edgeTurn();
-		collisionTurn();
-		collisionRepeller();
+//		collisionTurn();
+		collisionRepeller(delta);
 
 			
 		
@@ -148,15 +157,16 @@ public void init(GameContainer container) throws SlickException {
 	}
 	
 	
-	public void moveBot(int delta)
+	public void moveBot(int delta, float screen_pos_x, float screen_pos_y)
 	{
 		y_pos += 0.2f*delta;
-		botBoxFB.setLocation(x_pos-43*size, y_pos+(5-50)*size);
-		botBoxTL.setLocation(x_pos-51*size, y_pos+5-50*size);
-		botBoxTR.setLocation(x_pos-0*size, y_pos+5-50*size);
-		botBoxB.setLocation(x_pos-50*size, y_pos-5 + 10*size); // move bot collision box with bot animation
-		botBoxL.setLocation(x_pos-5-60*size, y_pos-5+50*size);
-		botBoxR.setLocation(x_pos-5+60*size, y_pos-5+50*size);
+		botBoxFB.setLocation(x_pos+ screen_pos_x-43*size, y_pos+ screen_pos_y+(5-50)*size);
+		botBoxTL.setLocation(x_pos+ screen_pos_x-51*size, y_pos+ screen_pos_y+5-50*size);
+		botBoxTR.setLocation(x_pos+ screen_pos_x-0*size, y_pos+ screen_pos_y+5-50*size);
+		botBoxB.setLocation(x_pos+ screen_pos_x-50*size, y_pos+ screen_pos_y-5 + 10*size); // move bot collision box with bot animation
+		botBoxL.setLocation(x_pos+ screen_pos_x-5-60*size, y_pos+ screen_pos_y-5+50*size);
+		botBoxR.setLocation(x_pos+ screen_pos_x-5+60*size, y_pos+ screen_pos_y-5+50*size);
+		botBoxGT.setLocation(x_pos + screen_pos_x-40*size, y_pos + screen_pos_y + 35*size);
 		
 		if (direction == "Left" && inAir == false)
 		{
@@ -171,59 +181,65 @@ public void init(GameContainer container) throws SlickException {
 	
 //--------------
 	
-	public void collisionRepeller()
+	public void collisionRepeller(int delta)
 	{
 		collisionB = false;
+		pushObjectV = new Vector2f(0,0);
 		
-		for (int i = 0; i < boxes.length; i++)
-		{
-			if( botBoxB.intersects(boxes[i]) && collisionEnabled == true) // check if the bot collides with a groundBox
-				collisionB = true;
-		
-		}
 		
 		inAir = true;
-			
-		while (collisionB && collisionEnabled == true)
-		{
-			y_pos -= 0.01f;
-			botBoxB.setLocation(x_pos-50*size, y_pos-5+10*size); // move bot collision box with bot animation
-			
-			collisionB = false;
-			
-			for (int i = 0; i < boxes.length; i++)
-			{
-				if( botBoxB.intersects(boxes[i])) // re-check if the bot collides with a groundBox
-					{
-						collisionB = true;
-						standOnRectNr = i;		
-					}
-			}
-			
-			inAir = false;
-		}
+		onGround = false;
+		
+		if (collisionR)
+			pushObjectV.x = -1;
+		
+		if (collisionL)
+			pushObjectV.x = 1;
+		
+		if (collisionB)
+			pushObjectV.y = -1;
+
+		if (collisionGT)
+			pushObjectV.y = 1;
+		
+//		if (collisionGT)
+//			onGround = true;
+		
+//		if (collisionL || collisionR || collisionU || collisionD)
+//			collisionFB = true;
+		
+//		collisionU = false;
+//		collisionD = false;
+		collisionL = false;
+		collisionR = false;
+		collisionB = false;
+		collisionFB = false;
+		collisionGT = false;
+
+		x_pos += (pushObjectV.x/10)*delta;
+		y_pos += (pushObjectV.y/10)*delta;
 	}
 	
 //--------------	
 	
 	public void edgeTurn()
 	{
-		collisionL = false;
-		collisionR = false;
-		
-		for (int i = 0; i < boxes.length; i++)
-		{
-			
-			if( botBoxL.intersects(boxes[i]) && collisionEnabled && !inAir) // re-check if the bot collides with a groundBox
-			{
-				collisionL = true;
-			}
-			if( botBoxR.intersects(boxes[i]) && collisionEnabled && !inAir) // re-check if the bot collides with a groundBox
-			{
-				collisionR = true;
-			}
-
-		}
+//		collisionL = false;
+//		collisionR = false;
+//		
+//		for (int i = 0; i < boxes.length; i++)
+//		{
+//			
+//			if( botBoxL.intersects(boxes[i]) && collisionEnabled && !inAir) // re-check if the bot collides with a groundBox
+//			{
+//				collisionL = true;
+//			}
+//			if( botBoxR.intersects(boxes[i]) && collisionEnabled && !inAir) // re-check if the bot collides with a groundBox
+//			{
+//				collisionR = true;
+//			}
+//
+//		}
 	
 		
 		if (!collisionL && collisionR )
