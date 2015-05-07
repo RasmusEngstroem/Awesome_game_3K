@@ -105,7 +105,7 @@ public class BrickBlock extends Breakable {
 
 	}
 	
-	public void placeClones(){
+	public void placeClones() throws SlickException{
 		
 		
 		if( rep_x != 0){
