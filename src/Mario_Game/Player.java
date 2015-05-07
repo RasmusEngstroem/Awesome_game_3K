@@ -157,6 +157,10 @@ public class Player extends GameEntities{
 		
 		positionV.add(directionV);
 		positionV.x+=screen_pos_x;
+		positionV.y+=screen_pos_y;
+		
+		x_pos = positionV.x;
+		y_pos = positionV.y;
 		
 		botBoxFB.setLocation(positionV.x-50*size, positionV.y-5 - 40 *size); // move bot collision box with bot animation
 		botBoxGT.setLocation(positionV.x-40*size, positionV.y + 35*size);
