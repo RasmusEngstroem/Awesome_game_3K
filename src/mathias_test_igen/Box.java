@@ -16,18 +16,18 @@ public class Box extends GameObject {
 	public boolean placed = false;
 	public String  t = "kasse";
 	
-	public Mario mario;
+	public Mario_2 mario;
 	public Box[] kasse;
 	
 
 	
 	public Box(float x_pos, float y_pos, GameContainer container,
-			Mario mario, int clone_x) {
+			Mario_2 mario, int clone_x) {
 		super(x_pos, y_pos, container);
 		boxShape = new Rectangle(x_pos, y_pos, sizeScale, sizeScale);
 		breakHitBox = new Rectangle(x_pos, y_pos, sizeScale-4, 10);
 		this.mario = mario;
-		marioHead = mario.headHitbox;
+		marioHead = mario.botBoxT;
 		this.clone_x = clone_x;
 		placeClones();
 		// TODO Auto-generated constructor stub
@@ -72,19 +72,19 @@ public class Box extends GameObject {
 	}
 	
 	public void checkCollision(){
-		if(boxShape.intersects(mario.headHitbox) && placed && alive){
-			mario.hit_T = true;
+		if(boxShape.intersects(mario.botBoxT) && placed && alive){
+			mario.collisionU = true;
 		}
 
-		if(boxShape.intersects(mario.footHitbox) && placed && alive){
-			mario.hit_B = true;
+		if(boxShape.intersects(mario.botBoxB) && placed && alive){
+			mario.collisionD = true;
 		}
-		if(boxShape.intersects(mario.lHitbox) && placed && alive){
-			mario.hit_L = true;
+		if(boxShape.intersects(mario.botBoxL) && placed && alive){
+			mario.collisionL = true;
 		}
 		
-		if(boxShape.intersects(mario.rHitbox) && placed && alive){
-			mario.hit_R = true;
+		if(boxShape.intersects(mario.botBoxR) && placed && alive){
+			mario.collisionR = true;
 		}
 
 	}
