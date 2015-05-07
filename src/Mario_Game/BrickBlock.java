@@ -34,7 +34,7 @@ public class BrickBlock extends Breakable {
 		marioHead = mario.botBoxT;
 		this.rep_x = rep_x;
 		this.rep_y = rep_y;
-		textureBlock = new Image("Assets/blokEmpty.png");
+		textureBlock = new Image("Assets/blokBreakable.png");
 
 		placeClones();
 		// TODO Auto-generated constructor stub
