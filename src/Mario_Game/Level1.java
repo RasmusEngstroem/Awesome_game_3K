@@ -30,7 +30,7 @@ private SolidBlock solid1;
 private ItemBlock item1;
 
 private Coins coin;
-	
+private Enemies enemy;
 	
 //------ SETUP --------------------------------------------
 
@@ -54,6 +54,8 @@ public Level1(String title) {
 		solid1 = new SolidBlock(0, 0, 10, 0, player);
 		coin = new Coins(0, 0, player);
 		
+		enemy = new Enemies(400,0);
+		enemy.init(container);
 	}
 
 	
@@ -68,6 +70,7 @@ public Level1(String title) {
 		solid1.update(1600+ x_posLevel, 300 + y_posLevel);
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
+		enemy.update(container, delta, x_posLevel, y_posLevel);
 		moveLevel(container, delta);
 		
 	}
@@ -84,6 +87,7 @@ public Level1(String title) {
 		coin.render(g);
 		solid1.render(g);
 		player.render(container, g);
+		enemy.render(container, g);
 		showStads(container, g);
 	}
 	
