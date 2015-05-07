@@ -26,7 +26,7 @@ public class Level1 extends level{
 		
 		rect.setLocation(200 + x_posL, 200 + y_posL);
 		
-		x_posL += 0.2f;
+		x_posL += 0.2f * delta;
 		
 	}
 	

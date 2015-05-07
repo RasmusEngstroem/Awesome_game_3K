@@ -14,23 +14,28 @@ public class Setup extends BasicGame {
 	
 	public int gameLevel = 1;
 	
+	
+//------ SETUP --------------------------------------------
+	
 	public Setup(String title) {
 		super(title);
 		
 	}
 
+//------ INIT --------------------------------------------
 	
 	public void init(GameContainer container) throws SlickException {
 		L1.sendToInit(container);
 				
 	}
 
+//------ UPDATE --------------------------------------------	
 	
 	public void update(GameContainer container, int delta) throws SlickException {
 		L1.sendToUpdate(container,delta);		
 	}
 	
-	
+//------ RENDER --------------------------------------------
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		L1.sendToRender(container,g);		
 	}
