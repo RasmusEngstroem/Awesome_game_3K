@@ -10,6 +10,8 @@ public class ItemBlock extends Breakable {
 
 	public Image textureBlock;
 	
+	public EmptyItemBlock empty;
+	
 	public Rectangle boxShape;
 	public Rectangle breakHitBox;
 	public Rectangle marioHead;
@@ -54,6 +56,12 @@ public void update(float x, float y){
 				kasse[i].checkCollision();
 			}
 		}
+		
+		if(!alive){
+			empty.update(x_pos, y_pos);
+			empty.checkCollision();
+		}
+		
 	}
 	//aijhdjk
 	
@@ -66,6 +74,10 @@ public void update(float x, float y){
 		textureBlock.draw(x_pos, y_pos);
 		breakBox();
 		}
+		if(!alive){
+			empty.render(g);
+		}
+
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){
 				kasse[i].render(g);
@@ -78,7 +90,7 @@ public void update(float x, float y){
 			alive=false;
 			System.out.println("hit");
 			mario.collisionD = true;
-			EmptyItemBlock kasse = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario);
+			empty = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario);
 		}
 	}
 	
