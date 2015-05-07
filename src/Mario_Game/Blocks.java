@@ -1,5 +1,10 @@
 package Mario_Game;
 
+import mathias_test_igen.Box;
+import mathias_test_igen.Mario_2;
+
+import org.newdawn.slick.geom.Rectangle;
+
 public abstract class Blocks extends GameEntities{
 	
 	public int rep_x;
