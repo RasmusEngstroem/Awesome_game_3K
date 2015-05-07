@@ -35,7 +35,7 @@ public class ItemBlock extends Breakable {
 		marioHead = mario.botBoxT;
 		this.rep_x = rep_x;
 		this.rep_y = rep_y;
-		textureBlock = new Image("Assets/blokBreakable.png");
+		textureBlock = new Image("Assets/blokItem.png");
 
 		placeClones();
 	}
@@ -58,7 +58,7 @@ public void update(float x, float y){
 		}
 		
 		if(!alive){
-			empty.update(x_pos, y_pos);
+			empty.update(x, y);
 			empty.checkCollision();
 		}
 		
