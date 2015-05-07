@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 
 public class Setup extends BasicGame {
 	
-	public Level1 L1 = new Level1();
+	public Level1 L1 = new Level1("level 1");
 	
 	public int gameLevel = 1;
 	
@@ -21,18 +21,18 @@ public class Setup extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		L1.sendToInit();
+		L1.sendToInit(container);
 				
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		L1.sendToUpdate();		
+		L1.sendToUpdate(container,delta);		
 	}
 	
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		L1.sendToRender();		
+		L1.sendToRender(container,g);		
 	}
 
 	public static void main(String[] args) throws SlickException{
