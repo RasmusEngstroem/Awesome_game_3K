@@ -82,13 +82,13 @@ public class SimpleSlickGame extends BasicGame
 		Input input = gc.getInput(); 
 		if(input.isKeyDown(Input.KEY_D))
 		{
-			myBlocks.x_pos += delta*0.2f;
-			backgroundX += delta*0.01f; 
+			myBlocks.x_pos += 0.5f*delta;
+			backgroundX += 0.03f*delta; 
 		}
 		if(input.isKeyDown(Input.KEY_A))
 		{
-			myBlocks.x_pos -= delta*0.2f;
-			backgroundX -= delta*0.01f; 
+			myBlocks.x_pos -= 0.5f*delta;
+			backgroundX -= 0.03f*delta; 
 		}
 		
 		if(mousepointer.intersects(blocks.boundingbox))
