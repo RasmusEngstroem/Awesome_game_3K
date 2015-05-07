@@ -9,6 +9,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
 public class BrickBlock extends Breakable {
+	
+	//hej
 
 	public Rectangle boxShape;
 	public Rectangle breakHitBox;
