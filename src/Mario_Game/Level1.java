@@ -28,7 +28,7 @@ private EmptyItemBlock emptyBlok2;
 private ItemBlock item1;
 
 private Coins coin;
-	
+private Enemies enemy;
 	
 //------ SETUP --------------------------------------------
 
@@ -51,6 +51,8 @@ public Level1(String title) {
 		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player);
 		coin = new Coins(0, 0, player);
 		
+		enemy = new Enemies(400,0);
+		enemy.init(container);
 	}
 
 	
@@ -64,6 +66,7 @@ public Level1(String title) {
 		coin.update(300+ x_posLevel, 500 + y_posLevel);
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
+		enemy.update(container, delta, x_posLevel, y_posLevel);
 		moveLevel(container, delta);
 		
 	}
@@ -79,6 +82,7 @@ public Level1(String title) {
 		emptyBlok2.render(g);
 		coin.render(g);
 		player.render(container, g);
+		enemy.render(container, g);
 		showStads(container, g);
 	}
 	
