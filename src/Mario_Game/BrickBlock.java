@@ -60,9 +60,6 @@ public class BrickBlock extends Breakable {
 	public void render(Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		if(alive){
-		g.setColor(Color.white);
-		g.draw(boxShape);
-		g.draw(breakHitBox);
 		textureBlock.draw(x_pos, y_pos);
 		breakBox();
 		}

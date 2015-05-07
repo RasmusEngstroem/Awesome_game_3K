@@ -52,10 +52,6 @@ public class SolidBlock extends Unbreakable {
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
 		if(alive){
-			
-			g.setColor(Color.white);
-			
-			g.draw(boxShape);
 			textureBlock.draw(x_pos, y_pos);
 			
 		}

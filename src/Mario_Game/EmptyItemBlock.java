@@ -52,12 +52,7 @@ public class EmptyItemBlock extends Unbreakable {
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
 		if(alive){
-			
-			g.setColor(Color.white);
-			
-			g.draw(boxShape);
 			textureBlock.draw(x_pos, y_pos);
-			
 		}
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){
