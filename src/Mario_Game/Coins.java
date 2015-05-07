@@ -23,6 +23,8 @@ public class Coins extends Items {
 		this.mario = mario;
 		this.x_pos = x_pos;
 		this.y_pos = y_pos;
+		coinShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
+
 		marioShape = mario.botBoxFB;
 		textureBlock = new Image("Assets/coin.png");
 		// TODO Auto-generated constructor stub
