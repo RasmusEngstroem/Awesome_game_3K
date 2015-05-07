@@ -51,10 +51,10 @@ public void update(float x, float y){
 		breakHitBox.setCenterX(x);
 		breakHitBox.setCenterY(y+(scaleSize/2)-5);
 		placed = true;
+		checkCollision();
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){
 				kasse[i].update(x+scaleSize*i+scaleSize, y);
-				kasse[i].checkCollision();
 			}
 		}
 		
