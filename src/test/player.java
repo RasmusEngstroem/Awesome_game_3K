@@ -34,19 +34,16 @@ public class player extends BasicGame{
 //	public hitBoxes[] boxes;
 	public boxTest box = new boxTest("2");
 	
-	
-	private Circle botBoxFB; 
-	private Rectangle botBoxTL;   // body Top
-	private Rectangle botBoxTR;   // body Top
+	private Rectangle botBoxFB;   // Full Body
+	private Rectangle botBoxT;   // body Top
 	private Rectangle botBoxB;   // body Bottom
 	private Rectangle botBoxL;  // left
 	private Rectangle botBoxR;  // right
+	private Rectangle botBoxGT;  // ground check
 	
 	public boolean collisionFB = false;  // body
-//	private boolean collisionT = false;
 	private boolean collisionB = false;
-//	private boolean collisionL = false;  // left
-//	private boolean collisionR = false;  // right
+
 //	private boolean inAir = true;
 	private boolean collisionEnabled = true;
 	
@@ -98,9 +95,12 @@ public class player extends BasicGame{
 		positionV = new Vector2f(positionX, positionY);
 		directionV = new Vector2f(0,0);
 		
-
-		botBoxB = new Rectangle(0,0,100*size, 85*size);
-		botBoxL = new Rectangle(0,0,80*size, 10*size);
+		botBoxL = new Rectangle(0,0,10*size, 85*size);
+		botBoxR = new Rectangle(0,0,10*size, 85*size);
+		botBoxT = new Rectangle(0,0,85*size, 10*size);
+		botBoxB = new Rectangle(0,0,85*size, 10*size);
+		botBoxFB = new Rectangle(0,0,100*size, 85*size);
+		botBoxGT = new Rectangle(0,0,80*size, 10*size);
 
 		
 	}
@@ -152,10 +152,14 @@ public class player extends BasicGame{
 		positionV.add(directionV);
 
 		
-		botBoxB.setLocation(positionV.x-50*size, positionV.y-5 - 40 *size); // move bot collision box with bot animation
-		botBoxL.setLocation(positionV.x-40*size, positionV.y + 35*size);
+		botBoxFB.setLocation(positionV.x-50*size, positionV.y-5 - 40 *size); // move bot collision box with bot animation
+		botBoxGT.setLocation(positionV.x-40*size, positionV.y + 35*size);
+		
+		botBoxL.setLocation(positionV.x-50*size, positionV.y - 40 *size);
+		botBoxR.setLocation(positionV.x + 45*size, positionV.y - 40 *size);
+		botBoxT.setLocation(positionV.x+ 0-45*size, positionV.y - 50 *size);
+		botBoxB.setLocation(positionV.x+ 0-40*size, positionV.y + 40 *size);
 
-	
 	
 	}
 	
@@ -189,19 +193,19 @@ public class player extends BasicGame{
 //		
 //		for (int i = 0; i < boxes.length; i++)
 //		{
-//			if( botBoxB.intersects(boxes[i])) // check if the bot collides with a groundBox
+//			if( botBoxFB.intersects(boxes[i])) // check if the bot collides with a groundBox
 //			{
 //				
-//				if (botBoxB.getCenterY()+ (0.5f * botBoxB.getHeight())+0.5f > boxes[i].getCenterY()- 0.5f * boxes[i].getHeight())
+//				if (botBoxFB.getCenterY()+ (0.5f * botBoxFB.getHeight())+0.5f > boxes[i].getCenterY()- 0.5f * boxes[i].getHeight())
 //					pushObjectV.y = -1;
 //				
-//				if (botBoxB.getCenterY()+ 0.5f * botBoxB.getHeight()+1f > boxes[i].getCenterY()+ 0.5f * boxes[i].getHeight())
+//				if (botBoxFB.getCenterY()+ 0.5f * botBoxFB.getHeight()+1f > boxes[i].getCenterY()+ 0.5f * boxes[i].getHeight())
 //					pushObjectV.y = 1;
 //				
-//				if (botBoxB.getCenterX()+ 0.5f * botBoxB.getWidth()-0.5f < boxes[i].getCenterX()- 0.5f * boxes[i].getWidth()  && botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight()-1f > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
+//				if (botBoxFB.getCenterX()+ 0.5f * botBoxFB.getWidth()-0.5f < boxes[i].getCenterX()- 0.5f * boxes[i].getWidth()  && botBoxFB.getCenterY()+ 0.5 * botBoxFB.getHeight()-1f > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
 //					pushObjectV.x = -1;
 //				
-//				if (botBoxB.getCenterX()- 0.5f * botBoxB.getWidth() + 0.7f > boxes[i].getCenterX()+ 0.5f * boxes[i].getWidth()  && botBoxB.getCenterY()+ 0.5 * botBoxB.getHeight()-1f > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
+//				if (botBoxFB.getCenterX()- 0.5f * botBoxFB.getWidth() + 0.7f > boxes[i].getCenterX()+ 0.5f * boxes[i].getWidth()  && botBoxFB.getCenterY()+ 0.5 * botBoxFB.getHeight()-1f > boxes[i].getCenterY()- 0.5 * boxes[i].getHeight())
 //					pushObjectV.x = 1;
 //				
 //				
@@ -213,12 +217,19 @@ public class player extends BasicGame{
 			
 //			collisionVPrint = pushObjectV;
 //
-////			while (botBoxB.intersects(boxes[i]))
+////			while (botBoxFB.intersects(boxes[i]))
 //			{
 				positionV.x += pushObjectV.x/100;
 				positionV.y += pushObjectV.y/100;
-				botBoxB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
+				
+//				botBoxFB.setLocation(positionV.x-50*size, positionV.y-5-40*size); // move bot collision box with bot animation
+//				botBoxGT.setLocation(positionV.x-40*size, positionV.y + 35*size);
 //				
+//				botBoxL.setLocation(positionV.x-50*size, positionV.y - 40 *size);
+//				botBoxR.setLocation(positionV.x + 45*size, positionV.y - 40 *size);
+//				botBoxT.setLocation(positionV.x+ 0-45*size, positionV.y - 50 *size);
+//				botBoxB.setLocation(positionV.x+ 0-40*size, positionV.y + 40 *size);
+
 //			}
 //			
 //
@@ -303,10 +314,10 @@ public class player extends BasicGame{
 		
 		g.setColor(Color.lightGray);
 		g.draw(botBoxL);
-//		g.draw(botBoxR);
+		g.draw(botBoxR);
+		g.draw(botBoxFB);
+		g.draw(botBoxT);
 		g.draw(botBoxB);
-//		g.draw(botBoxTL);
-//		g.draw(botBoxTR);
 //		g.draw(botBoxFB);
 
 
