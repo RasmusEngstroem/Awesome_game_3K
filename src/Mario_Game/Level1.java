@@ -9,7 +9,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
-import test.setupClass;
 
 public class Level1 extends level{
 
@@ -181,7 +180,7 @@ public Level1(String title) {
 	public void sendToRender(GameContainer container, Graphics g) throws SlickException {
 		
 		
-		background.draw(x_posLevel/1.1f - 800 , y_posLevel/1.1f - 500);
+		background.draw(x_posLevel/1.1f - 1500 , y_posLevel/1.1f - 1000);
 		
 		
 		levelZone.render(g);
