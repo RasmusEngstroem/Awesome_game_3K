@@ -77,12 +77,7 @@ public Level1(String title) {
 		
 		player = new Player(100 + x_posLevel, -500 + y_posLevel, container);
 		player.init(container);
-//		brick = new ItemBlock(0,0, 5, 0, player, enemy);
-//		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player, enemy);
-//		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player, enemy);
-//		solid1 = new SolidBlock(0, 0, 5, 0, player, enemy);
-//		coin = new Coins(0, 0, player);
-		
+
 		winCube = new WinCube(0, 0, player);
 		
 		solid1 = new SolidBlock(0, 0, 12, 0, player, enemy);
@@ -96,7 +91,7 @@ public Level1(String title) {
 		itemBlok4 = new ItemBlock(0, 0, 2, 0, player, enemy);
 		itemBlok5 = new ItemBlock(0, 0, 0, 0, player, enemy);
 		itemBlok6 = new ItemBlock(0, 0, 1, 0, player, enemy);
-		itemBlok7 = new ItemBlock(0, 0, 0, 0, player, enemy);
+		itemBlok7 = new ItemBlock(0, 0, 2, 0, player, enemy);
 		
 		brickBlok1 = new BrickBlock(0, 0, 1, 0, player, enemy);
 		brickBlok2 = new BrickBlock(0, 0, 0, 0, player, enemy);
@@ -146,12 +141,6 @@ public Level1(String title) {
 			
 		
 
-//				brick.update(200+ x_posLevel, 300 + y_posLevel);
-//				emptyBlok1.update(0+ x_posLevel, 600 + y_posLevel);
-//				emptyBlok2.update(900+ x_posLevel, 500 + y_posLevel);
-//				coin.update(300+ x_posLevel, 500 + y_posLevel);
-//				solid1.update(-600+ x_posLevel, 200 + y_posLevel);
-				
 				
 				solid1.update(0+ x_posLevel, 0 + y_posLevel);
 				solid2.update(1500+ x_posLevel, 0 + y_posLevel);
@@ -196,11 +185,7 @@ public Level1(String title) {
 		
 		
 		levelZone.render(g);
-//		brick.render(g);
-//		emptyBlok1.render(g);
-//		emptyBlok2.render(g);
-//		coin.render(g);
-		
+
 		solid1.render(g);
 		solid2.render(g);
 		solid3.render(g);
