@@ -78,7 +78,7 @@ public class Player extends GameEntities{
 	boolean collisionD = false;
 	boolean collisionGT = false;
 	
-	public boolean alive = true;
+	private boolean alive = true;
 	
 	public Player(float x_pos, float y_pos, GameContainer container) {
 		super(x_pos, y_pos);
@@ -320,8 +320,9 @@ public class Player extends GameEntities{
 
 	}
 	
-	private void death()
+	public void death()
 	{
+		alive = false;
 		collisionEnabled = false;
 		Level1.moveLevel = false;
 	}

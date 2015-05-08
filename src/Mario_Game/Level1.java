@@ -56,7 +56,7 @@ public Level1(String title) {
 		coin = new Coins(0, 0, player);
 		
 		for(int i = 0; i<enemy.length; i++ ){
-			enemy[i]= new Enemies(400+ 100*i,0);
+			enemy[i]= new Enemies(400+ 100*i,0, player);
 			enemy[i].init(container);
 		}
 	}
@@ -66,7 +66,7 @@ public Level1(String title) {
 //------ UPDATE --------------------------------------------
 	public void sendToUpdate(GameContainer container, int delta) throws SlickException {
 		
-		player.death();
+		
 		
 		brick.update(200+ x_posLevel, 300 + y_posLevel);
 		emptyBlok1.update(0+ x_posLevel, 600 + y_posLevel);
