@@ -207,7 +207,7 @@ public Level1(String title) {
 		
 		winCube.render(g);
 		player.render(container, g);
-		player.showInfo(container, g);
+//		player.showInfo(container, g);
 		for(int i = 0; i<enemy.length; i++ ){
 			enemy[i].render(container, g);
 //			enemy[i].showInfo(container, g);
