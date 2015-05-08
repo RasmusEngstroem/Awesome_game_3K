@@ -34,7 +34,6 @@ public class WinCube extends GameEntities  {
 	}
 	
 	public void render(Graphics g){
-		g.draw(boxShape);
 		textureBlock.draw(x_pos, y_pos);
 	
 		
