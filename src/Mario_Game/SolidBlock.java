@@ -53,19 +53,17 @@ public class SolidBlock extends Unbreakable {
 		placed = true;
 		checkCollision(); // Call of collision detection method 
 		if( rep_x != 0){ // if x_rep is not 0 run the for-loop
-			for(int i=0; i< rep_x; i++){ // This for loop 
+			for(int i=0; i< rep_x; i++){ // This for loop updates the position for all the created blocks in the array. 
 				kasse[i].update(x+scaleSize*i+scaleSize, y);
 			}
 		}
 	}
 	
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
-		if(alive){
+		if(alive){ // As long as the player is alive, draw the blocks. 
 			textureBlock.draw(x_pos, y_pos);
-			
 		}
-		if( rep_x != 0){
+		if( rep_x != 0){ // If rep_x is not zero, render all the blocks in the array. 
 			for(int i=0; i< rep_x; i++){
 				kasse[i].render(g);
 			}
@@ -74,11 +72,12 @@ public class SolidBlock extends Unbreakable {
 	
 
 	
-	public void checkCollision(){
+	public void checkCollision(){ 
+		// The collision box of mario consist of many different separate collision boxes. 
+		// Below is a collection of if statements to check if the different parts of that collision box collides with the Solidblocks
 		if(boxShape.intersects(mario.botBoxT) && placed && alive){
 			mario.collisionU = true;
 		}
-
 		if(boxShape.intersects(mario.botBoxB) && placed && alive){
 			mario.collisionD = true;
 		}
@@ -93,6 +92,8 @@ public class SolidBlock extends Unbreakable {
 			mario.collisionGT = true;
 		}
 		for(int i = 0; i < enemy.length; i++){
+			
+			// And this part of the collision detection is to check for collision with enemies. 
 			
 			if(boxShape.intersects(enemy[i].botBoxB) && placed && alive){
 				enemy[i].collisionB = true;
@@ -114,14 +115,14 @@ public class SolidBlock extends Unbreakable {
 			if(boxShape.intersects(enemy[i].botBoxGT) && placed && alive){
 				enemy[i].collisionGT = true;
 			}
-			
+	
 		}
 	}
 	
-	public void placeClones() throws SlickException{
-		if( rep_x != 0){
-			SolidBlock[] kasse = new SolidBlock[rep_x];
-			for(int i=0; i< rep_x; i++){
+	public void placeClones() throws SlickException{ 
+		if( rep_x != 0){ // If rep_x is not 0 
+			SolidBlock[] kasse = new SolidBlock[rep_x]; // Create new array 
+			for(int i=0; i< rep_x; i++){ // Initialize the blocks in the array. 
 				kasse[i]= new SolidBlock(x_pos, x_pos, 0, 0, mario, enemy);
 			} 
 			this.kasse = kasse;
