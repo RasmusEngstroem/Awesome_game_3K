@@ -132,6 +132,9 @@ public class Enemies extends GameEntities {
 		mouseLastX = container.getInput().getMouseX();
 		mouseLastY = container.getInput().getMouseY();
 		
+		
+		marioCollision();
+		
 	}
 	
 
