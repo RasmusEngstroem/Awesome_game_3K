@@ -1,5 +1,6 @@
 package Mario_Game;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -30,6 +31,7 @@ public class LevelZone extends GameEntities {
 	}
 	
 	public void render(Graphics g){
+		g.setColor(Color.magenta);
 		g.fill(boxShape);
 		g.draw(boxShape);
 		
