@@ -3,6 +3,7 @@ package Mario_Game;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -43,6 +44,8 @@ public class Setup extends BasicGame {
 	
 //------ RENDER --------------------------------------------
 	public void render(GameContainer container, Graphics g) throws SlickException {
+		g.setBackground(Color.white);
+		
 		L1.sendToRender(container,g);		
 	}
 

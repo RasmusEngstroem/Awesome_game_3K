@@ -217,12 +217,10 @@ public class Enemies extends GameEntities {
 //		}
 		if (collisionB)
 		{
-			System.out.println("B");
 			pushObjectV.y = -1;
 		}
 		if (collisionGT)
 		{
-			System.out.println("GT");
 			onGround = true;
 		}
 			

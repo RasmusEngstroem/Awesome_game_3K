@@ -136,9 +136,7 @@ public class Player extends GameEntities{
 		
 		if (hitByEnemy)
 			looseLive(delta);
-		
-		if (!alive)
-			looseLive(delta);
+	
 		
 	}
 	
@@ -365,12 +363,12 @@ public class Player extends GameEntities{
 		
 		
 		g.setColor(Color.lightGray);
-		g.draw(botBoxL);
-		g.draw(botBoxR);
+//		g.draw(botBoxL);
+//		g.draw(botBoxR);
 		g.draw(botBoxFB);
-		g.draw(botBoxT);
-		g.draw(botBoxB);
-		g.draw(botBoxGT);
+//		g.draw(botBoxT);
+//		g.draw(botBoxB);
+//		g.draw(botBoxGT);
 
 
 	}

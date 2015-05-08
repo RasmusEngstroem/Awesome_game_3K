@@ -99,7 +99,10 @@ public Level1(String title) {
 //------ RENDER --------------------------------------------
 	public void sendToRender(GameContainer container, Graphics g) throws SlickException {
 		
+		
 		background.draw(x_posLevel/1.1f - 800 , y_posLevel/1.1f - 500);
+		
+		levelZone.render(g);
 		brick.render(g);
 		emptyBlok1.render(g);
 		emptyBlok2.render(g);
@@ -147,7 +150,7 @@ public Level1(String title) {
 	
 	void showStads(GameContainer container, Graphics g)
 	{
-		g.setColor(Color.red);
+		g.setColor(Color.black);
 		
 		g.drawString("Points " + points, 10, 30); // print collision true/false
 		g.drawString("Lives  " + lives, 10, 45); // print collision true/false
@@ -155,7 +158,7 @@ public Level1(String title) {
 	
 	void endScreen(GameContainer container, Graphics g)
 	{
-		g.setColor(Color.red);
+		g.setColor(Color.black);
 		g.drawString("GameOver", width/2, height/2);
 		
 	}
