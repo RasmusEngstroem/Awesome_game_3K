@@ -46,7 +46,7 @@ public class Player extends GameEntities{
 	
 	public float size = 0.95f;
 	public float speed = 2f;
-	public float jumpHeight = 0.5f;
+	public float jumpHeight = 0.8f;
 //	public float dampingAir = 0.002f;
 	public float damping = 1.01f;
 	public float gravity = 0.01f;
