@@ -14,9 +14,9 @@ import test.boxTest;
 
 public class Player extends GameEntities{
 
-	public String pictureL = "pictures/animationBotL.png";
-	public String pictureR = "pictures/animationBotR.png";
-	public String pictureFall = "pictures/animationBotFall.png";
+	public String pictureL = "Assets/botPlayerL.png";
+	public String pictureR = "Assets/botPlayerR.png";
+	public String pictureFall = "Assets/botPlayerF.png";
 	
 	public SpriteSheet botSheetL;
 	public Animation botAnimationL;
