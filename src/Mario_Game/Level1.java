@@ -49,9 +49,9 @@ public Level1(String title) {
 		player = new Player(100 + x_posLevel, 100 + y_posLevel, container);
 		player.init(container);
 		brick = new ItemBlock(0,0, 5, 0, player, enemy);
-		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player);
-		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player);
-		solid1 = new SolidBlock(0, 0, 10, 0, player);
+		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player, enemy);
+		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player, enemy);
+		solid1 = new SolidBlock(0, 0, 10, 0, player, enemy);
 		coin = new Coins(0, 0, player);
 		
 		for(int i = 0; i<enemy.length; i++ ){
