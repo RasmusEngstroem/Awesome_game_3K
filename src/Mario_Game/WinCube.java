@@ -16,7 +16,7 @@ public class WinCube extends GameEntities  {
 	
 	public WinCube(float x_pos, float y_pos, Player mario) throws SlickException {
 		super(x_pos, y_pos);
-		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
+		boxShape = new Rectangle(x_pos, y_pos, scaleSize*2, scaleSize*2);
 		this.mario = mario;
 		textureBlock = new Image("Assets/goal.png");
 		this.x_pos = x_pos;
