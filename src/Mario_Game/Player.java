@@ -46,7 +46,7 @@ public class Player extends GameEntities{
 	
 	public float size = 0.95f;
 	public float speed = 2f;
-	public float jumpHeight = 1.2f;
+	public float jumpHeight = 0.7f;
 //	public float dampingAir = 0.002f;
 	public float damping = 1.01f;
 	public float gravity = 0.01f;
@@ -170,7 +170,12 @@ public class Player extends GameEntities{
 //			positionV.y -= 20;
 			directionV.y -= jumpHeight*delta;
 			}
-			
+		
+		if (jump)
+		{
+			directionV.y += jumpHeight*13;
+			jump = false;
+		}
 
 		positionV.add(directionV);
 //		positionV.x+=screen_pos_x;

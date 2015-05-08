@@ -23,7 +23,8 @@ public static int height = 768;
 public int moveMargin = 150;
 public static boolean moveLevel = true;
 public static boolean gameOver = false;
-	
+
+public LevelZone levelZone;
 public Player player;
 private ItemBlock brick; 
 private EmptyItemBlock emptyBlok1;
@@ -56,6 +57,9 @@ public Level1(String title) {
 		solid1 = new SolidBlock(0, 0, 5, 0, player, enemy);
 		coin = new Coins(0, 0, player);
 		
+		levelZone = new LevelZone(x_posLevel, y_posLevel, 4000, 3000, player);
+		
+		
 		for(int i = 0; i<enemy.length; i++ ){
 			enemy[i]= new Enemies(400+ 100*i,0, player);
 			enemy[i].init(container);
@@ -74,7 +78,7 @@ public Level1(String title) {
 		
 		brick.update(200+ x_posLevel, 300 + y_posLevel);
 		emptyBlok1.update(0+ x_posLevel, 600 + y_posLevel);
-		emptyBlok2.update(800+ x_posLevel, 500 + y_posLevel);
+		emptyBlok2.update(900+ x_posLevel, 500 + y_posLevel);
 		coin.update(300+ x_posLevel, 500 + y_posLevel);
 		solid1.update(-600+ x_posLevel, 200 + y_posLevel);
 		
@@ -86,6 +90,8 @@ public Level1(String title) {
 		}
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
+		
+		levelZone.update(x_posLevel, y_posLevel);
 	}
 	
 	
