@@ -216,8 +216,8 @@ public class Player extends GameEntities{
 
 		if (collisionEnabled)
 		{
-			positionV.x += (pushObjectV.x/10)*delta;
-			positionV.y += (pushObjectV.y/10)*delta;
+			positionV.x += (pushObjectV.x/5)*delta;
+			positionV.y += (pushObjectV.y/5)*delta;
 			
 
 		

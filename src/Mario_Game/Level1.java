@@ -98,7 +98,7 @@ public Level1(String title) {
 		player.render(container, g);
 		for(int i = 0; i<enemy.length; i++ ){
 			enemy[i].render(container, g);
-//			enemy[i].showInfo(container, g);
+			enemy[i].showInfo(container, g);
 		}
 		showStads(container, g);
 	}
