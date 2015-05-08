@@ -24,7 +24,7 @@ public class WinCube extends GameEntities  { // This class has a IS-A relationsh
 		super(x_pos, y_pos); // Inherits from the super class 
 		boxShape = new Rectangle(x_pos, y_pos, scaleSize*2, scaleSize*2); // Create a new rectangle. Scalesize is inherited from of gameobjects.
 		this.mario = mario; // This mario is the same as the playable Mario. 
-		textureBlock = new Image("Assets/goal.png"); // Import an image to be used on this block
+		textureBlock = new Image("goal.png"); // Import an image to be used on this block
 		this.x_pos = x_pos; // This x position is equal to the superclass x position 
 		this.y_pos = y_pos; // // This y position is equal to the superclass y position 
 	}

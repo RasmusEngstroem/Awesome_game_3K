@@ -40,7 +40,7 @@ public class SolidBlock extends Unbreakable {
 		marioHead = mario.botBoxT; // This version of the mario collision detection will be the same as the one parsed when the class is declared. 
 		this.rep_x = rep_x; // The x position of the box will be the same as the one parsed. 
 		this.rep_y = rep_y; //-||-
-		textureBlock = new Image("Assets/blokSolid.png"); // Import Image to use for texture to this block.
+		textureBlock = new Image("blokSolid.png"); // Import Image to use for texture to this block.
 		this.enemy = enemy; // Enemies expressed in this class will be the same as the enemies from the class where this class is called. 
 		placeClones(); // Calls the placeClones(); method. 
 	}

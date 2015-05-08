@@ -33,7 +33,7 @@ public class ItemBlock extends Breakable {
 		marioHead = mario.botBoxT;
 		this.rep_x = rep_x;
 		this.rep_y = rep_y;
-		textureBlock = new Image("Assets/blokItem.png");
+		textureBlock = new Image("blokItem.png");
 		this.enemy = enemy;
 		placeClones();
 	}

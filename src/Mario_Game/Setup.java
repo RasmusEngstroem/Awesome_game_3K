@@ -6,7 +6,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
+//import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Setup extends BasicGame {
@@ -56,7 +56,7 @@ public class Setup extends BasicGame {
 		app.setTargetFrameRate(200); // Set desired frame rate of the game.
 		app.setDisplayMode(width, height, false); // Set displaymode of the game using height and width from above. False is a bool for fullscreen. 
 //		app.setAlwaysRender(true);
-		app.start(); // Start the app. 
+		app.start(); 
 	}
 
 
