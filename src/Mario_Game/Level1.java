@@ -22,6 +22,7 @@ public static int width = 1024;
 public static int height = 768;
 public int moveMargin = 150;
 public static boolean moveLevel = true;
+public static boolean gameOver = false;
 	
 public Player player;
 private ItemBlock brick; 
@@ -59,13 +60,16 @@ public Level1(String title) {
 			enemy[i]= new Enemies(400+ 100*i,0, player);
 			enemy[i].init(container);
 		}
+		if (lives <= 0)
+			gameOver = true;
 	}
 
 	
 	
 //------ UPDATE --------------------------------------------
 	public void sendToUpdate(GameContainer container, int delta) throws SlickException {
-		
+		if (!gameOver)
+		{
 		
 		
 		brick.update(200+ x_posLevel, 300 + y_posLevel);
@@ -74,14 +78,14 @@ public Level1(String title) {
 		coin.update(300+ x_posLevel, 500 + y_posLevel);
 		solid1.update(-600+ x_posLevel, 200 + y_posLevel);
 		
-		player.update(container, delta, x_posLevel, y_posLevel);
+		
 		for(int i = 0; i<enemy.length; i++ ){
 			enemy[i].update(container, delta, x_posLevel , y_posLevel);
+		}	
+			moveLevel(container, delta);
 		}
 		
-		if (moveLevel)
-			moveLevel(container, delta);
-		
+		player.update(container, delta, x_posLevel, y_posLevel);
 	}
 	
 	
@@ -96,9 +100,10 @@ public Level1(String title) {
 		coin.render(g);
 		solid1.render(g);
 		player.render(container, g);
+		player.showInfo(container, g);
 		for(int i = 0; i<enemy.length; i++ ){
 			enemy[i].render(container, g);
-			enemy[i].showInfo(container, g);
+//			enemy[i].showInfo(container, g);
 		}
 		showStads(container, g);
 	}
@@ -140,6 +145,13 @@ public Level1(String title) {
 		
 		g.drawString("Points " + points, 10, 30); // print collision true/false
 		g.drawString("Lives  " + lives, 10, 45); // print collision true/false
+	}
+	
+	void endScreen(GameContainer container, Graphics g)
+	{
+		g.setColor(Color.red);
+		g.drawString("GameOver", width/2, height/2);
+		
 	}
 	
 }

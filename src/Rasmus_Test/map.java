@@ -10,47 +10,32 @@ public class map { // this class will be used to call the function that will spa
 		int gapsizelarge = 3*blocksize; 
 	
 							// length of ground
-		for( int i = 0; i <= 70*blocksize; i+=50) // This loop will spawn the first part of the map. 70 tiles. 
+		for( int i = 0; i <= 70*blocksize; i+=blocksize) // This loop will spawn the first part of the map. 70 tiles. 
 		{
 			blocks.draw(blocks.x_pos+i,blocks.y_pos,50,50); 
 		}
 		//System.out.println(lastbox);
 					// putting in gapsize here creates the gap between the ground. 
-		for( int i = (70*blocksize+gapsizesmall) ; i <= ((70*blocksize+gapsizesmall)+(15*blocksize)); i+=50) 
+		for( int i = (70*blocksize+gapsizesmall) ; i <= ((70*blocksize+gapsizesmall)+(15*blocksize)); i+=blocksize) 
 		{
 			blocks.draw(blocks.x_pos+i,blocks.y_pos,50,50); 	
 		}
 		
-		for(int i = ((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall; i <= (((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall+(65*blocksize)); i+=50)
+		for(int i = ((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall; i <= (((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall+(65*blocksize)); i+=blocksize)
 		{
 			blocks.draw(blocks.x_pos+i,blocks.y_pos,50,50); 
 		}
 		
-		for(int i = (((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall+(65*blocksize))+gapsizelarge; i <= (((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall+(65*blocksize))+gapsizesmall+(60*blocksize); i+=50)
+		for(int i = (((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall+(65*blocksize))+gapsizelarge; i <= (((70*blocksize+gapsizesmall)+(15*blocksize))+gapsizesmall+(65*blocksize))+gapsizesmall+(60*blocksize); i+=blocksize)
 		{
 			blocks.draw(blocks.x_pos+i,blocks.y_pos,50,50); 
 		}
 	
 	}
 	
-	public void printTriangle (int count) {
-	    int line = 1;
-	    while(line <= count) {
-	        for(int x = 1; x <= line; x++) {
-	            System.out.print("*");
-	        }
-	        System.out.print("\n");
-	        line++;
-	    }
-	}
-	
-	public static void printrightfacetriangle(int posx, int posy, int size)
+	public static void printrightfacetriangle(int posx, int posy, int size) // pos is self explanatory. Size is the size of the triangle.
 	{
-//	        for(int i=0;i<=50*size;i+=50){
-//		        for(int j=0;j<=i;j+=50){
-//		            blocks.draw(i, j, 50, 50);
-//		        }
-//		    }
+
 		for(int i=posx;i>=posx-(size*50);i-=50){
 	        for(int j=posy; j>=i;j-=50){
 	            blocks.draw(i, j, 50, 50);
@@ -58,13 +43,9 @@ public class map { // this class will be used to call the function that will spa
 	    	}
 	 }
 	
-	public static void printleftfacetriangle(int posx, int posy, int size)
+	public static void printleftfacetriangle(int posx, int posy, int size) // Same here, this is just projected. 
 	{
-//	        for(int i=0;i<=50*size;i+=50){
-//		        for(int j=0;j<=i;j+=50){
-//		            blocks.draw(i, j, 50, 50);
-//		        }
-//		    }
+
 		for(int i=posx;i>=posx-(size*50);i-=50){
 	        for(int j=posy; j<=i;j+=50){
 	            blocks.draw(i, j, 50, 50);

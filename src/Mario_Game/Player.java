@@ -78,7 +78,11 @@ public class Player extends GameEntities{
 	boolean collisionD = false;
 	boolean collisionGT = false;
 	
-	private boolean alive = true;
+	public boolean alive = true;
+	public boolean hitByEnemy = false;
+	boolean immortal = false;
+	float timer = 4;
+	int delta = 0;
 	
 	public Player(float x_pos, float y_pos, GameContainer container) {
 		super(x_pos, y_pos);
@@ -111,7 +115,7 @@ public class Player extends GameEntities{
 
 	public void update(GameContainer container, int delta,float screen_pos_x, float screen_pos_y) throws SlickException {
 		
-	
+		
 		
 		botAnimationL.setSpeed(speed * (1-directionV.x));
 		botAnimationL.update(delta);
@@ -128,6 +132,12 @@ public class Player extends GameEntities{
 		movePlayer(container,delta);
 		collisionDeflection(container,delta);
 		damping(delta);
+		
+		if (hitByEnemy)
+			looseLive(delta);
+		
+		if (!alive)
+			looseLive(delta);
 		
 	}
 	
@@ -299,12 +309,12 @@ public class Player extends GameEntities{
 	{
 		g.setColor(Color.lightGray);
 		
-		g.drawString("L " + collisionL, 10, 30); // print collision true/false
-		g.drawString("R " + collisionR, 10, 45); // print collision true/false
-		g.drawString("U: " + collisionU, 10, 60); // print inAir true/false
-		g.drawString("D: " + collisionD, 10, 75); // print inAir true/false
-		g.drawString("onGround: " + onGround, 10, 90); // print inAir true/false
-		g.drawString("inAir: " + inAir, 10, 105); // print inAir true/false
+		g.drawString("L " + collisionL, 10 + positionV.x , 30); // print collision true/false
+		g.drawString("R " + collisionR, 10+ positionV.x, 45); // print collision true/false
+		g.drawString("U: " + collisionU, 10+ positionV.x, 60); // print inAir true/false
+		g.drawString("D: " + collisionD, 10+ positionV.x, 75); // print inAir true/false
+		g.drawString("looseLive: " + hitByEnemy, 10+ positionV.x, 90); // print inAir true/false
+		g.drawString("timer: " + timer, 10+ positionV.x, 105); // print inAir true/false
 		
 //		g.drawString("variable: " + variable, 10, 60); // print inAir true/false
 		
@@ -320,15 +330,31 @@ public class Player extends GameEntities{
 
 	}
 	
-	public void death()
+	private void death()
 	{
-		alive = false;
 		collisionEnabled = false;
 		Level1.moveLevel = false;
 	}
 	
-	public void looseLive()
+	private void looseLive(int delta)
 	{
+		
+		
+		if (!immortal)
+		{
+			Level1.lives --;
+			immortal = true;
+		}
+		if (immortal)
+			timer -= 0.001f*delta;
+			
+		if (timer <= 0) 
+		{
+			timer = 4;
+			immortal = false;
+			hitByEnemy = false;
+		}
+			
 		
 	}
 	

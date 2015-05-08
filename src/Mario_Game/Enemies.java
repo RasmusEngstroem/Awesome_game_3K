@@ -344,10 +344,12 @@ public class Enemies extends GameEntities {
 		}
 		if(botBoxFB.intersects(mario.botBoxL) && collisionEnabled){
 			mario.collisionL = true;
+			mario.hitByEnemy = true;
 		}
 		
 		if(botBoxFB.intersects(mario.botBoxR) && collisionEnabled){
 			mario.collisionR = true;
+			mario.hitByEnemy = true;
 		}
 		if(botBoxFB.intersects(mario.botBoxGT) && collisionEnabled){
 			mario.collisionGT = true;
