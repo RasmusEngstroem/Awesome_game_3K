@@ -32,7 +32,7 @@ public class LevelZone extends GameEntities {
 	
 	public void render(Graphics g){
 		g.setColor(Color.magenta);
-		g.fill(boxShape);
+//		g.fill(boxShape);
 		g.draw(boxShape);
 		
 	}
