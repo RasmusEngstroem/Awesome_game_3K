@@ -46,7 +46,7 @@ public class Player extends GameEntities{
 	
 	public float size = 0.95f;
 	public float speed = 2f;
-	public float jumpHeight = 0.7f;
+	public float jumpHeight = 0.5f;
 //	public float dampingAir = 0.002f;
 	public float damping = 1.01f;
 	public float gravity = 0.01f;
@@ -356,7 +356,7 @@ public class Player extends GameEntities{
 		g.drawString("U: " + collisionU, 10+ positionV.x, 60); // print inAir true/false
 		g.drawString("D: " + collisionD, 10+ positionV.x, 75); // print inAir true/false
 		g.drawString("looseLive: " + hitByEnemy, 10+ positionV.x, 90); // print inAir true/false
-		g.drawString("timer: " + timer, 10+ positionV.x, 105); // print inAir true/false
+		g.drawString("positionX " + positionV.x, 10, 105); // print inAir true/false
 		
 //		g.drawString("variable: " + variable, 10, 60); // print inAir true/false
 		
