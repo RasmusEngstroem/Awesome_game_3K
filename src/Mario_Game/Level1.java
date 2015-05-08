@@ -34,7 +34,9 @@ private SolidBlock solid1;
 private ItemBlock item1;
 
 private Coins coin;
+private WinCube winCube;
 private Enemies[] enemy = new Enemies[3];
+
 	
 //------ SETUP --------------------------------------------
 
@@ -57,6 +59,7 @@ public Level1(String title) {
 		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player, enemy);
 		solid1 = new SolidBlock(0, 0, 5, 0, player, enemy);
 		coin = new Coins(0, 0, player);
+		winCube = new WinCube(0, 0, player);
 		
 		levelZone = new LevelZone(x_posLevel, y_posLevel, 4000, 3000, player);
 		
@@ -76,9 +79,9 @@ public Level1(String title) {
 		if (lives <= 0)
 			gameOver = true;
 		
-		if (!gameOver )
+		if (!gameWon )
 		{
-			if (!gameWon )
+			if (!gameOver  )
 			{
 			
 		
@@ -94,7 +97,7 @@ public Level1(String title) {
 				}	
 				
 				
-				
+				winCube.update(1300 + x_posLevel, 385 + y_posLevel);
 				
 				moveLevel(container, delta);
 				}
@@ -111,12 +114,14 @@ public Level1(String title) {
 		
 		background.draw(x_posLevel/1.1f - 800 , y_posLevel/1.1f - 500);
 		
+		
 		levelZone.render(g);
 		brick.render(g);
 		emptyBlok1.render(g);
 		emptyBlok2.render(g);
 		coin.render(g);
 		solid1.render(g);
+		winCube.render(g);
 		player.render(container, g);
 //		player.showInfo(container, g);
 		for(int i = 0; i<enemy.length; i++ ){
@@ -164,7 +169,7 @@ public Level1(String title) {
 		g.drawString("Points " + points, 10, 30); // print collision true/false
 		g.drawString("Lives  " + lives, 10, 45); // print collision true/false
 	
-		if (gameOver)
+		if (gameOver && !gameWon)
 			endScreen(container, g);
 		
 		if (gameWon)
@@ -179,8 +184,8 @@ public Level1(String title) {
 	
 	void winScreen(GameContainer container, Graphics g)
 	{
-		g.setColor(Color.yellow);
-		g.drawString("You win!", width/2-50, height/2);
+		g.setColor(Color.red);
+		g.drawString("You win!", width/2-50, height/4);
 		
 	}
 	
