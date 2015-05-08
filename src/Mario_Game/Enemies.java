@@ -13,11 +13,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Enemies extends GameEntities {
 	
-	public Enemies(float x_pos, float y_pos) {
-		super(x_pos, y_pos);
-		this. x_pos = x_pos;
-		this. y_pos = y_pos;
-	}
+	
 
 	public Rectangle[] boxes;
 	
@@ -72,7 +68,16 @@ public class Enemies extends GameEntities {
 	float screen_posX =0;
 	float screen_posY =0;
 	
-public void init(GameContainer container) throws SlickException {
+	public Player mario;
+	
+	public Enemies(float x_pos, float y_pos, Player mario) {
+		super(x_pos, y_pos);
+		this. x_pos = x_pos;
+		this. y_pos = y_pos;
+		this.mario = mario;
+	}
+	
+	public void init(GameContainer container) throws SlickException {
 		
 		initBot(container);
 		
@@ -340,6 +345,35 @@ public void init(GameContainer container) throws SlickException {
 //		g.draw(botBoxTR);
 //		g.draw(botBoxFB);
 	}
+	
+	public void marioCollision(){
+		
+		if(botBoxFB.intersects(mario.botBoxT) && collisionEnabled){
+			mario.collisionU = true;
+		}
+
+		if(botBoxFB.intersects(mario.botBoxB) && collisionEnabled){
+			mario.collisionD = true;
+		}
+		if(botBoxFB.intersects(mario.botBoxL) && collisionEnabled){
+			mario.collisionL = true;
+		}
+		
+		if(botBoxFB.intersects(mario.botBoxR) && collisionEnabled){
+			mario.collisionR = true;
+		}
+		if(botBoxFB.intersects(mario.botBoxGT) && collisionEnabled){
+			mario.collisionGT = true;
+		}
+		
+		if(( botBoxTL.intersects(mario.botBoxB) || botBoxTR.intersects(mario.botBoxB) ) && collisionEnabled){
+			
+			mario.collisionD = true;
+			dead();
+		}
+		
+	}
+	
   
 
 }
