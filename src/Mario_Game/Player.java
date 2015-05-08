@@ -1,5 +1,7 @@
 package Mario_Game;
 
+
+// used libraries
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -12,24 +14,20 @@ import org.newdawn.slick.geom.Vector2f;
 
 
 
-public class Player extends GameEntities{
+public class Player extends GameEntities{  // player class, which inheres game entities
 
-	public String pictureL = "Assets/botPlayerL.png";
-	public String pictureR = "Assets/botPlayerR.png";
-	public String pictureFall = "Assets/botPlayerF.png";
+	public String pictureL = "botPlayerL.png";  // save picture names as strings for easy access
+	public String pictureR = "botPlayerR.png";  // pictures for the sprite sheets
+	public String pictureFall = "botPlayerF.png";
 	
-	public SpriteSheet botSheetL;
-	public Animation botAnimationL;
+	public SpriteSheet botSheetL;  // make space for the sprite sheets for the animation
+	public Animation botAnimationL;  // the animations
 	public SpriteSheet botSheetR;
 	public Animation botAnimationR;
 	public SpriteSheet botSheetFall;
 	public Animation botAnimationFall;
 	
-	
-	public Rectangle[] boxes;
-//	public hitBoxes[] boxes;
-//	public boxTest box = new boxTest("2");
-	
+	//The shapes used for the collision
 	public Rectangle botBoxFB;   // Full Body
 	public Rectangle botBoxT;   // body Top
 	public Rectangle botBoxB;   // body Bottom
@@ -37,41 +35,37 @@ public class Player extends GameEntities{
 	public Rectangle botBoxR;  // right
 	public Rectangle botBoxGT;  // ground check
 	
-	public boolean collisionFB = false;  // body
-	private boolean collisionB = false;
 
-//	private boolean inAir = true; 
-	private boolean collisionEnabled = true;
 	
-	
+	// player variables
 	public float size = 0.95f;
 	public float speed = 2f;
 	public float jumpHeight = 0.8f;
-//	public float dampingAir = 0.002f;
 	public float damping = 1.01f;
 	public float gravity = 0.01f;
 	
-	public float screen_pos_x;
+	public float screen_pos_x;  // for locally storing the screen position
 	public float screen_pos_y;
-	
-	
+
 	public float positionX = 100;
 	public float positionY = 50;
 		
-	public Vector2f positionV;
-	public Vector2f directionV;
+	public Vector2f positionV;  // vector storing the position
+	public Vector2f directionV;  // vector storing the direction to be added to the position
 
 
-	Vector2f pushObjectV = new Vector2f(0,0);
+	Vector2f pushObjectV = new Vector2f(0,0);  // vector for storing in which direction the inputs from outside pushes the player
 	Vector2f collisionV = new Vector2f(0,0);
-	private boolean inAir = true;
 	private boolean onGround = false;
-	private boolean inCollision = false;
 	public boolean jump = false;
-	private int standOnRectNr = 0;
-	
+
 	Vector2f collisionVPrint = new Vector2f(0,0); 
 	float variable = 0;
+	
+	
+	// the booleans for controlling the inputs from the enemies and bricks
+	public boolean collisionFB = false; 
+	private boolean collisionEnabled = true;
 	
 	boolean collisionL = false;
 	boolean collisionR = false;
@@ -82,8 +76,11 @@ public class Player extends GameEntities{
 	public boolean alive = true;
 	public boolean hitByEnemy = false;
 	boolean immortal = false;
-	float timer = 4;
+	
+	// for controlling the loose life function
+	float timer = 2;
 	int delta = 0;
+	
 	
 	public Player(float x_pos, float y_pos, GameContainer container) {
 		super(x_pos, y_pos);
@@ -95,15 +92,15 @@ public class Player extends GameEntities{
 
 
 
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container) throws SlickException { // separate initial function for if different players
 
-		initPlayer(container);
+		initPlayer(container); // stores the function for initializing the player - animations etc
 
 
-		positionV = new Vector2f(positionX, positionY);
+		positionV = new Vector2f(positionX, positionY); // store the position from the instance input
 		directionV = new Vector2f(0,0);
 		
-		botBoxL = new Rectangle(0,0,10*size, 85*size);
+		botBoxL = new Rectangle(0,0,10*size, 85*size);// set size and position of the collision boxes
 		botBoxR = new Rectangle(0,0,10*size, 85*size);
 		botBoxT = new Rectangle(0,0,85*size, 10*size);
 		botBoxB = new Rectangle(0,0,85*size, 10*size);
@@ -117,24 +114,23 @@ public class Player extends GameEntities{
 	public void update(GameContainer container, int delta,float screen_pos_x, float screen_pos_y) throws SlickException {
 		
 		
-		
-		botAnimationL.setSpeed(speed * (1-directionV.x));
-		botAnimationL.update(delta);
+		botAnimationL.setSpeed(speed * (1-directionV.x)); // set speed of animation to follow speed of player
+		botAnimationL.update(delta); // update independent of screen updates
 		botAnimationR.setSpeed(speed* (1+ directionV.x));
 		botAnimationR.update(delta);
 		botAnimationFall.setSpeed(speed);
 		botAnimationFall.update(delta);
-		this.screen_pos_x = screen_pos_x;
+		this.screen_pos_x = screen_pos_x;  // update the position
 		this.screen_pos_y = screen_pos_y;
 
-		if (!alive)
+		if (!alive) // start the death function if the alive bool is set to false from outside or inside
 		death();
 	
-		movePlayer(container,delta);
-		collisionDeflection(container,delta);
-		damping(delta);
+		movePlayer(container,delta); // move the player - gravity - add the direction vector
+		collisionDeflection(container,delta); // puch player around according to what hits him
+		damping(delta); // damp the speed
 		
-		if (hitByEnemy)
+		if (hitByEnemy)  // start loosing life function if hit by enemy bool is set to true
 			looseLive(delta);
 	
 		
@@ -143,7 +139,7 @@ public class Player extends GameEntities{
 	
 	public void render(GameContainer container, Graphics g) throws SlickException {
 
-		drawPlayer();
+		drawPlayer();  // draw player function
 
 	}
 
@@ -155,31 +151,29 @@ public class Player extends GameEntities{
 	{
 		Input input = container.getInput();
 		
-		directionV.y += gravity*delta;
+		directionV.y += gravity*delta;  // add gravity to direction
 
-		if(input.isKeyDown(Input.KEY_A))
-			directionV.x -= (speed/500)*delta;
+		if(input.isKeyDown(Input.KEY_A))  // check if the keys are pressed
+			directionV.x -= (speed/500)*delta;  // move the player according to speed
 		
 		if(input.isKeyDown(Input.KEY_D))
 			directionV.x += (speed/500)*delta;
 		
 		if(input.isKeyDown(Input.KEY_W) && onGround && pushObjectV.x == 0 && pushObjectV.y !=0 )
 			{
-//			positionV.y -= 20;
 			directionV.y -= jumpHeight*delta;
 			}
 		
-		if (jump)
+		if (jump)  // if jump is set true from outer place - here the enemies - make the layer jump/throw up in the air
 		{
 			directionV.y += jumpHeight*13;
 			jump = false;
 		}
 
-		positionV.add(directionV);
-//		positionV.x+=screen_pos_x;
-//		positionV.y+=screen_pos_y;
+		positionV.add(directionV); // add direction to the position
+
 		
-		x_pos = botBoxFB.getCenterX();
+		x_pos = botBoxFB.getCenterX();  // update the inherited position vector
 		y_pos = botBoxFB.getCenterY();
 		
 		botBoxFB.setLocation(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-5 - 40 *size); // move bot collision box with bot animation
@@ -197,16 +191,14 @@ public class Player extends GameEntities{
 	
 	public void collisionDeflection(GameContainer container,int delta)
 	{
-		pushObjectV = new Vector2f(0,0);
-		inCollision = false;
-		
-		inAir = true;
+		pushObjectV = new Vector2f(0,0);  // reset the vector for storing the direction to push
+
 		onGround = false;
 		
-		if (collisionR)
+		if (collisionR)  // if the collision booleans are set true from other classes
 		{
-			pushObjectV.x = -1;
-			directionLock("x", -1);
+			pushObjectV.x = -1; // set the direction to push
+			directionLock("x", -1);  // make the direction vector go uppersite direction - bounce
 		}
 		
 		if (collisionL)
@@ -234,25 +226,19 @@ public class Player extends GameEntities{
 		if (collisionL || collisionR || collisionU || collisionD)
 			collisionFB = true;
 		
-		collisionU = false;
+		collisionU = false; // reset to false
 		collisionD = false;
 		collisionL = false;
 		collisionR = false;
 		collisionFB = false;
 		collisionGT = false;
 
-		if (collisionEnabled)
+		if (collisionEnabled)  // if collision is enabled
 		{
-			positionV.x += (pushObjectV.x/5)*delta;
+			positionV.x += (pushObjectV.x/5)*delta; // push in the desired direction
 			positionV.y += (pushObjectV.y/5)*delta;
 			
 
-		
-//		if (pushObjectV.y != 0 )
-//			directionV.y = 0;
-
-//		if (pushObjectV.x != 0)
-//			directionV.x = 0;
 		}
 	}
 
@@ -260,35 +246,19 @@ public class Player extends GameEntities{
 
 //---------------------------------
 	
-	private void damping( int delta) {
+	private void damping( int delta) { // the damping of the direction vector
 		
-//		directionV = directionV.scale(1-damping/delta) ;
 		directionV.x /= (damping);
 		directionV.y /= (damping);
-//		float a = 0.0015f;
-//		float b = 0.003f;
-//		
-//		if (directionV.x > 0.01f)
-//			directionV.x -= a*delta;
-//		else if (directionV.x < -0.01f)
-//			directionV.x += a*delta;
-//		else
-//			directionV.x = 0;
-//		
-//		if (directionV.y > 0.01f)
-//			directionV.y -= b*delta;
-//		else if (directionV.y < -0.01f)
-//			directionV.y += b*delta;
-//		else
-//			directionV.y = 0;
+		
 		if (onGround)
-			directionV.y /= (damping);
+			directionV.y /= (damping); // extra damping on ground
 		
 	}
 	
 //---------------------------------	
 	
-	public void initPlayer(GameContainer container) throws SlickException
+	public void initPlayer(GameContainer container) throws SlickException  // apply the pictures to the sprite sheets and apply the sprites to the animations
 	{
 		botSheetL = new SpriteSheet(pictureL, 100, 100);
 		botAnimationL = new Animation(botSheetL, 700);
@@ -304,37 +274,37 @@ public class Player extends GameEntities{
 	
 	
 	
-	public void drawPlayer()
+	public void drawPlayer()  // draw the player in a render function
 	{
 	
-		if ( !onGround)
+		if ( !onGround) // if in the air - show fall/jump animation
 		botAnimationFall.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
-		else if (directionV.x < -0.005f)
+		else if (directionV.x < -0.005f) // if direction against left - play walking left animation
 		botAnimationL.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
-		else if (directionV.x > 0.005f)
+		else if (directionV.x > 0.005f) // right
 		botAnimationR.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
-		else
+		else   // else idle animation
 			botAnimationFall.draw(positionV.x + screen_pos_x-50*size, positionV.y + screen_pos_y-50*size, 100 * size, 100*size);
 		
 	}
 	
 	
-	void directionLock(String lockDirection, int direction)
+	void directionLock(String lockDirection, int direction) // set the axis to lock and in what direction
 	{
 		if (lockDirection == "x")
 		{
-			if (directionV.x < 0f && direction == 1)
+			if (directionV.x < 0f && direction == 1)  // always turn direction vector positive x
 				directionV.x*=-1*0.3f;
 			
-			if (directionV.x > 0f && direction == -1)
+			if (directionV.x > 0f && direction == -1)  //negative
 				directionV.x*=-1*0.3f;
 
 			}
 
-		else if (lockDirection == "y")
+		else if (lockDirection == "y")  //y
 		{
 			if (directionV.y < 0f && direction == 1)
 				directionV.y*=-1*0.3f;
@@ -347,7 +317,7 @@ public class Player extends GameEntities{
 		
 	}
 	
-	public void showInfo (GameContainer container, Graphics g) throws SlickException  // for debugging
+	public void showInfo (GameContainer container, Graphics g) throws SlickException  // for debugging - can be called when rendered
 	{
 		g.setColor(Color.lightGray);
 		
@@ -372,28 +342,28 @@ public class Player extends GameEntities{
 
 	}
 	
-	private void death()
+	private void death()  // if dead
 	{
-		collisionEnabled = false;
-		Level1.moveLevel = false;
+		collisionEnabled = false; // fall through ground
+		Level1.moveLevel = false; // stop the level from moving
 	}
 	
-	private void looseLive(int delta)
+	private void looseLive(int delta)  // for loosing life 
 	{
 		
 		if (!immortal)
 		{
-			Level1.lives --;
+			Level1.lives --; // loose one life and turn immortal
 			immortal = true;
 		}
 		if (immortal)
-			timer -= 0.001f*delta;
+			timer -= 0.001f*delta;  // as long as the timer runs
 			
-		if (timer <= 0) 
+		if (timer <= 0)  // when timer runs out
 		{
-			timer = 4;
-			immortal = false;
-			hitByEnemy = false;
+			timer = 2;         // reset timer 
+			immortal = false;  // turn mortal
+			hitByEnemy = false;  // reset hit boolean
 		}
 			
 		
