@@ -1,7 +1,7 @@
 package Mario_Game;
 
-import mathias_test_igen.Box;
-import mathias_test_igen.Mario_2;
+//import mathias_test_igen.Box;
+//import mathias_test_igen.Mario_2;
 
 import org.newdawn.slick.geom.Rectangle;
 

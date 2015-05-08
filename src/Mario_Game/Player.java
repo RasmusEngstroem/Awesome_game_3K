@@ -10,7 +10,7 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
-import test.boxTest;
+
 
 public class Player extends GameEntities{
 
@@ -28,7 +28,7 @@ public class Player extends GameEntities{
 	
 	public Rectangle[] boxes;
 //	public hitBoxes[] boxes;
-	public boxTest box = new boxTest("2");
+//	public boxTest box = new boxTest("2");
 	
 	public Rectangle botBoxFB;   // Full Body
 	public Rectangle botBoxT;   // body Top
