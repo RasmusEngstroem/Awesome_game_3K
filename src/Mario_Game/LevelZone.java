@@ -4,7 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
-public class LevelZone extends GameEntities {
+public class LevelZone extends GameEntities { // inherence from  game entities
 
 	public float width;
 	public float height;
@@ -12,11 +12,11 @@ public class LevelZone extends GameEntities {
 	public Player mario;
 	
 	
-	public LevelZone(float x_pos, float y_pos, float width, float height, Player mario) {
+	public LevelZone(float x_pos, float y_pos, float width, float height, Player mario) {  // set position, size
 		super(x_pos, y_pos);
 		this.width = width;
 		this.height = height;
-		boxShape = new Rectangle(x_pos, y_pos, width, height);
+		boxShape = new Rectangle(x_pos, y_pos, width, height);  // instantiate the shape to check for the player
 		this.mario = mario;
 		// TODO Auto-generated constructor stub
 	}
@@ -38,8 +38,8 @@ public class LevelZone extends GameEntities {
 	}
 	
 	public void checkIfInsideLevel(){
-		if(!boxShape.intersects(mario.botBoxFB)){
-			Level1.lives = -1;
+		if(!boxShape.intersects(mario.botBoxFB)){  // checks if the player is still within the level or has gone too far away
+			Level1.lives = -1;  // if so - loose life till death
 		}
 	}
 	

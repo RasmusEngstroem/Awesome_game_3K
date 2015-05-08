@@ -174,9 +174,9 @@ public Level1(String title) {
 		background.draw(x_posLevel/1.1f - 1500 , y_posLevel/1.1f - 1000); // draw the background at position, but slow it down a little- for effect
 		
 		
-		levelZone.render(g); // draw game objects by calling the render function
+//		levelZone.render(g); 
 
-		solid1.render(g);
+		solid1.render(g); // draw game objects by calling the render function
 		solid2.render(g);
 		solid3.render(g);
 		solid4.render(g);
