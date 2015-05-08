@@ -21,7 +21,6 @@ public class WinCube extends GameEntities  {
 		textureBlock = new Image("Assets/goal.png");
 		this.x_pos = x_pos;
 		this.y_pos = y_pos;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void update(float x_pos, float y_pos){
@@ -29,14 +28,11 @@ public class WinCube extends GameEntities  {
 		this.y_pos=y_pos-(scaleSize);
 		boxShape.setCenterX(x_pos + 50 -(scaleSize/2));
 		boxShape.setCenterY(y_pos + 70-(scaleSize/2));
-		
 		checkCollision();
 	}
 	
 	public void render(Graphics g){
-		textureBlock.draw(x_pos, y_pos);
-	
-		
+		textureBlock.draw(x_pos, y_pos);	
 	}
 	
 	public void checkCollision(){
@@ -44,6 +40,7 @@ public class WinCube extends GameEntities  {
 		if(boxShape.intersects(mario.botBoxFB)){
 			Level1.gameWon = true;
 		}
-		
 	}
+	
+	
 }
