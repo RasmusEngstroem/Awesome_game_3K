@@ -37,7 +37,7 @@ public class LevelZone extends GameEntities {
 	
 	public void checkIfInsideLevel(){
 		if(!boxShape.contains(mario.botBoxFB)){
-			mario.alive = false;
+			Level1.lives = 0;
 		}
 	}
 	
