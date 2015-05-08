@@ -21,6 +21,7 @@ public static int lives = 3;
 public static int width = 1024;
 public static int height = 768;
 public int moveMargin = 150;
+public static boolean moveLevel = true;
 	
 public Player player;
 private ItemBlock brick; 
@@ -55,7 +56,7 @@ public Level1(String title) {
 		coin = new Coins(0, 0, player);
 		
 		for(int i = 0; i<enemy.length; i++ ){
-			enemy[i]= new Enemies(400+ 100*i,0);
+			enemy[i]= new Enemies(400+ 100*i,0, player);
 			enemy[i].init(container);
 		}
 	}
@@ -64,6 +65,8 @@ public Level1(String title) {
 	
 //------ UPDATE --------------------------------------------
 	public void sendToUpdate(GameContainer container, int delta) throws SlickException {
+		
+		
 		
 		brick.update(200+ x_posLevel, 300 + y_posLevel);
 		emptyBlok1.update(0+ x_posLevel, 600 + y_posLevel);
@@ -75,7 +78,9 @@ public Level1(String title) {
 		for(int i = 0; i<enemy.length; i++ ){
 			enemy[i].update(container, delta, x_posLevel , y_posLevel);
 		}
-		moveLevel(container, delta);
+		
+		if (moveLevel)
+			moveLevel(container, delta);
 		
 	}
 	
