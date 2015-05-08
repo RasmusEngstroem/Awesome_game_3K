@@ -29,13 +29,13 @@ public class Enemies extends GameEntities {
 	public Animation botAnimationFall;
 	
 
-	private Circle botBoxFB; 
-	private Rectangle botBoxTL;   // body Top
-	private Rectangle botBoxTR;   // body Top
-	private Rectangle botBoxB;   // body Bottom
-	private Rectangle botBoxL;  // left
-	private Rectangle botBoxR;  // right
-	private Rectangle botBoxGT; // cheeck ground
+	public Circle botBoxFB; 
+	public Rectangle botBoxTL;   // body Top
+	public Rectangle botBoxTR;   // body Top
+	public Rectangle botBoxB;   // body Bottom
+	public Rectangle botBoxL;  // left
+	public Rectangle botBoxR;  // right
+	public Rectangle botBoxGT; // cheeck ground
 	
 	public float x_pos = 300f;
 	public float y_pos = 100f;
@@ -69,6 +69,8 @@ public class Enemies extends GameEntities {
 	private String direction = "Left"; 
 	//asd
 
+	float screen_posX =0;
+	float screen_posY =0;
 	
 public void init(GameContainer container) throws SlickException {
 		
@@ -95,7 +97,8 @@ public void init(GameContainer container) throws SlickException {
 		botAnimationFall.setSpeed(speed);
 		botAnimationFall.update(delta);
 		
-		
+		screen_posX = screen_pos_x;
+		screen_posY = screen_pos_y;
 		
 		moveBot(delta, screen_pos_x, screen_pos_y);
 		edgeTurn();
@@ -104,7 +107,7 @@ public void init(GameContainer container) throws SlickException {
 
 			
 		
-		if (Math.sqrt(Math.pow((x_pos - container.getInput().getMouseX()), 2)) < 50 && Math.sqrt(Math.pow((y_pos - container.getInput().getMouseY()), 2)) < 50 )
+		if (Math.sqrt(Math.pow((x_pos+screen_pos_x - container.getInput().getMouseX()), 2)) < 50 && Math.sqrt(Math.pow((y_pos+screen_pos_y  - container.getInput().getMouseY()), 2)) < 50 )
 		{
 			if (container.getInput().getMouseY() - mouseLastY > 20)
 			{
@@ -168,11 +171,11 @@ public void init(GameContainer container) throws SlickException {
 		botBoxR.setLocation(x_pos+ screen_pos_x-5+60*size, y_pos+ screen_pos_y-5+50*size);
 		botBoxGT.setLocation(x_pos + screen_pos_x-40*size, y_pos + screen_pos_y + 35*size);
 		
-		if (direction == "Left" && inAir == false)
+		if (direction == "Left" && onGround)
 		{
 			x_pos -= 0.2f * speed*size*delta;
 		}
-		else if (direction == "Right" && inAir == false)
+		else if (direction == "Right" && onGround)
 		{
 			x_pos += 0.2f * speed*size*delta;
 		}
@@ -183,24 +186,33 @@ public void init(GameContainer container) throws SlickException {
 	
 	public void collisionRepeller(int delta)
 	{
-		collisionB = false;
 		pushObjectV = new Vector2f(0,0);
 		
 		
 		inAir = true;
 		onGround = false;
 		
-		if (collisionR)
-			pushObjectV.x = -1;
-		
-		if (collisionL)
-			pushObjectV.x = 1;
-		
+//		if (collisionR)
+//		{
+//			System.out.println("R");
+//			pushObjectV.x = -1;
+//		}
+//		if (collisionL)
+//		{
+//			System.out.println("L");
+//			pushObjectV.x = 1;
+//		}
 		if (collisionB)
+		{
+			System.out.println("B");
 			pushObjectV.y = -1;
-
+		}
 		if (collisionGT)
-			pushObjectV.y = 1;
+		{
+			System.out.println("GT");
+			onGround = true;
+		}
+			
 		
 //		if (collisionGT)
 //			onGround = true;
@@ -216,8 +228,8 @@ public void init(GameContainer container) throws SlickException {
 		collisionFB = false;
 		collisionGT = false;
 
-		x_pos += (pushObjectV.x/10)*delta;
-		y_pos += (pushObjectV.y/10)*delta;
+		x_pos += (pushObjectV.x/5)*delta;
+		y_pos += (pushObjectV.y/5)*delta;
 	}
 	
 //--------------	
@@ -284,14 +296,14 @@ public void init(GameContainer container) throws SlickException {
 	public void drawBot()
 	{
 	
-		if (inAir)
-		botAnimationFall.draw(x_pos-50*size, y_pos-50*size, 100 * size, 100*size);
+		if (!onGround)
+		botAnimationFall.draw(x_pos+ screen_posX-50*size, y_pos+ screen_posY-50*size, 100 * size, 100*size);
 		
 		else if (direction == "Left")
-		botAnimationL.draw(x_pos-50*size, y_pos-50*size, 100 * size, 100*size);
+		botAnimationL.draw(x_pos+ screen_posX-50*size, y_pos+ screen_posY-50*size, 100 * size, 100*size);
 		
 		else if (direction == "Right")
-		botAnimationR.draw(x_pos-50*size, y_pos-50*size, 100 * size, 100*size);
+		botAnimationR.draw(x_pos+ screen_posX-50*size, y_pos+ screen_posY-50*size, 100 * size, 100*size);
 
 	}
 	
@@ -314,19 +326,19 @@ public void init(GameContainer container) throws SlickException {
 	public void showInfo (GameContainer container, Graphics g) throws SlickException  // for debugging
 	{
 		g.drawString("collides: " + collisionB, 10, 30); // print collision true/false
-		g.drawString("in Air: " + inAir, 10, 45); // print inAir true/false
+		g.drawString("on Ground: " + onGround, 10, 45); // print inAir true/false
 		g.drawString("box nr underneath: " + standOnRectNr, 10, 60); // print inAir true/false
 		g.drawString("direction: " + direction, 10, 75); // print inAir true/false
 		g.drawString("size: " + size + " speed: " + speed, 10, 90); // print inAir true/false
 		g.drawString("Alive: " + collisionEnabled, 10, 105); // print inAir true/false
 
 		g.setColor(Color.lightGray);
-		g.draw(botBoxL);
-		g.draw(botBoxR);
+//		g.draw(botBoxL);
+//		g.draw(botBoxR);
 		g.draw(botBoxB);
-		g.draw(botBoxTL);
-		g.draw(botBoxTR);
-		g.draw(botBoxFB);
+//		g.draw(botBoxTL);
+//		g.draw(botBoxTR);
+//		g.draw(botBoxFB);
 	}
   
 

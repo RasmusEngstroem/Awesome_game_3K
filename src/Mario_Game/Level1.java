@@ -30,7 +30,7 @@ private SolidBlock solid1;
 private ItemBlock item1;
 
 private Coins coin;
-private Enemies enemy;
+private Enemies[] enemy = new Enemies[1];
 	
 //------ SETUP --------------------------------------------
 
@@ -48,14 +48,16 @@ public Level1(String title) {
 		
 		player = new Player(100 + x_posLevel, 100 + y_posLevel, container);
 		player.init(container);
-		brick = new ItemBlock(0,0, 5, 0, player);
+		brick = new ItemBlock(0,0, 5, 0, player, enemy);
 		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player);
 		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player);
 		solid1 = new SolidBlock(0, 0, 10, 0, player);
 		coin = new Coins(0, 0, player);
 		
-		enemy = new Enemies(400,0);
-		enemy.init(container);
+		for(int i = 0; i<enemy.length; i++ ){
+			enemy[i]= new Enemies(400,0);
+			enemy[i].init(container);
+		}
 	}
 
 	
@@ -70,7 +72,9 @@ public Level1(String title) {
 		solid1.update(1600+ x_posLevel, 300 + y_posLevel);
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
-		enemy.update(container, delta, x_posLevel, y_posLevel);
+		for(int i = 0; i<enemy.length; i++ ){
+			enemy[i].update(container, delta, x_posLevel, y_posLevel);
+		}
 		moveLevel(container, delta);
 		
 	}
@@ -87,7 +91,10 @@ public Level1(String title) {
 		coin.render(g);
 		solid1.render(g);
 		player.render(container, g);
-		enemy.render(container, g);
+		for(int i = 0; i<enemy.length; i++ ){
+			enemy[i].render(container, g);
+//			enemy[i].showInfo(container, g);
+		}
 		showStads(container, g);
 	}
 	

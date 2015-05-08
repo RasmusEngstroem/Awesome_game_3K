@@ -26,8 +26,9 @@ public class ItemBlock extends Breakable {
 	
 	public Player mario;
 	public ItemBlock[] kasse;
+	public Enemies[] enemy;
 	
-	public ItemBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario) throws SlickException {
+	public ItemBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario, Enemies[] enemy) throws SlickException {
 		super(x_pos, y_pos, rep_x, rep_y);
 		// TODO Auto-generated constructor stub
 		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
@@ -37,7 +38,7 @@ public class ItemBlock extends Breakable {
 		this.rep_x = rep_x;
 		this.rep_y = rep_y;
 		textureBlock = new Image("Assets/blokItem.png");
-
+		this.enemy = enemy;
 		placeClones();
 	}
 	
@@ -113,7 +114,30 @@ public void update(float x, float y){
 		if(boxShape.intersects(mario.botBoxGT) && placed && alive){
 			mario.collisionGT = true;
 		}
-		
+		for(int i = 0; i < enemy.length; i++){
+			
+			if(boxShape.intersects(enemy[i].botBoxB) && placed && alive){
+				enemy[i].collisionB = true;
+			}
+
+			if(boxShape.intersects(enemy[i].botBoxTL) && placed && alive){
+				enemy[i].collisionTL = true;
+			}
+			if(boxShape.intersects(enemy[i].botBoxTR) && placed && alive){
+				enemy[i].collisionTR = true;
+			}
+			
+			if(boxShape.intersects(enemy[i].botBoxL) && placed && alive){
+				enemy[i].collisionL = true;
+			}
+			if(boxShape.intersects(enemy[i].botBoxR) && placed && alive){
+				enemy[i].collisionR = true;
+			}
+			if(boxShape.intersects(enemy[i].botBoxGT) && placed && alive){
+				enemy[i].collisionGT = true;
+			}
+			
+		}
 
 	}
 	
@@ -123,7 +147,7 @@ public void update(float x, float y){
 		if( rep_x != 0){
 			ItemBlock[] kasse = new ItemBlock[rep_x];
 			for(int i=0; i< rep_x; i++){
-				kasse[i]= new ItemBlock(x_pos, x_pos, 0, 0, mario);
+				kasse[i]= new ItemBlock(x_pos, x_pos, 0, 0, mario, enemy);
 			
 			} 
 			this.kasse = kasse;
