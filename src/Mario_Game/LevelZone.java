@@ -1,5 +1,6 @@
 package Mario_Game;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
 public class LevelZone extends GameEntities {
@@ -26,6 +27,12 @@ public class LevelZone extends GameEntities {
 		boxShape.setCenterX(x_pos-width/2);
 		boxShape.setCenterY(y_pos-height/2);
 		checkIfInsideLevel();
+	}
+	
+	public void render(Graphics g){
+		
+		g.draw(boxShape);
+		
 	}
 	
 	public void checkIfInsideLevel(){
