@@ -30,7 +30,7 @@ private SolidBlock solid1;
 private ItemBlock item1;
 
 private Coins coin;
-private Enemies[] enemy = new Enemies[1];
+private Enemies[] enemy = new Enemies[3];
 	
 //------ SETUP --------------------------------------------
 
@@ -55,7 +55,7 @@ public Level1(String title) {
 		coin = new Coins(0, 0, player);
 		
 		for(int i = 0; i<enemy.length; i++ ){
-			enemy[i]= new Enemies(400,0);
+			enemy[i]= new Enemies(400+ 100*i,0);
 			enemy[i].init(container);
 		}
 	}
@@ -73,7 +73,7 @@ public Level1(String title) {
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
 		for(int i = 0; i<enemy.length; i++ ){
-			enemy[i].update(container, delta, x_posLevel, y_posLevel);
+			enemy[i].update(container, delta, x_posLevel , y_posLevel);
 		}
 		moveLevel(container, delta);
 		
