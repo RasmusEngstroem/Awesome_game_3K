@@ -236,8 +236,10 @@ public class Enemies extends GameEntities {
 		collisionFB = false;
 		collisionGT = false;
 
-		x_pos += (pushObjectV.x/3)*delta;
-		y_pos += (pushObjectV.y/3)*delta;
+		if (collisionEnabled)
+		{
+			x_pos += (pushObjectV.x/3)*delta;
+		}
 	}
 	
 //--------------	
