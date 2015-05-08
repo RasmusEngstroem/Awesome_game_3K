@@ -52,7 +52,7 @@ public Level1(String title) {
 		brick = new ItemBlock(0,0, 5, 0, player, enemy);
 		emptyBlok1 = new EmptyItemBlock(0, 0, 10, 0, player, enemy);
 		emptyBlok2 = new EmptyItemBlock(0, 0, 10, 0, player, enemy);
-		solid1 = new SolidBlock(0, 0, 10, 0, player, enemy);
+		solid1 = new SolidBlock(0, 0, 5, 0, player, enemy);
 		coin = new Coins(0, 0, player);
 		
 		for(int i = 0; i<enemy.length; i++ ){
@@ -72,7 +72,7 @@ public Level1(String title) {
 		emptyBlok1.update(0+ x_posLevel, 600 + y_posLevel);
 		emptyBlok2.update(800+ x_posLevel, 500 + y_posLevel);
 		coin.update(300+ x_posLevel, 500 + y_posLevel);
-		solid1.update(1600+ x_posLevel, 300 + y_posLevel);
+		solid1.update(-600+ x_posLevel, 200 + y_posLevel);
 		
 		player.update(container, delta, x_posLevel, y_posLevel);
 		for(int i = 0; i<enemy.length; i++ ){
@@ -98,7 +98,7 @@ public Level1(String title) {
 		player.render(container, g);
 		for(int i = 0; i<enemy.length; i++ ){
 			enemy[i].render(container, g);
-//			enemy[i].showInfo(container, g);
+			enemy[i].showInfo(container, g);
 		}
 		showStads(container, g);
 	}

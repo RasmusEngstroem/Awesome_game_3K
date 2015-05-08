@@ -32,6 +32,7 @@ public class Enemies extends GameEntities {
 	public Rectangle botBoxL;  // left
 	public Rectangle botBoxR;  // right
 	public Rectangle botBoxGT; // cheeck ground
+	public Rectangle botBoxT; // cheeck ground
 	
 	public float x_pos = 300f;
 	public float y_pos = 100f;
@@ -55,6 +56,7 @@ public class Enemies extends GameEntities {
 	public boolean collisionGT = false;  // Ground Check
 	public boolean collisionTL = false;
 	public boolean collisionTR = false;
+	public boolean collisionT = false; 
 	
 	public boolean inAir = true;
 	public boolean onGround = false;
@@ -88,6 +90,7 @@ public class Enemies extends GameEntities {
 		botBoxL = new Rectangle(0,0,10*size, 35*size);
 		botBoxR = new Rectangle(0,0,10*size, 35*size);
 		botBoxGT = new Rectangle(0,0,80*size, 10*size);
+		botBoxT = new Rectangle(0,0,80*size, 10*size);
 		
 	}
 	
@@ -105,9 +108,10 @@ public class Enemies extends GameEntities {
 		screen_posX = screen_pos_x;
 		screen_posY = screen_pos_y;
 		
+//		collisionTurn(delta);
 		moveBot(delta, screen_pos_x, screen_pos_y);
 		edgeTurn();
-//		collisionTurn();
+		
 		collisionRepeller(delta);
 
 			
@@ -178,6 +182,7 @@ public class Enemies extends GameEntities {
 		botBoxL.setLocation(x_pos+ screen_pos_x-5-60*size, y_pos+ screen_pos_y-5+50*size);
 		botBoxR.setLocation(x_pos+ screen_pos_x-5+60*size, y_pos+ screen_pos_y-5+50*size);
 		botBoxGT.setLocation(x_pos + screen_pos_x-40*size, y_pos + screen_pos_y + 35*size);
+		botBoxT.setLocation(x_pos + screen_pos_x-40*size, y_pos + screen_pos_y - 60*size);
 		
 		if (direction == "Left" && onGround)
 		{
@@ -239,6 +244,7 @@ public class Enemies extends GameEntities {
 		if (collisionEnabled)
 		{
 			x_pos += (pushObjectV.x/3)*delta;
+			y_pos += (pushObjectV.y/3)*delta;
 		}
 	}
 	
@@ -246,24 +252,7 @@ public class Enemies extends GameEntities {
 	
 	public void edgeTurn()
 	{
-//		collisionL = false;
-//		collisionR = false;
-//		
-//		for (int i = 0; i < boxes.length; i++)
-//		{
-//			
-//			if( botBoxL.intersects(boxes[i]) && collisionEnabled && !inAir) // re-check if the bot collides with a groundBox
-//			{
-//				collisionL = true;
-//			}
-//			if( botBoxR.intersects(boxes[i]) && collisionEnabled && !inAir) // re-check if the bot collides with a groundBox
-//			{
-//				collisionR = true;
-//			}
-//
-//		}
 	
-		
 		if (!collisionL && collisionR )
 			direction = "Right";
 			
@@ -273,32 +262,23 @@ public class Enemies extends GameEntities {
 	}
 
 	
-	public void collisionTurn()
+	public void collisionTurn(int delta)
 	{
-		for (int i = 0; i < boxes.length; i++)
-		{
-		
-			if(botBoxTL.intersects(boxes[i]) && collisionEnabled && !inAir)
-			{
-				while (botBoxTL.intersects(boxes[i]))
-				{
-					x_pos += 0.01f;
-					botBoxTL.setLocation(x_pos-51*size, y_pos+(5-50)*size); // move bot collision box with bot animation
-				}
-				changeDirection();
-			}
 
-			
-			if(botBoxTR.intersects(boxes[i])&& collisionEnabled && !inAir)
+			if(collisionTL  && onGround)
 			{
-				while (botBoxTR.intersects(boxes[i]))
-				{
-					x_pos -= 0.01f;
-					botBoxTR.setLocation(x_pos-0*size, y_pos+(5-50)*size); // move bot collision box with bot animation
-				}
 				changeDirection();
+				x_pos += (1/3)*delta;
 			}
-		}
+			
+			if(collisionTR  && onGround)
+			{
+				changeDirection();
+				x_pos -= (1/3)*delta;
+			}
+	
+
+	
 	}
 	
 //--------------
@@ -330,6 +310,7 @@ public class Enemies extends GameEntities {
 	public void dead()
 	{
 		collisionEnabled = false;
+		Level1.points ++;
 		
 	}
 	
@@ -343,12 +324,13 @@ public class Enemies extends GameEntities {
 		g.drawString("Alive: " + collisionEnabled, 10, 105); // print inAir true/false
 
 		g.setColor(Color.lightGray);
-//		g.draw(botBoxL);
-//		g.draw(botBoxR);
+		g.draw(botBoxL);
+		g.draw(botBoxR);
 		g.draw(botBoxB);
-//		g.draw(botBoxTL);
-//		g.draw(botBoxTR);
+		g.draw(botBoxTL);
+		g.draw(botBoxTR);
 //		g.draw(botBoxFB);
+		g.draw(botBoxT);
 	}
 	
 	public void marioCollision(){
@@ -371,7 +353,7 @@ public class Enemies extends GameEntities {
 			mario.collisionGT = true;
 		}
 		
-		if(( botBoxTL.intersects(mario.botBoxB) || botBoxTR.intersects(mario.botBoxB) ) && collisionEnabled){
+		if(botBoxT.intersects(mario.botBoxB ) && collisionEnabled){
 			
 			mario.collisionD = true;
 			dead();
