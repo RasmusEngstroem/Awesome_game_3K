@@ -5,13 +5,14 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
-public class ItemBlock extends Breakable {
+public class ItemBlock extends Breakable { // This class has a IS-A relationship Brekable
 
-	public Image textureBlock;
 	
+	// Declaration of variables used in this class. 
+	
+	public Image textureBlock;
 	public EmptyItemBlock empty;
 	public Coins coin;
-	
 	public Rectangle boxShape;
 	public Rectangle breakHitBox;
 	public Rectangle marioHead;
@@ -25,20 +26,20 @@ public class ItemBlock extends Breakable {
 	public ItemBlock[] kasse;
 	public Enemies[] enemy;
 	
-	public ItemBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario, Enemies[] enemy) throws SlickException {
-		super(x_pos, y_pos, rep_x, rep_y);
-		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
-		breakHitBox = new Rectangle(x_pos, y_pos, scaleSize-4, 10);
-		this.mario = mario;
-		marioHead = mario.botBoxT;
-		this.rep_x = rep_x;
-		this.rep_y = rep_y;
-		textureBlock = new Image("blokItem.png");
-		this.enemy = enemy;
-		placeClones();
+	public ItemBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario, Enemies[] enemy) throws SlickException { // Constructor for ItemBlock.class
+		super(x_pos, y_pos, rep_x, rep_y); //Inheritance from parent. 
+		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize); // Spawn rectangle for colition detection for these blocks. 
+		breakHitBox = new Rectangle(x_pos, y_pos, scaleSize-4, 10); // Hitbox used to destroy blocks that mario can jump head into. 
+		this.mario = mario; // This mario will be the mario referenced in the call arguments. 
+		marioHead = mario.botBoxT; // Same again as above. This hitbox will be same as the one references in the call. 
+		this.rep_x = rep_x; // Same with the x 
+		this.rep_y = rep_y; // So with the y 
+		textureBlock = new Image("blokItem.png"); // Import Image texture for these blocks. 
+		this.enemy = enemy; // Enemy also
+		placeClones(); // Call of method to actually draw the blocks. 
 	}
 	
-	public void update(float x, float y){
+	public void update(float x, float y){ // This method is used to update the blocks. 
 		this.x_pos=x-(scaleSize/2);
 		this.y_pos=y-(scaleSize/2);
 		boxShape.setCenterX(x);
@@ -59,12 +60,12 @@ public class ItemBlock extends Breakable {
 		}
 	}
 	
-	public void render(Graphics g) throws SlickException {
-		if(alive){
+	public void render(Graphics g) throws SlickException { // This is used to render the content of this class. 
+		if(alive){	// If the player is alive, draw the blocks. 
 		textureBlock.draw(x_pos, y_pos);
-		breakBox();
+		breakBox(); // Call method for mario to destroy blocks that he can break with his head. 
 		}
-		if(!alive){
+		if(!alive){ // If dead rendes 
 			empty.render(g);
 			coin.render(g);
 		}
