@@ -30,7 +30,7 @@ public class LevelZone extends GameEntities {
 	}
 	
 	public void render(Graphics g){
-		
+		g.fill(boxShape);
 		g.draw(boxShape);
 		
 	}
