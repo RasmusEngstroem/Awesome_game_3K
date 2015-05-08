@@ -53,7 +53,7 @@ public class ItemBlock extends Breakable { // This class has a IS-A relationship
 				kasse[i].update(x+scaleSize*i+scaleSize, y);
 			}
 		}
-		if(!alive){
+		if(!alive){ 
 			empty.update(x, y);
 			coin.update(x+scaleSize/4, y-scaleSize);
 			empty.checkCollision();
@@ -61,15 +61,15 @@ public class ItemBlock extends Breakable { // This class has a IS-A relationship
 	}
 	
 	public void render(Graphics g) throws SlickException { // This is used to render the content of this class. 
-		if(alive){	// If the player is alive, draw the blocks. 
-		textureBlock.draw(x_pos, y_pos);
+		if(alive){	// if the block is undestroyed, draw run code below
+		textureBlock.draw(x_pos, y_pos); // Draw at positions 
 		breakBox(); // Call method for mario to destroy blocks that he can break with his head. 
 		}
-		if(!alive){ // If dead rendes 
-			empty.render(g);
+		if(!alive){
+			empty.render(g); // If the block has been hit by mario, render the empty version plus a coin over the block. 
 			coin.render(g);
 		}
-		if( rep_x != 0){
+		if( rep_x != 0){ // If repetition is not 0 render all the blocks. 
 			for(int i=0; i< rep_x; i++){
 				kasse[i].render(g);
 			}
@@ -77,13 +77,14 @@ public class ItemBlock extends Breakable { // This class has a IS-A relationship
 	}
 	
 	public void breakBox() throws SlickException{
-		if(breakHitBox.intersects(marioHead) && placed && alive){
-			alive=false;
+		if(breakHitBox.intersects(marioHead) && placed && alive){   // Check collision between marios head, and the block. 
+																	//If they collide and the box is places and the box is not destroyed
+			alive=false; // If above is true, the block has been hit and is not alive. 
 			System.out.println("hit");
 			mario.collisionD = true;
-			empty = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario, enemy);
-			coin = new Coins(x_pos+(scaleSize/2)-scaleSize, x_pos+(scaleSize/2)-scaleSize, mario);
-			for(int i = 0; i < enemy.length; i++){
+			empty = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario, enemy); //Instantiate the empty block. 
+			coin = new Coins(x_pos+(scaleSize/2)-scaleSize, x_pos+(scaleSize/2)-scaleSize, mario); // Instantiate the coin that spawns on top. 
+			for(int i = 0; i < enemy.length; i++){ // Collision check between the block and enemies. If they stnd on top when mario hits underneath, they die. 
 				if(boxShape.intersects(enemy[i].botBoxGT)){
 					enemy[i].dead();
 				}
@@ -91,7 +92,7 @@ public class ItemBlock extends Breakable { // This class has a IS-A relationship
 		}
 	}
 	
-	public void checkCollision(){
+	public void checkCollision(){ // COllision check with all of marios collision detection parts. 
 		if(boxShape.intersects(mario.botBoxT) && placed && alive){
 			mario.collisionU = true;
 		}
@@ -107,7 +108,8 @@ public class ItemBlock extends Breakable { // This class has a IS-A relationship
 		if(boxShape.intersects(mario.botBoxGT) && placed && alive){
 			mario.collisionGT = true;
 		}
-		for(int i = 0; i < enemy.length; i++){
+		for(int i = 0; i < enemy.length; i++){ // Bots( enemies ) constist of several collision boxes also. 
+												//The following determines what "body part" collides with the block. 
 			if(boxShape.intersects(enemy[i].botBoxB) && placed && alive){
 				enemy[i].collisionB = true;
 			}
@@ -129,11 +131,11 @@ public class ItemBlock extends Breakable { // This class has a IS-A relationship
 		}
 	}
 	
-	public void placeClones() throws SlickException{		
+	public void placeClones() throws SlickException{	 	
 		if( rep_x != 0){
-			ItemBlock[] kasse = new ItemBlock[rep_x];
-			for(int i=0; i< rep_x; i++){
-				kasse[i]= new ItemBlock(x_pos, x_pos, 0, 0, mario, enemy);			
+			ItemBlock[] kasse = new ItemBlock[rep_x]; // Instantiate the array which contains the blocks.
+			for(int i=0; i< rep_x; i++){ 
+				kasse[i]= new ItemBlock(x_pos, x_pos, 0, 0, mario, enemy);	// instantiate new blocks in the array. 		
 			} 
 			this.kasse = kasse;
 		}
