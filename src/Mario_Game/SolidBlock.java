@@ -1,6 +1,5 @@
 package Mario_Game;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -10,42 +9,51 @@ public class SolidBlock extends Unbreakable {
 
 	public Image textureBlock;
 	
-	public Rectangle boxShape;
-	public Rectangle marioHead;
-	public boolean alive = true;
+	public Rectangle boxShape; // Declare a rectangle
+	public Rectangle marioHead; // Declare 
+	public boolean alive = true; // A boolean used to check if the player is still alive 
 	public boolean placed = false;
 	public String  t = "kasse";
 	public int rep_x;
 	public int rep_y;
-	
 	public Player mario;
 	public SolidBlock[] kasse;
 	public Enemies[] enemy;
 	float x_pos;
 	float y_pos;
 	
-	public SolidBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario, Enemies[] enemy) throws SlickException {
-		super(x_pos, y_pos, rep_x, rep_y);
-		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
-		this.mario = mario;
-		marioHead = mario.botBoxT;
-		this.rep_x = rep_x;
-		this.rep_y = rep_y;
-		textureBlock = new Image("Assets/blokSolid.png");
-		this.enemy = enemy;
-		placeClones();
-		// TODO Auto-generated constructor stub
+	/**
+	 * 
+	 * @param x_pos the x position of the block 
+	 * @param y_pos the y position of the block 
+	 * @param rep_x the amount of block to be placed to the right of the original block 
+	 * @param rep_y the amount of block to be placed underneath of the original block 
+	 * @param mario the player
+	 * @param enemy the enemy
+	 * @throws SlickException exception thrown when error with slick library occurs
+	 */
+	
+	public SolidBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario, Enemies[] enemy) throws SlickException { 
+		super(x_pos, y_pos, rep_x, rep_y); // Inherits from the superclass
+		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize); // The collision box used to detect collision between this block and other gamobjects. 
+		this.mario = mario; // this mario we use here will be the same as the one parsed as argument when the class is declared. 
+		marioHead = mario.botBoxT; // This version of the mario collision detection will be the same as the one parsed when the class is declared. 
+		this.rep_x = rep_x; // The x position of the box will be the same as the one parsed. 
+		this.rep_y = rep_y; //-||-
+		textureBlock = new Image("Assets/blokSolid.png"); // Import Image to use for texture to this block.
+		this.enemy = enemy; // Enemies expressed in this class will be the same as the enemies from the class where this class is called. 
+		placeClones(); // Calls the placeClones(); method. 
 	}
 	
-	public void update(float x, float y){
-		this.x_pos=x-(scaleSize/2);
+	public void update(float x, float y){ // Update to be used in Level1 
+		this.x_pos=x-(scaleSize/2); // 
 		this.y_pos=y-(scaleSize/2);
 		boxShape.setCenterX(x);
 		boxShape.setCenterY(y);
 		placed = true;
-		checkCollision();
-		if( rep_x != 0){
-			for(int i=0; i< rep_x; i++){
+		checkCollision(); // Call of collision detection method 
+		if( rep_x != 0){ // if x_rep is not 0 run the for-loop
+			for(int i=0; i< rep_x; i++){ // This for loop 
 				kasse[i].update(x+scaleSize*i+scaleSize, y);
 			}
 		}
