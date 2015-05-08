@@ -67,6 +67,7 @@ public class Player extends GameEntities{
 	private boolean inAir = true;
 	private boolean onGround = false;
 	private boolean inCollision = false;
+	public boolean jump = false;
 	private int standOnRectNr = 0;
 	
 	Vector2f collisionVPrint = new Vector2f(0,0); 
@@ -200,16 +201,29 @@ public class Player extends GameEntities{
 		onGround = false;
 		
 		if (collisionR)
+		{
 			pushObjectV.x = -1;
+			directionLock("x", -1);
+		}
 		
 		if (collisionL)
+		{
 			pushObjectV.x = 1;
+			directionLock("x", 1);
+		}
 		
 		if (collisionD)
+		{
 			pushObjectV.y = -1;
+			directionLock("y", -1);
+		}
+		
 
 		if (collisionU)
+		{
 			pushObjectV.y = 1;
+			directionLock("y", 1);
+		}
 		
 		if (collisionGT)
 			onGround = true;
@@ -231,11 +245,11 @@ public class Player extends GameEntities{
 			
 
 		
-		if (pushObjectV.y != 0 )
-			directionV.y = 0;
+//		if (pushObjectV.y != 0 )
+//			directionV.y = 0;
 
-		if (pushObjectV.x != 0)
-			directionV.x = 0;
+//		if (pushObjectV.x != 0)
+//			directionV.x = 0;
 		}
 	}
 
@@ -305,6 +319,32 @@ public class Player extends GameEntities{
 	}
 	
 	
+	void directionLock(String lockDirection, int direction)
+	{
+		if (lockDirection == "x")
+		{
+			if (directionV.x < -0f && direction == 1)
+				directionV.x*=-1*0.3f;
+			
+			if (directionV.x > 0f && direction == -1)
+				directionV.x*=-1*0.3f;
+//			else
+//				directionV.x= 0;
+			}
+
+		else if (lockDirection == "y")
+		{
+			if (directionV.y < 0f && direction == 1)
+				directionV.y*=-1*0.3f;
+			
+			if (directionV.y > 0f && direction == -1)
+				directionV.y*=-1*0.3f;
+
+			
+		}
+		
+	}
+	
 	public void showInfo (GameContainer container, Graphics g) throws SlickException  // for debugging
 	{
 		g.setColor(Color.lightGray);
@@ -338,7 +378,6 @@ public class Player extends GameEntities{
 	
 	private void looseLive(int delta)
 	{
-		
 		
 		if (!immortal)
 		{
