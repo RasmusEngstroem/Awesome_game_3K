@@ -329,7 +329,7 @@ public class Enemies extends GameEntities {
 		g.draw(botBoxB);
 		g.draw(botBoxTL);
 		g.draw(botBoxTR);
-//		g.draw(botBoxFB);
+		g.draw(botBoxGT);
 		g.draw(botBoxT);
 	}
 	
