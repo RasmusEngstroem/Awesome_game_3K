@@ -1,5 +1,6 @@
 package Mario_Game;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
@@ -32,9 +33,10 @@ public class WinCube extends GameEntities  {
 		checkCollision();
 	}
 	
-	public void render(){
-		
+	public void render(Graphics g){
+		g.draw(boxShape);
 		textureBlock.draw(x_pos, y_pos);
+	
 		
 	}
 	
