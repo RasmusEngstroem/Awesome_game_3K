@@ -24,8 +24,8 @@ public class LevelZone extends GameEntities {
 		this.x_pos = x_pos;
 		this.y_pos = y_pos;
 		
-		boxShape.setCenterX(x_pos-width/2);
-		boxShape.setCenterY(y_pos-height/2);
+		boxShape.setCenterX(x_pos+width/2);
+		boxShape.setCenterY(y_pos+height/2);
 		checkIfInsideLevel();
 	}
 	
@@ -36,7 +36,7 @@ public class LevelZone extends GameEntities {
 	}
 	
 	public void checkIfInsideLevel(){
-		if(boxShape.contains(mario.botBoxFB)){
+		if(!boxShape.contains(mario.botBoxFB)){
 			mario.alive = false;
 		}
 	}
