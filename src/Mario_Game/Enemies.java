@@ -15,8 +15,7 @@ public class Enemies extends GameEntities {
 	
 	
 
-	public Rectangle[] boxes;
-	
+// sprite sheets and animations
 	public SpriteSheet botSheetL;
 	public Animation botAnimationL;
 	public SpriteSheet botSheetR;
@@ -24,7 +23,7 @@ public class Enemies extends GameEntities {
 	public SpriteSheet botSheetFall;
 	public Animation botAnimationFall;
 	
-
+// 
 	public Circle botBoxFB; 
 	public Rectangle botBoxTL;   // body Top
 	public Rectangle botBoxTR;   // body Top
@@ -40,16 +39,15 @@ public class Enemies extends GameEntities {
 	
 	public float speed = 0.6f;
 	public float size = 1f;
-	public String pictureL = "pictures/animationBotL.png";
-	public String pictureR = "pictures/animationBotR.png";
-	public String pictureFall = "pictures/animationBotFall.png";
+	public String pictureL = "animationBotL.png";
+	public String pictureR = "animationBotR.png";
+	public String pictureFall = "animationBotFall.png";
 	
 	private float mouseLastX = 0f;
 	private float mouseLastY = 0f;
 	
 	
 	public boolean collisionFB = false;  // body
-//	private boolean collisionT = false;
 	public boolean collisionB = false;
 	public boolean collisionL = false;  // left
 	public boolean collisionR = false;  // right
