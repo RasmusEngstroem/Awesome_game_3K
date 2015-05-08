@@ -301,9 +301,9 @@ public class Enemies extends GameEntities {
 		
 		if(botBoxT.intersects(mario.botBoxB ) && collisionEnabled){  // if hit from the top 
 			
-			mario.collisionD = true; // tell the player
-			mario.jump=true;  // make the player bounce
-			dead();  // turn dead
+			mario.collisionD = true; 	// tell the player
+			mario.jump=true; 			// make the player bounce
+			dead();  					// turn dead
 		}
 		
 	}
