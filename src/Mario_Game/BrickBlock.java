@@ -76,6 +76,11 @@ public class BrickBlock extends Breakable {
 			alive=false;
 			System.out.println("hit");
 			mario.collisionD = true;
+			for(int i = 0; i < enemy.length; i++){
+				if(boxShape.intersects(enemy[i].botBoxGT)){
+					enemy[i].dead();
+				}
+			}
 		}
 	}
 	
