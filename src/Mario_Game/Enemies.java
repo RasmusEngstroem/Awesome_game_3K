@@ -228,8 +228,8 @@ public void init(GameContainer container) throws SlickException {
 		collisionFB = false;
 		collisionGT = false;
 
-		x_pos += (pushObjectV.x/5)*delta;
-		y_pos += (pushObjectV.y/5)*delta;
+		x_pos += (pushObjectV.x/3)*delta;
+		y_pos += (pushObjectV.y/3)*delta;
 	}
 	
 //--------------	
