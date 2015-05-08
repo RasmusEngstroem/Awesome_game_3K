@@ -78,6 +78,8 @@ public class Player extends GameEntities{
 	boolean collisionD = false;
 	boolean collisionGT = false;
 	
+	public boolean alive = true;
+	
 	public Player(float x_pos, float y_pos, GameContainer container) {
 		super(x_pos, y_pos);
 		positionY = y_pos;
@@ -109,6 +111,8 @@ public class Player extends GameEntities{
 
 	public void update(GameContainer container, int delta,float screen_pos_x, float screen_pos_y) throws SlickException {
 		
+	
+		
 		botAnimationL.setSpeed(speed * (1-directionV.x));
 		botAnimationL.update(delta);
 		botAnimationR.setSpeed(speed* (1+ directionV.x));
@@ -118,6 +122,8 @@ public class Player extends GameEntities{
 		this.screen_pos_x = screen_pos_x;
 		this.screen_pos_y = screen_pos_y;
 
+		if (!alive)
+		death();
 	
 		movePlayer(container,delta);
 		collisionDeflection(container,delta);
@@ -154,7 +160,7 @@ public class Player extends GameEntities{
 			directionV.y -= jumpHeight*delta;
 			}
 			
-		
+
 		positionV.add(directionV);
 //		positionV.x+=screen_pos_x;
 //		positionV.y+=screen_pos_y;
@@ -208,9 +214,11 @@ public class Player extends GameEntities{
 		collisionFB = false;
 		collisionGT = false;
 
-		positionV.x += (pushObjectV.x/10)*delta;
-		positionV.y += (pushObjectV.y/10)*delta;
-				
+		if (collisionEnabled)
+		{
+			positionV.x += (pushObjectV.x/10)*delta;
+			positionV.y += (pushObjectV.y/10)*delta;
+			
 
 		
 		if (pushObjectV.y != 0 )
@@ -218,6 +226,7 @@ public class Player extends GameEntities{
 
 		if (pushObjectV.x != 0)
 			directionV.x = 0;
+		}
 	}
 
 		
@@ -310,5 +319,17 @@ public class Player extends GameEntities{
 
 
 	}
+	
+	private void death()
+	{
+		collisionEnabled = false;
+		Level1.moveLevel = false;
+	}
+	
+	public void looseLive()
+	{
+		
+	}
+	
 
 }

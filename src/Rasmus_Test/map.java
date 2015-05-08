@@ -6,16 +6,16 @@ public class map { // this class will be used to call the function that will spa
 	{
 		int groundY = 700; 
 		int blocksize = 50; 
-		int gapsizesmall = 200; 
-		int gapsizelarge = 150; 
+		int gapsizesmall = 4*blocksize; 
+		int gapsizelarge = 3*blocksize; 
 	
-		
+							// length of ground
 		for( int i = 0; i <= 70*blocksize; i+=50) // This loop will spawn the first part of the map. 70 tiles. 
 		{
 			blocks.draw(blocks.x_pos+i,blocks.y_pos,50,50); 
 		}
 		//System.out.println(lastbox);
-		
+					// putting in gapsize here creates the gap between the ground. 
 		for( int i = (70*blocksize+gapsizesmall) ; i <= ((70*blocksize+gapsizesmall)+(15*blocksize)); i+=50) 
 		{
 			blocks.draw(blocks.x_pos+i,blocks.y_pos,50,50); 	
@@ -44,17 +44,33 @@ public class map { // this class will be used to call the function that will spa
 	    }
 	}
 	
-	public static void printtriangles1(int posx, int posy)
+	public static void printrightfacetriangle(int posx, int posy, int size)
 	{
-	
-//
-//	        for(int i=0;i<=150;i+=50){
+//	        for(int i=0;i<=50*size;i+=50){
 //		        for(int j=0;j<=i;j+=50){
 //		            blocks.draw(i, j, 50, 50);
 //		        }
-//		    
 //		    }
-	    }
+		for(int i=posx;i>=posx-(size*50);i-=50){
+	        for(int j=posy; j>=i;j-=50){
+	            blocks.draw(i, j, 50, 50);
+	        	}
+	    	}
+	 }
+	
+	public static void printleftfacetriangle(int posx, int posy, int size)
+	{
+//	        for(int i=0;i<=50*size;i+=50){
+//		        for(int j=0;j<=i;j+=50){
+//		            blocks.draw(i, j, 50, 50);
+//		        }
+//		    }
+		for(int i=posx;i>=posx-(size*50);i-=50){
+	        for(int j=posy; j<=i;j+=50){
+	            blocks.draw(i, j, 50, 50);
+	        	}
+	    	}
+	 }
 	
 		
 		
