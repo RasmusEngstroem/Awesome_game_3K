@@ -23,7 +23,7 @@ public class Enemies extends GameEntities {
 	public SpriteSheet botSheetFall;
 	public Animation botAnimationFall;
 	
-// 
+// wd
 	public Circle botBoxFB; 
 	public Rectangle botBoxTL;   // body Top
 	public Rectangle botBoxTR;   // body Top
