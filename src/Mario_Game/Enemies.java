@@ -89,8 +89,8 @@ public class Enemies extends GameEntities {
 		botBoxB = new Rectangle(0,0,104*size, 35*size);
 		botBoxL = new Rectangle(0,0,10*size, 35*size);
 		botBoxR = new Rectangle(0,0,10*size, 35*size);
-		botBoxGT = new Rectangle(0,0,80*size, 10*size);
-		botBoxT = new Rectangle(0,0,80*size, 10*size);
+		botBoxGT = new Rectangle(0,0,40*size, 10*size);
+		botBoxT = new Rectangle(0,0,60*size, 10*size);
 		
 	}
 	
@@ -181,8 +181,8 @@ public class Enemies extends GameEntities {
 		botBoxB.setLocation(x_pos+ screen_pos_x-54*size, y_pos+ screen_pos_y-5 + 10*size); // move bot collision box with bot animation
 		botBoxL.setLocation(x_pos+ screen_pos_x-5-58*size, y_pos+ screen_pos_y-5+50*size);
 		botBoxR.setLocation(x_pos+ screen_pos_x-5+60*size, y_pos+ screen_pos_y-5+50*size);
-		botBoxGT.setLocation(x_pos + screen_pos_x-40*size, y_pos + screen_pos_y + 35*size);
-		botBoxT.setLocation(x_pos + screen_pos_x-40*size, y_pos + screen_pos_y - 60*size);
+		botBoxGT.setLocation(x_pos + screen_pos_x-20*size, y_pos + screen_pos_y + 35*size);
+		botBoxT.setLocation(x_pos + screen_pos_x-30*size, y_pos + screen_pos_y - 60*size);
 		
 		if (direction == "Left" && onGround)
 		{

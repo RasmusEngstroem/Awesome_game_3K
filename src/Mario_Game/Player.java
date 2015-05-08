@@ -326,13 +326,12 @@ public class Player extends GameEntities{
 	{
 		if (lockDirection == "x")
 		{
-			if (directionV.x < -0f && direction == 1)
+			if (directionV.x < 0f && direction == 1)
 				directionV.x*=-1*0.3f;
 			
 			if (directionV.x > 0f && direction == -1)
 				directionV.x*=-1*0.3f;
-//			else
-//				directionV.x= 0;
+
 			}
 
 		else if (lockDirection == "y")
