@@ -27,8 +27,8 @@ public class WinCube extends GameEntities  {
 	public void update(float x_pos, float y_pos){
 		this.x_pos=x_pos-(scaleSize/2);
 		this.y_pos=y_pos-(scaleSize/2);
-		boxShape.setCenterX(x_pos-(scaleSize/2));
-		boxShape.setCenterY(y_pos-(scaleSize/2));
+		boxShape.setCenterX(x_pos-(scaleSize));
+		boxShape.setCenterY(y_pos-(scaleSize));
 		
 		checkCollision();
 	}
