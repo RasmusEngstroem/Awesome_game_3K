@@ -94,7 +94,7 @@ public void update(float x, float y){
 			empty = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario, enemy);
 			coin = new Coins(x_pos+(scaleSize/2)-scaleSize, x_pos+(scaleSize/2)-scaleSize, mario);
 			for(int i = 0; i < enemy.length; i++){
-				if(boxShape.intersects(enemy[i].botBoxB)){
+				if(boxShape.intersects(enemy[i].botBoxGT)){
 					enemy[i].dead();
 				}
 			}
