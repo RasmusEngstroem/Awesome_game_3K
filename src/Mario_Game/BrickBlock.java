@@ -22,9 +22,10 @@ public class BrickBlock extends Breakable {
 	float y_pos;
 	
 	public Player mario;
+	public Enemies[] enemy;
 	public BrickBlock[] kasse;
 	
-	public BrickBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario) throws SlickException {
+	public BrickBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario, Enemies[] enemy) throws SlickException {
 		super(x_pos, y_pos, rep_x, rep_y);
 		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
 		breakHitBox = new Rectangle(x_pos, y_pos, scaleSize-4, 10);
@@ -33,7 +34,7 @@ public class BrickBlock extends Breakable {
 		this.rep_x = rep_x;
 		this.rep_y = rep_y;
 		textureBlock = new Image("Assets/blokBreakable.png");
-
+		this.enemy = enemy;
 		placeClones();
 		// TODO Auto-generated constructor stub
 	}
@@ -96,7 +97,30 @@ public class BrickBlock extends Breakable {
 		if(boxShape.intersects(mario.botBoxGT) && placed && alive){
 			mario.collisionGT = true;
 		}
-		
+		for(int i = 0; i < enemy.length; i++){
+			
+			if(boxShape.intersects(enemy[i].botBoxB) && placed && alive){
+				enemy[i].collisionB = true;
+			}
+
+			if(boxShape.intersects(enemy[i].botBoxTL) && placed && alive){
+				enemy[i].collisionTL = true;
+			}
+			if(boxShape.intersects(enemy[i].botBoxTR) && placed && alive){
+				enemy[i].collisionTR = true;
+			}
+			
+			if(boxShape.intersects(enemy[i].botBoxL) && placed && alive){
+				enemy[i].collisionL = true;
+			}
+			if(boxShape.intersects(enemy[i].botBoxR) && placed && alive){
+				enemy[i].collisionR = true;
+			}
+			if(boxShape.intersects(enemy[i].botBoxGT) && placed && alive){
+				enemy[i].collisionGT = true;
+			}
+			
+		}
 
 	}
 	
@@ -106,7 +130,7 @@ public class BrickBlock extends Breakable {
 		if( rep_x != 0){
 			BrickBlock[] kasse = new BrickBlock[rep_x];
 			for(int i=0; i< rep_x; i++){
-				kasse[i]= new BrickBlock(x_pos, x_pos, 0, 0, mario);
+				kasse[i]= new BrickBlock(x_pos, x_pos, 0, 0, mario, enemy);
 			
 			} 
 			this.kasse = kasse;
