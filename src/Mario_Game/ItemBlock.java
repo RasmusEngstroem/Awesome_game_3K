@@ -91,7 +91,7 @@ public void update(float x, float y){
 			alive=false;
 			System.out.println("hit");
 			mario.collisionD = true;
-			empty = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario);
+			empty = new EmptyItemBlock(x_pos+(scaleSize/2), y_pos+(scaleSize/2), 0, 0, mario, enemy);
 			coin = new Coins(x_pos+(scaleSize/2)-scaleSize, x_pos+(scaleSize/2)-scaleSize, mario);
 		}
 	}
