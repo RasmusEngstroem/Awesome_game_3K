@@ -1,6 +1,5 @@
 package Mario_Game;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -18,19 +17,16 @@ public class ItemBlock extends Breakable {
 	public Rectangle marioHead;
 	public boolean alive = true;
 	public boolean placed = false;
-	public String  t = "kasse";
 	public int rep_x;
 	public int rep_y;
 	float x_pos;
 	float y_pos;
-	
 	public Player mario;
 	public ItemBlock[] kasse;
 	public Enemies[] enemy;
 	
 	public ItemBlock(float x_pos, float y_pos, int rep_x, int rep_y, Player mario, Enemies[] enemy) throws SlickException {
 		super(x_pos, y_pos, rep_x, rep_y);
-		// TODO Auto-generated constructor stub
 		boxShape = new Rectangle(x_pos, y_pos, scaleSize, scaleSize);
 		breakHitBox = new Rectangle(x_pos, y_pos, scaleSize-4, 10);
 		this.mario = mario;
@@ -42,11 +38,9 @@ public class ItemBlock extends Breakable {
 		placeClones();
 	}
 	
-public void update(float x, float y){
-		
+	public void update(float x, float y){
 		this.x_pos=x-(scaleSize/2);
 		this.y_pos=y-(scaleSize/2);
-		
 		boxShape.setCenterX(x);
 		boxShape.setCenterY(y);
 		breakHitBox.setCenterX(x);
@@ -58,18 +52,14 @@ public void update(float x, float y){
 				kasse[i].update(x+scaleSize*i+scaleSize, y);
 			}
 		}
-		
 		if(!alive){
 			empty.update(x, y);
 			coin.update(x+scaleSize/4, y-scaleSize);
 			empty.checkCollision();
 		}
-		
 	}
-	//aijhdjk
 	
 	public void render(Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
 		if(alive){
 		textureBlock.draw(x_pos, y_pos);
 		breakBox();
@@ -78,7 +68,6 @@ public void update(float x, float y){
 			empty.render(g);
 			coin.render(g);
 		}
-
 		if( rep_x != 0){
 			for(int i=0; i< rep_x; i++){
 				kasse[i].render(g);
@@ -105,14 +94,12 @@ public void update(float x, float y){
 		if(boxShape.intersects(mario.botBoxT) && placed && alive){
 			mario.collisionU = true;
 		}
-
 		if(boxShape.intersects(mario.botBoxB) && placed && alive){
 			mario.collisionD = true;
 		}
 		if(boxShape.intersects(mario.botBoxL) && placed && alive){
 			mario.collisionL = true;
 		}
-		
 		if(boxShape.intersects(mario.botBoxR) && placed && alive){
 			mario.collisionR = true;
 		}
@@ -120,18 +107,15 @@ public void update(float x, float y){
 			mario.collisionGT = true;
 		}
 		for(int i = 0; i < enemy.length; i++){
-			
 			if(boxShape.intersects(enemy[i].botBoxB) && placed && alive){
 				enemy[i].collisionB = true;
 			}
-
 			if(boxShape.intersects(enemy[i].botBoxTL) && placed && alive){
 				enemy[i].collisionTL = true;
 			}
 			if(boxShape.intersects(enemy[i].botBoxTR) && placed && alive){
 				enemy[i].collisionTR = true;
 			}
-			
 			if(boxShape.intersects(enemy[i].botBoxL) && placed && alive){
 				enemy[i].collisionL = true;
 			}
@@ -141,25 +125,17 @@ public void update(float x, float y){
 			if(boxShape.intersects(enemy[i].botBoxGT) && placed && alive){
 				enemy[i].collisionGT = true;
 			}
-			
 		}
-
 	}
 	
-	public void placeClones() throws SlickException{
-		
-		
+	public void placeClones() throws SlickException{		
 		if( rep_x != 0){
 			ItemBlock[] kasse = new ItemBlock[rep_x];
 			for(int i=0; i< rep_x; i++){
-				kasse[i]= new ItemBlock(x_pos, x_pos, 0, 0, mario, enemy);
-			
+				kasse[i]= new ItemBlock(x_pos, x_pos, 0, 0, mario, enemy);			
 			} 
 			this.kasse = kasse;
 		}
-		
-		
-		
 	}
 
 }
